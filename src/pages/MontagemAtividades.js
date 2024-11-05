@@ -9,6 +9,8 @@ import AbaFechar from '../assets/iconeFechar.png'
 import Objetiva from '../assets/atividadeObjetiva.png'
 import adicionarAtividade from '../assets/botaoAdicionar.png'
 import adicionarImg from '../assets/addImg.png'
+import opcaoA from '../assets/opcaoA.png'
+import opcaoB from '../assets/opcaoB.png'
 
 
 
@@ -58,16 +60,31 @@ const MontagemAtividades = () => {
 
             <div style={{height: '320px', width: '414px', backgroundColor: '#E9CE03', display: 'flex', justifyContent: 'center', paddingTop: '10px', flexDirection: 'column', gap: '20px', alignItems: 'center'}}>
                 
-                <button style={{height: '52px', width: '302px', backgroundColor: '#FFFFFF', border: 'none', borderRadius: '5px'}}>
+                <button style={{height: '52px', width: '302px', backgroundColor: '#FFFFFF', border: 'none', borderRadius: '5px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 10px'}}>
+                    <text style={{fontSize: '20px'}}>A</text>
+                    <text>Adiconar o conteúdo</text>
 
+                    <button style={{border: 'none',background: 'transparent'}}>
+                        <img src={AbaFechar}></img>
+                    </button>
                 </button>
 
-                <button style={{height: '52px', width: '302px', backgroundColor: '#FFFFFF', border: 'none', borderRadius: '5px'}}>
-                    
+                <button style={{height: '52px', width: '302px', backgroundColor: '#FFFFFF', border: 'none', borderRadius: '5px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 10px'}}>
+               <text style={{fontSize: '20px'}}>B</text>
+                    <text>Adiconar o conteúdo</text>
+
+                    <button style={{border: 'none',background: 'transparent'}}>
+                        <img src={AbaFechar}></img>
+                    </button>
                 </button>
 
-                <button style={{height: '52px', width: '302px', backgroundColor: '#FFFFFF', border: 'none', borderRadius: '5px'}}>
-                    
+                <button style={{height: '52px', width: '302px', backgroundColor: '#FFFFFF', border: 'none', borderRadius: '5px', display: 'flex', alignItems: 'center', justifyContent: 'space-between',padding: '0 10px'}}>
+                    <button style={{height: '20px', width: '20px', border: 'none', background: 'transparent', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                        <img src ={adicionarAtividade} style={{height: '20px', width: '20px'}}></img>
+                    </button>
+                
+                    <text style={{textAlign: 'center', flex: '1'}}>Adiconar o conteúdo</text>
+
                 </button>
 
             </div>
