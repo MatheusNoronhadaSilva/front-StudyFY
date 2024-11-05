@@ -1,4 +1,3 @@
-// frontend/src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Cadastro from './pages/Cadastro';
@@ -17,6 +16,7 @@ import MudarSenha from './pages/MudarSenha'
 import Emblemas from './pages/Emblemas';
 import MontagemAtividades from './pages/MontagemAtividades';
 import TelaAtividades from './pages/TelaAtividades';
+import Atividades from './pages/Atividade'
 
 import * as C from './styles/app';
 
@@ -26,28 +26,23 @@ function App() {
     <C.Container>
       <Router>
         <Routes>
-          <Route exact path='/' element= {<MontagemAtividades/>} />
-          <Route exact path='/' element= {<TelaAtividades/>} />
-          <Route path='/perfil' element={<Perfil/>} />
-          <Route path='/tela-atividades' element={<TelaAtividades/>} />
-          <Route path='/atividade' element= {<Atividade/>} />
-          <Route exact path='/' element= {<Perfil/>} />
-          <Route path='/perfil' element={<Perfil/>} />
-          <Route exact path='/' element= {<GrupoMentoria/>} />
-          <Route path='/perfil' element={<Perfil/>}></Route>
-          <Route path='/atividades' element= {<Atividades/>} />
-          <Route path='/caderno-virtual' element= {<CadernoVirtual/>} />
-          <Route path='/rank' element= {<Rank/>} />
-          <Route path='/ajuda' element= {<Ajuda/>} />
-          <Route path='/notificacao' element= {<Notificacao/>} />
-          <Route path='/chat-privado' element= {<ChatPrivado/>} />
-          <Route path='/chatIA' element= {<ChatIA/>} />
-          <Route path='/login' element= {<Login/>} />
-          <Route path='/cadastro' element={<Cadastro />}/>
-          <Route path='/grupo-mentoria' element={<GrupoMentoria />}/>
-          <Route path='/esqueceu-senha' element={<EsqueceuSenha />}/>
-          <Route path='/mudar-senha' element={<MudarSenha />}/>
-          <Route path='/emblemas' element={<Emblemas />}/>
+          <Route path="/" element={<TelaAtividades/>} />
+          <Route path="/tela-atividades" element={<TelaAtividades />} />
+          <Route path="/perfil" element={<Perfil />} />
+          <Route path="/atividade/:id" element={<Atividade />} /> {/* Rota com parâmetro id */}
+          <Route path="/atividades" element={<Atividades />} />
+          <Route path="/caderno-virtual" element={<CadernoVirtual />} />
+          <Route path="/rank" element={<Rank />} />
+          <Route path="/ajuda" element={<Ajuda />} />
+          <Route path="/notificacao" element={<Notificacao />} />
+          <Route path="/chat-privado" element={<ChatPrivado />} />
+          <Route path="/chatIA" element={<ChatIA />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/cadastro" element={<Cadastro />} />
+          <Route path="/grupo-mentoria" element={<GrupoMentoria />} />
+          <Route path="/esqueceu-senha" element={<EsqueceuSenha />} />
+          <Route path="/mudar-senha" element={<MudarSenha />} />
+          <Route path="/emblemas" element={<Emblemas />} />
         </Routes>
       </Router>
     </C.Container>

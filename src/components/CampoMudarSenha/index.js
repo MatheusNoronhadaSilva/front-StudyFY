@@ -8,6 +8,8 @@ import axios from 'axios';
 import { useMediaQuery } from '@mui/material';
 import mascote from '../../assets/mascote.png'
 
+
+
 const CampoMudarSenha = () => {
   const [senhaAlterada, setSenhaAlterada] = useState("");
   const [confirmarSenha, setConfirmarSenha] = useState("");
@@ -95,7 +97,7 @@ const CampoMudarSenha = () => {
     } else if (confirmarSenha.includes('"') || confirmarSenha.includes("'")) {
       setMensagemErro('Não deve haver o uso de aspas nos campo');
       return false
-    } else if (confirmarSenha != senhaAlterada) {
+    } else if (confirmarSenha !== senhaAlterada) {
       setMensagemErro('Os campos possuem senhas diferentes')
       return false
     }

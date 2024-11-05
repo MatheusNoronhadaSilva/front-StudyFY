@@ -1,5 +1,5 @@
 // src/components/Box.js
-import React, { useState } from 'react';
+//import React, { useState } from 'react';
 import * as C from './style';
 import ftPerfil from '../../assets/Ellipse (1).png'
 

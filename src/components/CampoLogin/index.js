@@ -3,7 +3,8 @@ import * as C from './style';
 import { Link } from 'react-router-dom';
 import google from '../../assets/google.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faLocation, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
+//import { faEnvelope, faLocation, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import ContainerLogin from '../../styles/campoDados';
 import { useMediaQuery } from '@mui/material';
 import mascote from '../../assets/mascote.png'

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faEnvelope, faLock, faPhone } from '@fortawesome/free-solid-svg-icons';
 import mascote from '../../assets/mascote.png'
 import { useMediaQuery } from '@mui/material';
-import axios from 'axios';
+//import axios from 'axios';
 
 
 const InserirInfoAluno = ({ AvancarEtapa, RetornarDados }) => {

@@ -4,8 +4,8 @@ import fotoMentor from '../../assets/Ellipse (1).png';
 import PrimeiroLugar from '../../assets/1 lugar.png';
 import SegundoLugar from '../../assets/2 lugar.png';
 import TerceiroLugar from '../../assets/3 lugar.png';
-import avancarTudo from '../../assets/avancar tudo.png'
-import avancar from '../../assets/avancar.png'
+//import avancarTudo from '../../assets/avancar tudo.png'
+//import avancar from '../../assets/avancar.png'
 
 const RankMaisAjudados = () => {
 
