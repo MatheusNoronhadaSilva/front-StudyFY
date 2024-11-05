@@ -24,7 +24,7 @@ const LoginAluno = () => {
 
     try {
 
-      if(dadosLogin.email == 'a' && dadosLogin.senha == '123456'){
+      if(dadosLogin.email === 'a' && dadosLogin.senha === '123456'){
         navigate('/grupo-mentoria')
       }
 
