@@ -16,6 +16,7 @@ import EsqueceuSenha from './pages/EsqueceuSenha';
 import MudarSenha from './pages/MudarSenha'
 import Emblemas from './pages/Emblemas';
 import MontagemAtividades from './pages/MontagemAtividades';
+import MontagemAtividadesOrganizar from './pages/MontagemAtividadeOrganizar';
 
 import * as C from './styles/app';
 import MontagemAtividadesTexto from './pages/MontagemAtividadeTexto';

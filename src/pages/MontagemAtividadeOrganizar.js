@@ -1,4 +1,3 @@
-// src/pages/Entrada.js
 import React from 'react';
 import Container from '../styles/telaCheia';
 import Navegacao from '../components/Navegacao'
@@ -16,7 +15,7 @@ import lacunas from '../assets/lacuna.png'
 
 
 
-const  MontagemAtividadesTexto = () => {
+const  MontagemAtividadesOrganizar = () => {
 
   return (
     <Container style={{backgroundColor: 'white', alignItems: 'center', paddingTop: '1vh'}}>
@@ -62,31 +61,21 @@ const  MontagemAtividadesTexto = () => {
 
             </div>
 
-            <div style={{height: '105px', width: '413px', border: '3px solid #D9D9D9', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
 
-                <img src={adicionarImg}></img>
-
-            </div>
-            <div style={{height: '105px', width: '413px', border: '3px solid #D9D9D9', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-
-              <textarea placeholder="Adicione uma questão" style={{height: '95px', width: '350px', outline: 'none', border: 'none'}}></textarea>
-
-            </div>
-
-         {/* <div>
+         <div>
             <textarea placeholder="Adicione uma questão" style={{height: '220px', width: '100', border: 'none', padding: '10px', outline: 'none'}}></textarea>
-         </div> */}
+         </div>
 
            
 
             <div style={{height: '390px', width: '414px', backgroundColor: '#D9D9D9', display: 'flex', justifyContent: 'center', paddingTop: '10px', flexDirection: 'column', gap: '20px', alignItems: 'center'}}>
                 
                 <button style={{height: '52px', width: '302px', backgroundColor: '#FFFFFF', border: 'none', borderRadius: '5px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 10px'}}>
-                    <text style={{fontSize: '20px'}}>1</text>
+                    <text style={{fontSize: '20px'}}>A</text>
 
                     <textarea placeholder="Adiconar o conteúdo" style={{border: 'none', outline: 'none'}}></textarea>
 
-                    
+                    <img src={checkBox}></img>
 
                     <button style={{border: 'none',background: 'transparent'}}>
                         <img style={{height: '20px', width: '20px'}} src={AbaFechar}></img>
@@ -94,10 +83,10 @@ const  MontagemAtividadesTexto = () => {
                 </button>
 
                 <button style={{height: '52px', width: '302px', backgroundColor: '#FFFFFF', border: 'none', borderRadius: '5px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 10px'}}>
-               <text style={{fontSize: '20px'}}>2</text>
+               <text style={{fontSize: '20px'}}>A</text>
                <textarea placeholder="Adiconar o conteúdo" style={{border: 'none', outline: 'none'}}></textarea>
 
-                  
+                    <img src={checkBoxV} style={{height: '15px', width: '15px'}}></img>
 
                     <button style={{border: 'none',background: 'transparent'}}>
                         <img style={{height: '20px', width: '20px'}} src={AbaFechar}></img>
@@ -136,4 +125,4 @@ const  MontagemAtividadesTexto = () => {
   );
 };
 
-export default MontagemAtividadesTexto;
+export default MontagemAtividadesOrganizar;
