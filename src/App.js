@@ -18,6 +18,7 @@ import Emblemas from './pages/Emblemas';
 import MontagemAtividades from './pages/MontagemAtividades';
 
 import * as C from './styles/app';
+import MontagemAtividadesTexto from './pages/MontagemAtividadeTexto';
 
 function App() {
 
@@ -25,7 +26,7 @@ function App() {
     <C.Container>
       <Router>
         <Routes>
-          <Route exact path='/' element= {<MontagemAtividades/>} />
+          <Route exact path='/' element= {<MontagemAtividadesTexto/>} />
           <Route path='/perfil' element={<Perfil/>}></Route>
           <Route path='/atividades' element= {<Atividades/>} />
           <Route path='/caderno-virtual' element= {<CadernoVirtual/>} />
