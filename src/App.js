@@ -17,6 +17,7 @@ import MudarSenha from './pages/MudarSenha'
 import Emblemas from './pages/Emblemas';
 import MontagemAtividades from './pages/MontagemAtividades';
 import MontagemAtividadesOrganizar from './pages/MontagemAtividadeOrganizar';
+import DesceuRank from './pages/DesceuRank'
 
 import * as C from './styles/app';
 import MontagemAtividadesTexto from './pages/MontagemAtividadeTexto';
@@ -27,7 +28,7 @@ function App() {
     <C.Container>
       <Router>
         <Routes>
-          <Route exact path='/' element= {<MontagemAtividadesTexto/>} />
+          <Route exact path='/' element= {<DesceuRank/>} />
           <Route path='/perfil' element={<Perfil/>}></Route>
           <Route path='/atividades' element= {<Atividades/>} />
           <Route path='/caderno-virtual' element= {<CadernoVirtual/>} />
