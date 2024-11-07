@@ -63,6 +63,12 @@ const TelaQuestao = () => {
   const handleResponderClick = () => {
     if (selectedOption === null) {
       setRespostaFeedback('Por favor, selecione uma alternativa.');
+  
+      // Após 3 segundos, limpa a mensagem de feedback
+      setTimeout(() => {
+        setRespostaFeedback('');
+      }, 2000);
+  
       return;
     }
 

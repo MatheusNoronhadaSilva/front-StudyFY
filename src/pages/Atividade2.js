@@ -94,6 +94,7 @@ const Atividade2 = () => {
     window.location.reload();
   };
 
+  
   return (
     <Container style={{ backgroundColor: 'white', alignItems: 'center', display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <div style={{ 
@@ -102,10 +103,10 @@ const Atividade2 = () => {
         alignItems: 'center', 
         width: '100%', 
         padding: '10px', 
-        backgroundColor: 'white', 
+        backgroundColor: '#FFD700', 
         borderBottom: '1px solid #FFD700'
       }}>
-        <AiOutlineClose size={30} color="#FFD700" onClick={handleCloseClick} />
+        <AiOutlineClose size={30} color="white" onClick={handleCloseClick} />
         <img src={Calabreso} alt="Mascote" style={{ width: '50px', height: '50px' }} />
       </div>
       
@@ -115,7 +116,7 @@ const Atividade2 = () => {
           fontSize: '1.5em',
           textTransform: 'uppercase',
           color: '#FFD700', 
-          margin: '20px 0 25px 0'  // **Ajuste no espaçamento superior e inferior do título**
+          margin: '40px 0 25px 0'  // **Ajuste no espaçamento superior e inferior do título**
         }}>
           Verdadeiro ou Falso
         </h2>
@@ -127,7 +128,7 @@ const Atividade2 = () => {
           borderRadius: '10px',
           boxShadow: '0px 4px 8px rgba(255, 215, 0, 0.5)',
           border: '1px solid #FFD700',
-          marginTop: '30px',  // **Ajuste na margem superior**
+          marginTop: '10px',  // **Ajuste na margem superior**
           textAlign: 'center'
         }}>
           {loadingEnunciado ? (

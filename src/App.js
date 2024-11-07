@@ -19,6 +19,7 @@ import TelaAtividades from './pages/TelaAtividades';
 import Atividades from './pages/Atividade';
 import Atividade2 from './pages/Atividade2';
 import Atividade3 from './pages/Atividade3';
+import Atividade4 from './pages/Atividade4';
 
 
 import VisualizacaoMentorias from './pages/visualizacaoMentoria';
@@ -52,6 +53,7 @@ function App() {
           <Route path="/emblemas" element={<Emblemas />} />
           <Route path="/atividade/2" element={<Atividade2 />} />
           <Route path="/atividade/3" element={<Atividade3 />} />
+          <Route path="/atividade/4" element={<Atividade4 />}/>
           <Route exact path='/' element= {<Configuraçao/>} />
           <Route exact path='/' element= {<TelaAtividades/>} />
           <Route path='/perfil' element={<Perfil/>} />

@@ -43,8 +43,13 @@ const TelaAtividades = () => {
       navigate('/atividade/1'); // O primeiro botão leva para Atividades.js
     } else if (index === 1) {
       navigate('/atividade/2'); // O segundo botão leva para Atividade2.js
+    } else if (index === 2) {
+      navigate('/atividade/3'); // O terceiro botão leva para Atividade3.js
+    } else if (index === 3) {
+      navigate('/atividade/4')
     }
   };
+  
 
   useEffect(() => {
     const lastCardIndex = selectedButtons.length - 1;
