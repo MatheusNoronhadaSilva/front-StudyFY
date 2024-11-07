@@ -37,7 +37,7 @@ function App() {
           <Route path='/chatIA' element= {<ChatIA/>} />
           <Route path='/login' element= {<Login/>} />
           <Route path='/cadastro' element={<Cadastro />}/>
-          <Route path='/grupo-mentoria' element={<GrupoMentoria />}/>
+          <Route path='/grupo-mentoria/:id' element={<GrupoMentoria />}/>
           <Route path='/esqueceu-senha' element={<EsqueceuSenha />}/>
           <Route path='/mudar-senha' element={<MudarSenha />}/>
           <Route path='/emblemas' element={<Emblemas />}/>

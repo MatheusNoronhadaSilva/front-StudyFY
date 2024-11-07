@@ -18,8 +18,10 @@ const InfoGrupoMentoria = ({ id }) => {
   useEffect(() => {
     const fetchMentorData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/v1/studyfy/mentor/grupo/${id}`);
-        setMentorData(response.data.mentor[0]); // Assume que você deseja o primeiro mentor
+        const response = await axios.get(`http://localhost:8080/v1/studyfy/mentorGrupo/${id}`);
+        setMentorData(response.data.mentor); // Assume que você deseja o primeiro mentor
+        console.log(response.data.mentor);
+        
       } catch (error) {
         console.error("Erro ao buscar os dados do mentor:", error);
       }
@@ -56,7 +58,7 @@ const InfoGrupoMentoria = ({ id }) => {
               </C.FotoGrupoDiv>
               <C.IntroGrupo>
                 <C.NomeGrupo>{grupoData ? grupoData.nome : "Carregando..."}</C.NomeGrupo>
-                <C.Membros>Membros {grupoData ? `${grupoData.numero_membros}/${grupoData.capacidade}` : "Carregando..."}</C.Membros>
+                <C.Membros>Membros {grupoData ? `${grupoData.quantidade_membros}/${grupoData.capacidade}` : "Carregando..."}</C.Membros>
               </C.IntroGrupo>
               <C.fundoAmarelo />
             </C.IntroGrupoDiv>
@@ -70,7 +72,7 @@ const InfoGrupoMentoria = ({ id }) => {
                   <C.FotoMentor alt='foto do mentor' src={fotoMentor} />
                   <C.InfoMentor>
                     <C.NomeMentor>{mentorData ? mentorData.mentor_nome : "Carregando..."}</C.NomeMentor>
-                    <C.TipoMentor>{mentorData ? mentorData.tipo_mentor : "Carregando..."}</C.TipoMentor>
+                    <C.TipoMentor>{mentorData ? mentorData.mentor_tipo : "Carregando..."}</C.TipoMentor>
                   </C.InfoMentor>
                 </C.DadosMentor>
                 <C.AvaliacaoMentor>
