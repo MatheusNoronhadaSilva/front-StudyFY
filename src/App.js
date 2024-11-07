@@ -20,7 +20,12 @@ import Atividades from './pages/Atividade';
 import Atividade2 from './pages/Atividade2';
 import Atividade3 from './pages/Atividade3';
 
+
+import VisualizacaoMentorias from './pages/visualizacaoMentoria';
+
 import * as C from './styles/app';
+import Ranking from './pages/Ranking';
+import Configuraçao from './pages/Configuracao';
 
 function App() {
 
@@ -47,6 +52,30 @@ function App() {
           <Route path="/emblemas" element={<Emblemas />} />
           <Route path="/atividade/2" element={<Atividade2 />} />
           <Route path="/atividade/3" element={<Atividade3 />} />
+          <Route exact path='/' element= {<Configuraçao/>} />
+          <Route exact path='/' element= {<TelaAtividades/>} />
+          <Route path='/perfil' element={<Perfil/>} />
+          <Route path='/tela-atividades' element={<TelaAtividades/>} />
+          <Route path='/atividade' element= {<Atividade/>} />
+          <Route exact path='/' element= {<Perfil/>} />
+          <Route path='/perfil' element={<Perfil/>} />
+          <Route exact path='/' element= {<GrupoMentoria/>} />
+          <Route exact path='/' element= {<VisualizacaoMentorias/>} />
+          <Route exact path ='/visualizar-mentorias' element = {<VisualizacaoMentorias/>}/>
+          <Route path='/perfil' element={<Perfil/>}></Route>
+          <Route path='/atividades' element= {<Atividades/>} />
+          <Route path='/caderno-virtual' element= {<CadernoVirtual/>} />
+          <Route path='/rank' element= {<Rank/>} />
+          <Route path='/ajuda' element= {<Ajuda/>} />
+          <Route path='/notificacao' element= {<Notificacao/>} />
+          <Route path='/chat-privado' element= {<ChatPrivado/>} />
+          <Route path='/chatIA' element= {<ChatIA/>} />
+          <Route path='/login' element= {<Login/>} />
+          <Route path='/cadastro' element={<Cadastro />}/>
+          <Route path='/grupo-mentoria' element={<GrupoMentoria />}/>
+          <Route path='/esqueceu-senha' element={<EsqueceuSenha />}/>
+          <Route path='/mudar-senha' element={<MudarSenha />}/>
+          <Route path='/emblemas' element={<Emblemas />}/>
         </Routes>
       </Router>
     </C.Container>

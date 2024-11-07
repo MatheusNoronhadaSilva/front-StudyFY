@@ -89,6 +89,7 @@ export const InfoMentor = styled.div`
       width: 70%;
       padding-top: 0vh;
       justify-content: center;
+      max-width: 70%; 
    }
 `
 
@@ -142,8 +143,8 @@ align-items: center;
    border-radius:0px;
    border: none;
    position: relative;
-   width: 100%;
-   height: 70%;
+   flex-grow: 1;
+   z-index: 100;
    gap: 1vh;
 }
 `
@@ -209,12 +210,11 @@ export const Estrelas = styled.div`
 export const fundoAmarelo = styled.div`
    position: absolute;
    width: 100%;
-   height: 70%;
+   height: 100%;
    background-color: #fee101;
    border-radius: 8px;
    border: solid 3px #E9CE03;
    box-shadow: 0 0.5vh 0 0 #E9CE03;
-   bottom: -5%;   
    z-index: 0; /* Aumenta o z-index */
 `;
 
@@ -223,8 +223,77 @@ export const Membros = styled.span`
    font-size: 3.5vw;
 
    @media(min-width: 768px){
-      font-size: 1.5vw;
+      font-size: 1vw;
       z-index: 100;
+   }
+`
+
+export const NomeGrupo = styled.span`
+   font-weight: bold;
+   @media (min-width: 768px){
+      font-size: 1.3vw;
+      text-align: start;
+   }
+`
+
+export const FotoMateriaDiv = styled.div`
+   height: 60%;
+   width: 35%;
+   background-color: white;
+   border-radius: 360px;
+   z-index: 100;
+   bottom: 5%;
+   border: solid 1px black;
+   padding: 5% 5%;
+   position: absolute;
+`
+
+export const FotoMateria = styled.img`
+   height: 100%;
+   width: 100%;
+
+`
+
+export const IntroGrupoDiv = styled.div`
+
+   display: flex;
+flex-direction: row;
+background-color: #fee101;
+border-radius: 8px;
+border: solid 3px #E9CE03;
+box-shadow: 0 0.5vh 0 0 #E9CE03;
+width: 36%;
+height: 100%;
+justify-content: space-evenly;
+align-items: center;
+
+@media(min-width: 768px) {
+   box-shadow: none;
+   background-color: transparent;
+   border-radius:0px;
+   border: none;
+   position: relative;
+   width: 100%;
+   height: 40%;
+   max-height: 15vh;
+   margin-top: 6vh;
+   gap: 1vh;
+}
+`
+
+export const IntroGrupo = styled.div`
+
+   @media(min-width:768px){
+      display: flex;
+      flex-direction: column;
+      z-index:100;
+      height: 100%;
+      min-width: 60%;
+      max-width: 60%;
+      background-color: trasnparent;
+      justify-content: space-evenly;
+      text-align: end;
+      padding-right: 5%;  
    }
 `
 
@@ -233,8 +302,10 @@ export const IconeGrupo = styled.img`
    height: 60%;
 
    @media(min-width: 768px){
-      max-width: 28%;
-      height: 80%;
+      width: 80%;
+      height: 120%;
+      position: absolute;
+      top: -40%;
       z-index:100;
    }
 `
@@ -270,13 +341,14 @@ export const FotoMentor = styled.img`
 
 export const NomeMentor = styled.span`
    font-size: 3.5vw;
+   font-weight: bold;
    
    @media(min-width: 768px){
-      font-size: 1.3vw;
+      font-size: 1vw;
    }
 `
 
-export const MembrosAjudados = styled.span`
+export const TipoMentor = styled.span`
    font-size: 2.5vw;
    
    @media(min-width:768px){
