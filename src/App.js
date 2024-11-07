@@ -16,7 +16,9 @@ import MudarSenha from './pages/MudarSenha'
 import Emblemas from './pages/Emblemas';
 import MontagemAtividades from './pages/MontagemAtividades';
 import TelaAtividades from './pages/TelaAtividades';
-import Atividades from './pages/Atividade'
+import Atividades from './pages/Atividade';
+import Atividade2 from './pages/Atividade2';
+import Atividade3 from './pages/Atividade3';
 
 import * as C from './styles/app';
 
@@ -43,6 +45,8 @@ function App() {
           <Route path="/esqueceu-senha" element={<EsqueceuSenha />} />
           <Route path="/mudar-senha" element={<MudarSenha />} />
           <Route path="/emblemas" element={<Emblemas />} />
+          <Route path="/atividade/2" element={<Atividade2 />} />
+          <Route path="/atividade/3" element={<Atividade3 />} />
         </Routes>
       </Router>
     </C.Container>

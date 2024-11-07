@@ -2,53 +2,50 @@ import React, { useState, useEffect } from 'react';
 import Container from '../styles/telaCheia';
 import Navegacao from '../components/Navegacao';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';  // Importe o useNavigate
+import { useNavigate } from 'react-router-dom';
 
 const TelaAtividades = () => {
-  const [questao, setQuestao] = useState(null); // Para armazenar a questão
-  const [enunciado, setEnunciado] = useState(''); // Para armazenar o enunciado da questão
-  const [selectedButtons, setSelectedButtons] = useState(Array(12).fill(false)); // Botões selecionados
-  const [idQuestao, setIdQuestao] = useState(1); // Estado para armazenar o ID da questão
-  const navigate = useNavigate();  // Use o hook useNavigate para navegação
+  const [questao, setQuestao] = useState(null);
+  const [enunciado, setEnunciado] = useState('');
+  const [selectedButtons, setSelectedButtons] = useState(Array(12).fill(false));
+  const [idQuestao, setIdQuestao] = useState(1);
+  const navigate = useNavigate();
 
-  // Função para buscar o enunciado com base no ID da questão
   const fetchQuestao = async (id) => {
     try {
       const response = await axios.get(`http://localhost:8080/v1/studyfy/questao/${id}`);
       const questaoData = response.data.questao[0];
       setQuestao(questaoData);
-      setEnunciado(questaoData.enunciado); // Atualiza o enunciado com a resposta da API
+      setEnunciado(questaoData.enunciado);
     } catch (error) {
       console.error('Erro ao buscar a questão', error);
     }
   };
 
-  // Efeito para carregar o enunciado da questão sempre que o ID mudar
   useEffect(() => {
-    fetchQuestao(idQuestao); // Busca a questão com o ID atualizado
-  }, [idQuestao]); // Recarrega a questão sempre que o ID mudar
+    fetchQuestao(idQuestao);
+  }, [idQuestao]);
 
-  // Função que altera o estado de seleção dos botões
   const handleButtonClick = (index) => {
-    const newId = index + 1; // Exemplo de lógica para atualizar o ID (ajuste conforme a necessidade)
-    setIdQuestao(newId); // Atualiza o ID da questão com base no índice
+    const newId = index + 1;
+    setIdQuestao(newId);
 
-    // Alterna a seleção do botão
     setSelectedButtons((prev) => {
       const newSelectedButtons = [...prev];
-      newSelectedButtons[index] = !newSelectedButtons[index]; // Alterna a seleção do botão
+      newSelectedButtons[index] = !newSelectedButtons[index];
       return newSelectedButtons;
     });
   };
 
-  // Função para iniciar a atividade e navegar para a tela de Atividade com o ID da questão
-  const handleStartActivity = (activity) => {
+  const handleStartActivity = (activity, index) => {
     alert(`Atividade "${activity}" iniciada!`);
-    // Navegar para a página de Atividade passando o ID
-    navigate(`/atividade/${idQuestao}`);
+    if (index === 0) {
+      navigate('/atividade/1'); // O primeiro botão leva para Atividades.js
+    } else if (index === 1) {
+      navigate('/atividade/2'); // O segundo botão leva para Atividade2.js
+    }
   };
 
-  // Efeito para rolar a página automaticamente para baixo quando o último card for aberto
   useEffect(() => {
     const lastCardIndex = selectedButtons.length - 1;
     if (selectedButtons[lastCardIndex]) {
@@ -58,7 +55,6 @@ const TelaAtividades = () => {
 
   return (
     <Container style={{ backgroundColor: 'white', alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
-      {/* Título centralizado */}
       <div style={{ width: '100%', flexGrow: '1', overflowY: 'auto', textAlign: 'center', marginTop: '10%' }}>
         <div style={{
           display: 'flex', position: 'fixed', zIndex: '100', width: '100%', height: '5%',
@@ -72,7 +68,6 @@ const TelaAtividades = () => {
           </h2>
         </div>
 
-        {/* Assunto 1 - Soma */}
         <div style={{
           backgroundColor: '#ffeb3b', padding: '5%', color: '#000000', width: '100%',
           textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.0em'
@@ -87,7 +82,6 @@ const TelaAtividades = () => {
           Soma simples
         </h3>
 
-        {/* Botões de Atividades - Assunto 1 */}
         <div style={{
           display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '15%',
           width: '60%', marginLeft: '10%'
@@ -115,7 +109,7 @@ const TelaAtividades = () => {
                       backgroundColor: '#ffeb3b', border: 'none', padding: '7% 10%', borderRadius: '15%',
                       color: '#000', cursor: 'pointer',
                     }}
-                    onClick={() => handleStartActivity(`Atividade ${activity}`)}  // Passa o ID para a navegação
+                    onClick={() => handleStartActivity(`Atividade ${activity}`, index)}  // Passa o índice do botão
                   >
                     Começar
                   </button>
@@ -125,7 +119,6 @@ const TelaAtividades = () => {
           ))}
         </div>
 
-        {/* Assunto 2 - Subtração */}
         <div style={{
           backgroundColor: '#007bbf', padding: '5%', color: '#ffffff', width: '100%',
           textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.0em'
@@ -140,7 +133,6 @@ const TelaAtividades = () => {
           Subtração simples
         </h3>
 
-        {/* Botões de Atividades - Assunto 2 */}
         <div style={{
           display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '15%',
           width: '60%', marginLeft: '10%'
@@ -168,7 +160,7 @@ const TelaAtividades = () => {
                       backgroundColor: '#007bbf', border: 'none', padding: '7% 10%', borderRadius: '15%',
                       color: '#ffffff', cursor: 'pointer',
                     }}
-                    onClick={() => handleStartActivity(`Atividade ${activity}`)} // Passa o ID para a navegação
+                    onClick={() => handleStartActivity(`Atividade ${activity}`, index + 4)}
                   >
                     Começar
                   </button>
@@ -179,7 +171,6 @@ const TelaAtividades = () => {
         </div>
       </div>
 
-      {/* Componente de Navegação */}
       <Navegacao />
     </Container>
   );
