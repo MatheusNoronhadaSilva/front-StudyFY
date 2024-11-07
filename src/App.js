@@ -18,9 +18,12 @@ import Emblemas from './pages/Emblemas';
 import MontagemAtividades from './pages/MontagemAtividades';
 import MontagemAtividadesOrganizar from './pages/MontagemAtividadeOrganizar';
 import DesceuRank from './pages/DesceuRank'
+import Subiurank from './pages/SubiuRank';
+import FicouRank from './pages/ManteveRank';
 
 import * as C from './styles/app';
 import MontagemAtividadesTexto from './pages/MontagemAtividadeTexto';
+import ManteveRank from './pages/ManteveRank';
 
 function App() {
 
@@ -28,7 +31,7 @@ function App() {
     <C.Container>
       <Router>
         <Routes>
-          <Route exact path='/' element= {<DesceuRank/>} />
+          <Route exact path='/' element= {<MontagemAtividades/>} />
           <Route path='/perfil' element={<Perfil/>}></Route>
           <Route path='/atividades' element= {<Atividades/>} />
           <Route path='/caderno-virtual' element= {<CadernoVirtual/>} />
