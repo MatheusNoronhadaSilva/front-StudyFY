@@ -10,6 +10,7 @@ const TelaCheia = styled.div`
   @media (min-width: 768px) {
     background-color: #ffffff;
     flex-direction: row;
+    overflow: hidden;
   }
 `;
 

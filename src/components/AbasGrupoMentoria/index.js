@@ -6,6 +6,7 @@ import fitro from '../../assets/Filtro.png'
 import AbaMembros from '../MembrosGrupo';
 
 const AbasGrupoMentoria = () => {
+
   const [abaAtiva, setAbaAtiva] = useState(0); // Estado para rastrear a aba ativa
 
   const handleClick = (index) => {
@@ -25,16 +26,17 @@ const AbasGrupoMentoria = () => {
           </C.Aba>
         ))}
       </C.Abas>
-      <C.CampoAba>
-        {/* <C.Pesquisa>
+      {/* <C.CampoAba>
+        <C.Pesquisa>
           <C.BarraPesquisa>
-            <img src={lupa} alt='lupa' style={{height: '60%', width: '10%'}}></img>
+            <C.Lupa src={lupa} alt='lupa'></C.Lupa>
             <C.InputPesquisa></C.InputPesquisa>
           </C.BarraPesquisa>
-          <img src={fitro} alt='filtro'></img>
-        </C.Pesquisa> */}
+          <C.Filtro src={fitro} alt='filtro'></C.Filtro>
+        </C.Pesquisa>
         <AbaMembros />
-      </C.CampoAba>
+      </C.CampoAba> */}
+      <AbaMembros />
     </C.AbasGrupo>
   );
 };

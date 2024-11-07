@@ -7,6 +7,7 @@ export const TelaPadding = styled.div`
    flex-direction: column;
    padding-inline: 7vw;
    overflow-y: auto;
+   background-color: green;
 `
 
 export default TelaPadding;

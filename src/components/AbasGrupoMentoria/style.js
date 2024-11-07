@@ -11,6 +11,11 @@ export const AbasGrupo = styled.div`
    margin-top: 2vh;
    gap: 2vh;
    width: 100%;
+
+   @media(min-width: 768px){
+      padding-right: 0%;
+      width: 58.2%;
+   }
 `;
 
 export const Abas = styled.div`
@@ -21,6 +26,10 @@ export const Abas = styled.div`
    min-height: 10%;
    height: 10%;
    width: 100%;
+
+   @media (min-width: 768px){
+      width: 70%;
+   }
 `;
 
 export const Aba = styled.div`
@@ -44,6 +53,10 @@ export const CampoAba = styled.div`
    max-height: 50%;
    width: 100%;
    overflow-y: auto;
+
+   @media(min-width: 768px){
+      overflow-y: hidden;
+   }
 `;
 
 export const Pesquisa = styled.div`
@@ -53,6 +66,11 @@ export const Pesquisa = styled.div`
    width: 100%;
    height: 20%;
    max-height: 20%;
+
+   @media(min-width: 768px){
+      max-height: none;
+      height: 30%;
+   }
 `
 
 export const BarraPesquisa = styled.div`
@@ -72,3 +90,15 @@ export const InputPesquisa = styled.input`
    width: 100%;
    height: 100%;
 `
+
+export const Lupa = styled.img`
+   height: 60%;
+   width: 10%;
+
+   @media(min-width: 768px){
+      height: 20%;
+   }
+`
+
+export const Filtro = styled.img`
+   height: `

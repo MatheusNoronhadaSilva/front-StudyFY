@@ -1,0 +1,26 @@
+
+.divPerfil{
+    @media (min-width: 768px) {
+        width: 50%
+    }
+}
+
+.DadosProfessor{
+    @media (min-width: 768px) {
+        width: 50%
+    }
+}
+
+.botao{
+    @media (min-width: 768px) {
+        float: right;
+        margin-left: 10%; 
+    }
+
+}
+
+.estrela{
+    @media (min-width: 768px) {
+      margin-top: 10vw
+    }
+}

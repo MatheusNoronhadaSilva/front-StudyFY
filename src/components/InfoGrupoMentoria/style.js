@@ -12,11 +12,13 @@ export const InfoGrupo = styled.div`
    width: 100%;
 
    @media(min-width: 768px){
-      width: 80%;
+      width: 70%;
+      height: 42%;
       min-height: 32%;
       padding-top: 3%;
       padding-right: 0%;
       align-items: start;
+      flex-direction: row;
    }
 `;
 
@@ -28,11 +30,10 @@ export const IntroducaoGrupo = styled.div`
    justify-content: space-between;
 
    @media(min-width: 768px){
-      max-height: 40vh;
+      height: 100%;
       width: 50%;
-      background-color: blue;
       flex-direction: column;
-      gap: 5vh;
+      gap: 3vh;
    }
 `
 
@@ -45,7 +46,6 @@ export const MentorDiv = styled.div`
 
    @media (min-width: 768px){
       width: 100%;
-      background-color: pink;
    }
 `
 
@@ -74,7 +74,7 @@ export const CampoInfoMentor = styled.div`
    padding-inline: 1vw;
 
    @media(min-width: 768px){
-   max-height: 10vh;
+   flex-grow: 1;
 }
 `
 
@@ -88,6 +88,8 @@ export const InfoMentor = styled.div`
    @media(min-width: 768px){
       width: 70%;
       padding-top: 0vh;
+      justify-content: center;
+      max-width: 70%; 
    }
 `
 
@@ -141,24 +143,20 @@ align-items: center;
    border-radius:0px;
    border: none;
    position: relative;
-   width: 100%;
+   flex-grow: 1;
+   z-index: 100;
    gap: 1vh;
 }
 `
 
 export const DescricaoDiv = styled.div`
    display: flex;
-   flex-direction: column;
    width: 55%;
    height: 100%;
-   gap: 2vh;
-   align-items: center;
 
    @media(min-width: 768px){
-      width: 30%;
-      min-height: 100%;
-      background-color: pink;
-      flex-grow: 1;
+      width: 100%;
+      height: 75%;
    }
 `;
 
@@ -170,10 +168,6 @@ export const Descricao = styled.div`
    box-shadow: 0 0.5vh 0 0 #d9d9d9;
    height: 100%;
    width: 100%;
-
-   @media(min-width: 768px){
-      background-color: green;
-   }
 `;
 
 export const AvaliacaoMentor = styled.div`
@@ -189,6 +183,10 @@ export const Barra = styled.div`
    height: 70%;
    width: 2%;
    background-color: black;
+
+   @media(min-width: 768px){
+      min-width: 2%;
+   }
 `
 
 export const Avaliacao = styled.div`
@@ -206,17 +204,17 @@ export const Estrelas = styled.div`
    flex-direction: row;
    height: 20%;
    width: 100%;
+   justify-content: center;
 `
 
 export const fundoAmarelo = styled.div`
    position: absolute;
    width: 100%;
-   height: 70%;
+   height: 100%;
    background-color: #fee101;
    border-radius: 8px;
    border: solid 3px #E9CE03;
    box-shadow: 0 0.5vh 0 0 #E9CE03;
-   bottom: -5%;   
    z-index: 0; /* Aumenta o z-index */
 `;
 
@@ -225,8 +223,77 @@ export const Membros = styled.span`
    font-size: 3.5vw;
 
    @media(min-width: 768px){
-      font-size: 1.5vw;
+      font-size: 1vw;
       z-index: 100;
+   }
+`
+
+export const NomeGrupo = styled.span`
+   font-weight: bold;
+   @media (min-width: 768px){
+      font-size: 1.3vw;
+      text-align: start;
+   }
+`
+
+export const FotoMateriaDiv = styled.div`
+   height: 60%;
+   width: 35%;
+   background-color: white;
+   border-radius: 360px;
+   z-index: 100;
+   bottom: 5%;
+   border: solid 1px black;
+   padding: 5% 5%;
+   position: absolute;
+`
+
+export const FotoMateria = styled.img`
+   height: 100%;
+   width: 100%;
+
+`
+
+export const IntroGrupoDiv = styled.div`
+
+   display: flex;
+flex-direction: row;
+background-color: #fee101;
+border-radius: 8px;
+border: solid 3px #E9CE03;
+box-shadow: 0 0.5vh 0 0 #E9CE03;
+width: 36%;
+height: 100%;
+justify-content: space-evenly;
+align-items: center;
+
+@media(min-width: 768px) {
+   box-shadow: none;
+   background-color: transparent;
+   border-radius:0px;
+   border: none;
+   position: relative;
+   width: 100%;
+   height: 40%;
+   max-height: 15vh;
+   margin-top: 6vh;
+   gap: 1vh;
+}
+`
+
+export const IntroGrupo = styled.div`
+
+   @media(min-width:768px){
+      display: flex;
+      flex-direction: column;
+      z-index:100;
+      height: 100%;
+      min-width: 60%;
+      max-width: 60%;
+      background-color: trasnparent;
+      justify-content: space-evenly;
+      text-align: end;
+      padding-right: 5%;  
    }
 `
 
@@ -235,8 +302,10 @@ export const IconeGrupo = styled.img`
    height: 60%;
 
    @media(min-width: 768px){
-      width: 30%;
-      height: 30%;
+      width: 80%;
+      height: 120%;
+      position: absolute;
+      top: -40%;
       z-index:100;
    }
 `
@@ -252,8 +321,8 @@ export const IconeMentor = styled.img`
    width: 20%;
 
    @media(min-width: 768px){
-      height: 10%;
-      width: 15%;
+      height: 75%;
+      width: 11%;
    }
 `
 
@@ -266,21 +335,86 @@ export const FotoMentor = styled.img`
    width: 22%;
 
    @media(min-width: 768px){
+      width: 20%
    }
 `
 
 export const NomeMentor = styled.span`
    font-size: 3.5vw;
+   font-weight: bold;
    
    @media(min-width: 768px){
-      font-size: 1.5vw;
+      font-size: 1vw;
    }
 `
 
-export const MembrosAjudados = styled.span`
+export const TipoMentor = styled.span`
    font-size: 2.5vw;
    
    @media(min-width:768px){
+      font-size: 0.8vw;
+   }
+`
+
+export const AvaliacaoMedia = styled.span`
+   font-size: 2.5vw;
+   font-weight: bold;
+   
+   @media(min-width: 768px){
+      font-size: 1.5vw
+   }
+`
+
+export const Estrela = styled.img`
+   height: 100%;
+   width: 20%;
+
+   @media (min-width: 768px){
+      width: 16%;
+   }
+`
+
+export const QuantidadeAvaliacao = styled.span`
+   font-size: 2vw;
+   
+   @media(min-width: 768px){
+      font-size: 0.7vw
+   }
+`
+
+export const OpcoesGrupo = styled.div`
+
+   @media(min-width:768px){
+      width: 100%;
+      justify-content: center;
+      display: flex;
+      gap: 8%;
+   }
+`
+
+export const BotaoSair = styled.div`
+
+   background-color: #FF3939;
+   border: 3px solid #A30909;
+   box-shadow: 0 0.5vh 0 0 #A30909;
+   border-radius: 8px;
+   align-items: center;
+   justify-content: center;
+   display: flex;
+   cursor: pointer;
+
+   @media (min-width: 768px){
+      width: 45%;
+      height: 100%;
+      padding: 2% 2% 2% 2%;
+   }
+`
+
+export const Sair = styled.span`
+
+   text-align: center;
+   color: white;
+   @media(min-width: 768px){
       font-size: 1vw;
    }
 `

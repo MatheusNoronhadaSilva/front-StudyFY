@@ -52,20 +52,17 @@ const AbasGrupoMentoria = () => {
     { src: duvida, label: 'Dúvidas' },
   ];
 
-  const todasImagens = imagens.concat(imagensExtras);
-
-  console.log(todasImagens);
-  
+  const todasImagens = imagens.concat(imagensExtras);  
 
   const urlsNavegacao = [
-    'atividades',
+    'tela-atividades',
     'caderno-virtual',
     'rank',
-    'emblemas',
+    'perfil',
     'notificacao',
     'chat-privado',
     'chatIA',
-    'grupo-mentoria',
+    'visualizar-mentorias',
     'ajuda',
   ]
 
