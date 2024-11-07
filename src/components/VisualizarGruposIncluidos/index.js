@@ -1,22 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import * as C from './style';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
-import fotoGrupo from '../../assets/Ellipse (1).png'
-import matematica from '../../assets/Matematica.png'
+import fotoGrupo from '../../assets/Ellipse (1).png';
+import matematica from '../../assets/Matematica.png';
 
 const VisualizarGruposIncluidos = () => {
     const [isVisualizando, setIsVisualizando] = useState(false);
     const [showBorder, setShowBorder] = useState(false);
+    const [grupos, setGrupos] = useState([]); // Estado para armazenar os dados dos grupos
 
-    const handleVerGruposClick = () => {
-        setIsVisualizando(true); // Exibe a visualização de grupos
-        setShowBorder(true); // Ativa a borda ao clicar em "Ver grupos"
+    const handleVerGruposClick = async () => {
+        setIsVisualizando(true);
+        setShowBorder(true);
+
+        try {
+            // Envia o id do aluno, aqui definido como 1. Alterar conforme necessário.
+            const response = await axios.post('http://localhost:8080/v1/studyfy/grupoMentoriaAluno', { id: 1 });
+            
+            if (response.status === 200) {
+                console.log(response.data);
+                
+                setGrupos(response.data); // Salva os dados recebidos no estado `grupos`
+            } else {
+                console.log('Erro ao buscar grupos de mentoria');
+            }
+        } catch (error) {
+            console.error('Erro ao buscar grupos de mentoria:', error);
+        }
     };
 
     const handleFecharClick = () => {
-        setIsVisualizando(false); // Retorna para a visualização inicial
-        setShowBorder(false); // Remove a borda ao fechar
+        setIsVisualizando(false);
+        setShowBorder(false);
     };
 
     return (
@@ -28,17 +45,19 @@ const VisualizarGruposIncluidos = () => {
                 </C.VerGruposDiv>
             ) : (
                 <C.VisualizacaoGrupos>
-                    <div style={{width: '100%', gap: '30%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-evenly'}}>
+                    <div style={{ width: '100%', gap: '30%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-evenly' }}>
                         <C.Fechar icon={faClose} onClick={handleFecharClick} />
                         <C.DescricaoVisualizacao>Veja os grupos no qual faz parte</C.DescricaoVisualizacao>
                     </div>
-                    <C.GrupoMentoria>
-                        <C.IconeGrupo src={fotoGrupo}/>
-                        <C.FotoMateriaDiv>
-                            <C.IconeMateria src={matematica} />
-                        </C.FotoMateriaDiv>
-                        <C.NomeGrupo>Grupinho sdjsdjs jsdhjshd fhdfhd jhh...</C.NomeGrupo>
-                    </C.GrupoMentoria>  
+                    {grupos.map((grupo) => (
+                        <C.GrupoMentoria key={grupo.id}>
+                            <C.IconeGrupo src={fotoGrupo} />
+                            <C.FotoMateriaDiv>
+                                <C.IconeMateria src={matematica} />
+                            </C.FotoMateriaDiv>
+                            <C.NomeGrupo>{grupo.nome_grupo}</C.NomeGrupo>
+                        </C.GrupoMentoria>
+                    ))}
                 </C.VisualizacaoGrupos>
             )}
         </C.CampoVisualizarGruposIncluidos>

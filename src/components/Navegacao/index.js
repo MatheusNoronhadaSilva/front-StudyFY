@@ -65,7 +65,7 @@ const AbasGrupoMentoria = () => {
     'notificacao',
     'chat-privado',
     'chatIA',
-    'grupo-mentoria',
+    'visualizar-mentorias',
     'ajuda',
   ]
 
