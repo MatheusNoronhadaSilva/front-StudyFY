@@ -87,30 +87,22 @@ const MontagemAtividades = () => {
                                         border: '2px solid #E9CE03', height: '150px', width: '285px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
                                         backgroundColor: 'white', borderRadius: '12px', display: 'flex', justifyContent: 'space-between', margin: '10px'
                                     }}>
-                                        <div style={{
-                                            flexDirection: 'column', display: 'flex', alignItems: 'center', paddingTop: '40px', paddingLeft: '15px'
+                                        <div style={{flexDirection: 'column', display: 'flex', alignItems: 'center', paddingTop: '40px', paddingLeft: '15px'
                                         }}>
                                             <img style={{ height: '35px', width: '35px' }} src={Objetiva} alt="Objetiva" />
                                             <p>Múltipla escolha</p>
                                         </div>
 
-                                        <div style={{
-                                            display: 'flex', flexDirection: 'column', alignItems: 'flex-end', paddingTop: '35px', gap: '10px', margin: '5px'
-                                        }}>
+                                        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-end', paddingTop: '35px', gap: '10px', margin: '5px'}}>
 
-                                            <div style={{
-                                                backgroundColor: '#D9D9D9', height: '20px', width: '150px', borderRadius: '5px', display: 'flex', paddingLeft: '5px'
-                                            }}>
+                                            <div style={{backgroundColor: '#D9D9D9', height: '20px', width: '150px', borderRadius: '5px', display: 'flex', paddingLeft: '5px'}}>
                                                 <img style={{ height: '15px', width: '15px' }} src={AbaFechar} alt="Fechar" />
                                             </div>
-                                            <div style={{
-                                                backgroundColor: '#D9D9D9', height: '20px', width: '150px', borderRadius: '5px', display: 'flex', paddingLeft: '5px'
-                                            }}>
+
+                                            <div style={{backgroundColor: '#D9D9D9', height: '20px', width: '150px', borderRadius: '5px', display: 'flex', paddingLeft: '5px'}}>
                                                 <img style={{ height: '15px', width: '15px' }} src={checkBoxV} alt="Checkbox V" />
                                             </div>
-                                            <div style={{
-                                                backgroundColor: '#D9D9D9', height: '20px', width: '150px', borderRadius: '5px', display: 'flex', paddingLeft: '5px'
-                                            }}>
+                                            <div style={{backgroundColor: '#D9D9D9', height: '20px', width: '150px', borderRadius: '5px', display: 'flex', paddingLeft: '5px'}}>
                                                 <img style={{ height: '15px', width: '15px' }} src={AbaFechar} alt="Fechar" />
                                             </div>
                                         </div>
@@ -128,10 +120,7 @@ const MontagemAtividades = () => {
 
                 <div>
                     <textarea placeholder="Adicione uma questão:"
-                        style={{
-                            border: 'none', width: '400px', height: '200px', display: 'flex', justifyContent: 'center',
-                            paddingTop: '25%', fontSize: '20px', outline: 'none'
-                        }} />
+                        style={{border: 'none', width: '400px', height: '200px', display: 'flex', justifyContent: 'center',paddingTop: '25%', fontSize: '20px', outline: 'none'}}/>
 
                     <div style={{height: '170px', width: '414px', border: '2px solid #D9D9D9', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                         <img src={adicionarImg} alt="Adicionar Imagem" style={{ maxHeight: '100%', maxWidth: '100%' }} />
