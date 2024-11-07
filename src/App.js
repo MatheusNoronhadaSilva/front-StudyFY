@@ -15,6 +15,14 @@ import EsqueceuSenha from './pages/EsqueceuSenha';
 import MudarSenha from './pages/MudarSenha'
 import Emblemas from './pages/Emblemas';
 import MontagemAtividades from './pages/MontagemAtividades';
+import MontagemAtividadesOrganizar from './pages/MontagemAtividadeOrganizar';
+import DesceuRank from './pages/DesceuRank'
+import Subiurank from './pages/SubiuRank';
+import FicouRank from './pages/ManteveRank';
+
+import * as C from './styles/app';
+import MontagemAtividadesTexto from './pages/MontagemAtividadeTexto';
+import ManteveRank from './pages/ManteveRank';
 import TelaAtividades from './pages/TelaAtividades';
 import Atividades from './pages/Atividade';
 import Atividade2 from './pages/Atividade2';
@@ -54,6 +62,7 @@ function App() {
           <Route path="/atividade/2" element={<Atividade2 />} />
           <Route path="/atividade/3" element={<Atividade3 />} />
           <Route path="/atividade/4" element={<Atividade4 />}/>
+          <Route exact path='/' element= {<Notificacao/>} />
           <Route exact path='/' element= {<Configuraçao/>} />
           <Route exact path='/' element= {<TelaAtividades/>} />
           <Route path='/perfil' element={<Perfil/>} />

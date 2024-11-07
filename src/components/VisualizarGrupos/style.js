@@ -97,8 +97,8 @@ export const GruposOrganizados = styled.div`
 export const GrupoMentoria = styled.div`
   border: solid 1px #d9d9d9;
   width: 90%;
-  min-height: ${({ expanded }) => (expanded ? '200%' : '10vh')}; // Expande ao clicar
-  max-height: ${({ expanded }) => (expanded ? '60%' : '10vh')};
+  min-height: ${({ expanded }) => (expanded ? '22vh' : '10vh')}; // Expande ao clicar
+  max-height: ${({ expanded }) => (expanded ? '10vh' : '12vh')};
   border-radius: 8px;
   box-shadow: 0 0.5vh 0 0 #d9d9d9;
   padding-inline: 0.5vw;
@@ -189,6 +189,7 @@ export const InfoGrupo = styled.div`
 export const FotoGrupo = styled.img`
    @media(min-width: 768px){
       height: 70%;
+      max-height: 12vh;
       min-width: 28%;
     }`
 
@@ -222,6 +223,7 @@ export const IconeMateria = styled.img`
 
 export const FotoMateriaDiv = styled.div`
    height: 60%;
+   max-height: 6vh;
    width: 55%;
    background-color: white;
    border-radius: 360px;
