@@ -19,7 +19,7 @@ const VisualizarGrupos = () => {
     const pegarGrupos = async () => {
         try {
             const id = localStorage.getItem("userId") 
-            const response = await axios.post('http://localhost:8080/v1/studyfy/gruposMentoria', {params: {idAluno: id}} );
+            const response = await axios.post('http://localhost:8080/v1/studyfy/gruposMentoria', {idAluno: id});
             // Atualiza o estado com os dados dos grupos
             setGrupos(response.data);
         } catch (error) {

@@ -56,10 +56,16 @@ const InfoGrupoMentoria = ({ id }) => {
         grupoId: id,
         alunoId: alunoId,
       });
+
+      console.log(response);
       
-      if (response.status === 200) {
+      
+      if (response.status === 201) {
         console.log('Aluno entrou no grupo com sucesso');
-         navigate(`grupo-mentoria/${id}`)
+        localStorage.setItem('statusGrupoMentoria', 'membro')
+        navigate(`/grupo-mentoria/${id}`)
+      } else {
+        console.log('aaaaaaaaa');
       }
     } catch (error) {
       console.error("Erro ao entrar no grupo:", error);

@@ -16,14 +16,14 @@ const GrupoMentoria = () => {
         <Container style={{backgroundColor: 'white', alignItems: 'center'}}>
           <Navegacao />
           <div style={{height: '100%', width: '100%', flexDirection: 'column'}}>
-            <InfoGrupoMentoria id={id} /> {/* Passa o id para o componente */}
+            <InfoGrupoMentoria id={id} status={'membro'} /> {/* Passa o id para o componente */}
             <AbasGrupoMentoria />
           </div>
         </Container>
       ) : (
         <Container style={{ backgroundColor: 'white', alignItems: 'center', paddingTop: '1vh' }}>
           <span>Grupo de mentoria</span>
-          <InfoGrupoMentoria id={id} /> {/* Passa o id para o componente */}
+          <InfoGrupoMentoria id={id} status={'membro'} /> {/* Passa o id para o componente */}
           <AbasGrupoMentoria />
           <Navegacao></Navegacao>
         </Container>
