@@ -30,7 +30,7 @@ const AtividadeCorrespondencia = () => {
 
   const fetchEnunciado = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/v1/studyfy/questao/4');
+      const response = await axios.get('http://localhost:8080/v1/studyfy/questao/6');
       setEnunciado(response.data.questao[0].enunciado);
     } catch (error) {
       console.error('Erro ao buscar o enunciado:', error);
@@ -43,7 +43,7 @@ const AtividadeCorrespondencia = () => {
       const todasCorrespondencias = response.data.respostas || [];
       
       // Filtra as correspondências com IDs de 1 a 5
-      const correspondenciasFiltradas = todasCorrespondencias.filter((item) => item.id >= 1 && item.id <= 5);
+      const correspondenciasFiltradas = todasCorrespondencias.filter((item) => item.id >= 6 && item.id <= 9);
       setCorrespondencias(correspondenciasFiltradas);
     } catch (error) {
       console.error('Erro ao buscar correspondências:', error);
@@ -110,7 +110,7 @@ const AtividadeCorrespondencia = () => {
         alignItems: 'center', 
         width: '100%', 
         padding: '10px', 
-        backgroundColor: '#FFD700', 
+        backgroundColor: '#FFCC00', 
         borderBottom: '1px solid #FFD700',
         position: 'relative',
       }}>
@@ -130,7 +130,7 @@ const AtividadeCorrespondencia = () => {
         <h2 style={{
           fontSize: '1.5em',
           textTransform: 'uppercase',
-          color: '#FFD700', 
+          color: '#FFCC00', 
           margin: '15px 20px 25px 100px'  
         }}>
           Atividade de Correspondência
@@ -155,7 +155,7 @@ const AtividadeCorrespondencia = () => {
               <div style={{
                 width: '45%',
                 padding: '15px',
-                backgroundColor: '#FFEB3B',
+                backgroundColor: '#FFCC00',
                 borderRadius: '20px',
                 textAlign: 'center',
                 fontWeight: 'bold',
@@ -193,7 +193,7 @@ const AtividadeCorrespondencia = () => {
           style={{
             width: '80%',
             padding: '15px',
-            backgroundColor: '#FFD700',
+            backgroundColor: '#FFCC00',
             color: '#000',
             borderRadius: '25px',
             border: '1px solid #FFD700',
@@ -226,40 +226,42 @@ const AtividadeCorrespondencia = () => {
               boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
             }}
           >
-            {isRespostaCorreta ? 'Próximo Assunto' : 'Tente Novamente'}
+            {isRespostaCorreta ? 'Próxima questão' : 'Tente Novamente'}
           </button>
         )}
 
-        {respostaFeedback && (
+{respostaFeedback && (
           <div style={{
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            position: 'absolute',
+            position: 'fixed',
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
             width: '80%',
             height: '300px',
             backgroundColor: isRespostaCorreta ? 'rgba(76, 175, 80, 0.8)' : 'rgba(244, 67, 54, 0.8)',
-            borderRadius: '20px',
-            padding: '20px',
-            color: 'white',
-            fontSize: '1.5em',
-            fontWeight: 'bold',
+            color: '#fff',
+            borderRadius: '10px',
             textAlign: 'center',
+            padding: '20px',
+            boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.3)',
           }}>
-            <img
-              src={isRespostaCorreta ? CalabresoFeliz : CalabresoTriste}
-              alt={isRespostaCorreta ? 'Mascote Feliz' : 'Mascote Triste'}
-              style={{ width: '100px', height: '100px', marginRight: '20px' }}
-            />
-            {respostaFeedback}
+            <div style={{ textAlign: 'center' }}>
+              <img src={isRespostaCorreta ? CalabresoFeliz : CalabresoTriste} alt="Mascote" style={{ 
+                width: '120px', 
+                height: '120px', 
+                marginBottom: '15px', 
+                animation: 'shake 1s ease' // Shake mais suave
+              }} />
+              <h3 style={{ fontSize: '1.5em', marginTop: '0' }}>{respostaFeedback}</h3>
+            </div>
           </div>
         )}
       </div>
 
-      <Navegacao />
+    <Navegacao/>
     </Container>
   );
 };

@@ -87,7 +87,7 @@ const Atividade5 = () => {
 
   const handleNextQuestion = () => {
     // Redireciona para a tela de atividades
-    navigate('/atividade/5');
+    navigate('/atividade/6');
   };
 
   const handleRetry = () => {
