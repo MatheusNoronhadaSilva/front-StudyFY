@@ -12,7 +12,8 @@ export const InfoGrupo = styled.div`
    width: 100%;
 
    @media(min-width: 768px){
-      width: 70%;
+      width: 80%;
+      gap: 6%;
       height: 42%;
       min-height: 32%;
       padding-top: 3%;
@@ -143,7 +144,7 @@ align-items: center;
    border-radius:0px;
    border: none;
    position: relative;
-   flex-grow: 1;
+   width: 30%;
    z-index: 100;
    gap: 1vh;
 }
@@ -237,7 +238,7 @@ export const NomeGrupo = styled.span`
 `
 
 export const FotoMateriaDiv = styled.div`
-   height: 60%;
+   height: 55%;
    width: 35%;
    background-color: white;
    border-radius: 360px;

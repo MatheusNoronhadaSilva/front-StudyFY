@@ -13,8 +13,6 @@ const InfoGrupoMentoria = ({ id }) => {
   const [mentorData, setMentorData] = useState(null);
   const [grupoData, setGrupoData] = useState(null);
 
-  id = 1
-
   useEffect(() => {
     const fetchMentorData = async () => {
       try {
@@ -32,6 +30,7 @@ const InfoGrupoMentoria = ({ id }) => {
         console.log('oioiio');
         
         const response = await axios.get(`http://localhost:8080/v1/studyfy/mentoria/${id}`); // Novo endpoint
+        console.log(response);
         setGrupoData(response.data.grupo[0]); // Assume que você deseja o primeiro grupo
         console.log(grupoData);
         

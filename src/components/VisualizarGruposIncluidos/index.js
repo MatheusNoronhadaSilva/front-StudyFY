@@ -37,6 +37,10 @@ const VisualizarGruposIncluidos = () => {
         setShowBorder(false);
     };
 
+    const telaCriarGrupo = () => {
+        navigate('/criar-grupo-mentoria')
+    }
+
     // Função para redirecionar para a página de detalhes do grupo
     const handleGrupoClick = (id) => {
 
@@ -51,6 +55,11 @@ const VisualizarGruposIncluidos = () => {
                 <C.VerGruposDiv>
                     <C.Descricao>Veja os grupos que você faz parte!</C.Descricao>
                     <C.VerGrupo onClick={handleVerGruposClick}>Ver grupos</C.VerGrupo>
+                    <div style={{minHeight: '10%'}}></div>
+                    <C.Descricao>OU</C.Descricao>
+                    <div style={{minHeight: '10%'}}></div>
+                    <C.Descricao>Crie um grupo</C.Descricao>
+                    <C.VerGrupo onClick={telaCriarGrupo}>Criar grupo</C.VerGrupo>
                 </C.VerGruposDiv>
             ) : (
                 <C.VisualizacaoGrupos>
