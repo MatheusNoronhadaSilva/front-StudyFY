@@ -18,7 +18,8 @@ const VisualizarGrupos = () => {
 
     const pegarGrupos = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/v1/studyfy/gruposMentoria');
+            const id = localStorage.getItem("userId") 
+            const response = await axios.post('http://localhost:8080/v1/studyfy/gruposMentoria', {params: {idAluno: id}} );
             // Atualiza o estado com os dados dos grupos
             setGrupos(response.data);
         } catch (error) {
@@ -47,7 +48,7 @@ const VisualizarGrupos = () => {
 
     // Função para redirecionar ao clicar em "Ver grupo de mentoria"
     const handleVerGrupoClick = (id) => {
-        navigate(`/grupo-mentoria/${id}`); // Navega para a página do grupo de mentoria com o id
+        navigate(`/grupo-mentoria-previa/${id}`); // Navega para a página do grupo de mentoria com o id
     };
 
     return (

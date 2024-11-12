@@ -411,7 +411,25 @@ export const BotaoSair = styled.div`
    }
 `
 
-export const Sair = styled.span`
+export const BotaoEntrar = styled.div`
+
+   background-color: green;
+   border: 3px solid green;
+   box-shadow: 0 0.5vh 0 0 green;
+   border-radius: 8px;
+   align-items: center;
+   justify-content: center;
+   display: flex;
+   cursor: pointer;
+
+   @media (min-width: 768px){
+      width: 45%;
+      height: 100%;
+      padding: 2% 2% 2% 2%;
+   }
+`
+
+export const TituloBotao = styled.span`
 
    text-align: center;
    color: white;

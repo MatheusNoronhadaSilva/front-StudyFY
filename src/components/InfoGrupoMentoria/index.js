@@ -7,19 +7,20 @@ import iconeMentor from '../../assets/mentoria.png';
 import estrela from '../../assets/Star rate.png';
 import { useMediaQuery } from '@mui/material';
 import matematica from '../../assets/Matematica.png';
+import { useNavigate } from 'react-router-dom';
 
 const InfoGrupoMentoria = ({ id }) => {
   const isDesktop = useMediaQuery('(min-width: 768px)');
   const [mentorData, setMentorData] = useState(null);
   const [grupoData, setGrupoData] = useState(null);
+  const navigate = useNavigate(); // Hook para navegação
+
 
   useEffect(() => {
     const fetchMentorData = async () => {
       try {
         const response = await axios.get(`http://localhost:8080/v1/studyfy/mentorGrupo/${id}`);
-        setMentorData(response.data.mentor); // Assume que você deseja o primeiro mentor
-        console.log(response.data.mentor);
-        
+        setMentorData(response.data.mentor);
       } catch (error) {
         console.error("Erro ao buscar os dados do mentor:", error);
       }
@@ -27,13 +28,8 @@ const InfoGrupoMentoria = ({ id }) => {
 
     const fetchGrupoData = async () => {
       try {
-        console.log('oioiio');
-        
-        const response = await axios.get(`http://localhost:8080/v1/studyfy/mentoria/${id}`); // Novo endpoint
-        console.log(response);
-        setGrupoData(response.data.grupo[0]); // Assume que você deseja o primeiro grupo
-        console.log(grupoData);
-        
+        const response = await axios.get(`http://localhost:8080/v1/studyfy/mentoria/${id}`);
+        setGrupoData(response.data.grupo[0]);
       } catch (error) {
         console.error("Erro ao buscar os dados do grupo:", error);
       }
@@ -42,6 +38,33 @@ const InfoGrupoMentoria = ({ id }) => {
     fetchMentorData();
     fetchGrupoData();
   }, [id]);
+
+  const handleEntrar = async () => {
+    try {
+
+      console.log('entrando');
+      const alunoId = localStorage.getItem('userId');  // Pegando o ID do aluno do localStorage
+      if (!alunoId) {
+        console.error('Aluno não encontrado no localStorage');
+        return;
+      }
+
+
+      
+      // Requisição POST para o endpoint
+      const response = await axios.post(`http://localhost:8080/v1/studyfy/membros/grupo`, {
+        grupoId: id,
+        alunoId: alunoId,
+      });
+      
+      if (response.status === 200) {
+        console.log('Aluno entrou no grupo com sucesso');
+         navigate(`grupo-mentoria/${id}`)
+      }
+    } catch (error) {
+      console.error("Erro ao entrar no grupo:", error);
+    }
+  };
 
   return (
     <C.InfoGrupo>
@@ -57,7 +80,7 @@ const InfoGrupoMentoria = ({ id }) => {
               </C.FotoGrupoDiv>
               <C.IntroGrupo>
                 <C.NomeGrupo>{grupoData ? grupoData.nome : "Carregando..."}</C.NomeGrupo>
-                <C.Membros>Membros {grupoData ? `${grupoData.quantidade_membros}/${grupoData.capacidade}` : "Carregando..."}</C.Membros>
+                <C.Membros>{grupoData ? `${grupoData.quantidade_membros}/${grupoData.capacidade}` : "Carregando..."}</C.Membros>
               </C.IntroGrupo>
               <C.fundoAmarelo />
             </C.IntroGrupoDiv>
@@ -93,12 +116,9 @@ const InfoGrupoMentoria = ({ id }) => {
           </C.IntroducaoGrupo>
           <div style={{ justifyContent: 'space-between', paddingTop: '6%', width: '30%', height: '100%', display: 'flex', flexDirection: 'column' }}>
             <C.OpcoesGrupo>
-              <C.BotaoSair>
-                <C.Sair>Sair do grupo</C.Sair>
-              </C.BotaoSair>
-              <C.BotaoSair>
-                <C.Sair>Sair do grupo</C.Sair>
-              </C.BotaoSair>
+              <C.BotaoEntrar>
+                <C.TituloBotao onClick={handleEntrar}>Entrar</C.TituloBotao>
+              </C.BotaoEntrar>
             </C.OpcoesGrupo>
             <C.DescricaoDiv>
               <C.Descricao>{grupoData ? grupoData.descricao : "Carregando..."}</C.Descricao>
