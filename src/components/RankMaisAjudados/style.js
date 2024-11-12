@@ -18,6 +18,8 @@ export const MentorRank = styled.div`
    border-bottom: solid #d9d9d9 3px;
    border-top: solid #d9d9d9 3px;
 
+   @media()
+
 `
 
 export const Colocacao = styled.div`

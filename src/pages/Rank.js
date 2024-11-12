@@ -23,28 +23,34 @@ const Rank = () => {
             {isDesktop ? (
                 <>
                     <Navegacao></Navegacao>
+
                     <TelaPadding>
                         <ApresentacaoAba>
                             <span>Rank</span>
                             <img src={DuvidaAba}></img>
                         </ApresentacaoAba>
+
                         <Titulo>
                             <span>Seu Rank</span>
                             <FaixaAmarela />
                         </Titulo>
+
                         <InfoRank />
                         <RankAlunos />
+
                         <Titulo>
                             <span style={{ fontWeight: 'bold', fontSize: '7vw' }}>Rank de mentores</span>
                             <FaixaAmarela />
 
                             <span>Mentores que mais ajudam</span>
                         </Titulo>
+
                         <RankMaisAjudados />
 
                         <Titulo>
                             <span>Mentores com melhores avaliações</span>
                         </Titulo>
+                        
                         <RankMaisAjudados />
                     </TelaPadding>
                 </>
