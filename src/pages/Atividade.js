@@ -166,7 +166,7 @@ const TelaQuestao = () => {
           <button
             onClick={isRespostaCorreta ? handleNextQuestion : handleRetry}
             style={{
-              position: 'absolute', top: 'calc(100% - 165px)', right: '20px', width: '40%', padding: '12px', backgroundColor: '#FFD700', color: '#000',
+              position: 'absolute', top: 'calc(100% - 125px)', right: '20px', width: '40%', padding: '12px', backgroundColor: '#FFD700', color: '#000',
               borderRadius: '15px', border: '1px solid #FFD700', fontSize: '1em', fontWeight: 'bold', cursor: 'pointer', transition: 'all 0.3s ease',
               boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)'
             }}

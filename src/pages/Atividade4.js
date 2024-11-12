@@ -8,6 +8,16 @@ import Calabreso from '../assets/mascote.png';
 import CalabresoFeliz from '../assets/mascote feliz.png';
 import CalabresoTriste from '../assets/pinguim irritado.png';
 
+// Função para embaralhar o array
+const shuffleArray = (array) => {
+  const shuffledArray = [...array]; // Cria uma cópia para não modificar o original
+  for (let i = shuffledArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]]; // Troca os elementos
+  }
+  return shuffledArray;
+};
+
 const AtividadeCorrespondencia = () => {
   const [enunciado, setEnunciado] = useState('');
   const [correspondencias, setCorrespondencias] = useState([]);
@@ -20,7 +30,7 @@ const AtividadeCorrespondencia = () => {
 
   const fetchEnunciado = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/v1/studyfy/questao/6');
+      const response = await axios.get('http://localhost:8080/v1/studyfy/questao/4');
       setEnunciado(response.data.questao[0].enunciado);
     } catch (error) {
       console.error('Erro ao buscar o enunciado:', error);
@@ -63,7 +73,7 @@ const AtividadeCorrespondencia = () => {
     );
 
     setIsRespostaCorreta(isCorrect);
-    setRespostaFeedback(isCorrect ? 'PARABÉNS, VOCÊ ACERTOU!' : 'Errado, mas não desista, você consegue!');
+    setRespostaFeedback(isCorrect ? 'PARABÉNS, VOCÊ PASSOU PARA O PRÓXIMO ASSUNTO !' : 'Errado, mas não desista, você consegue!');
     setButtonVisible(true);
   };
 
@@ -71,13 +81,19 @@ const AtividadeCorrespondencia = () => {
     navigate('/tela-atividades');
   };
 
-  const handleNextQuestion = () => {
-    navigate('/atividade/6'); // Navega para a próxima atividade
+  // Alterado para navegar para o próximo capítulo ao invés da próxima questão
+  const handleNextChapter = () => {
+    // Navegar para o próximo capítulo (ou assunto)
+    // Exemplo: navega para a página de "Próximo Capítulo"
+    navigate('/tela-atividades'); // Aqui você deve mudar para a rota correspondente ao próximo capítulo
   };
 
   const handleRetry = () => {
     window.location.reload();
   };
+
+  // Embaralha as opções de palavras correspondentes para cada item
+  const shuffledCorrespondencias = shuffleArray(correspondencias);
 
   return (
     <Container style={{ 
@@ -108,14 +124,14 @@ const AtividadeCorrespondencia = () => {
         display: 'flex', 
         flexDirection: 'column', 
         alignItems: 'center', 
-        paddingBottom: '40px',
+        paddingBottom: '20px',
         overflowY: 'auto', // Ativa a rolagem vertical do conteúdo
       }}>
         <h2 style={{
           fontSize: '1.5em',
           textTransform: 'uppercase',
           color: '#FFD700', 
-          margin: '40px 30px 25px 100px'  
+          margin: '15px 20px 25px 100px'  
         }}>
           Atividade de Correspondência
         </h2>
@@ -162,7 +178,7 @@ const AtividadeCorrespondencia = () => {
                 }}
               >
                 <option value="">Selecione</option>
-                {correspondencias.map((option) => (
+                {shuffledCorrespondencias.map((option) => (
                   <option key={option.id} value={option.palavra_correspondente}>
                     {option.palavra_correspondente}
                   </option>
@@ -183,7 +199,7 @@ const AtividadeCorrespondencia = () => {
             border: '1px solid #FFD700',
             fontSize: '1.2em',
             fontWeight: 'bold',
-            margin: '50px 0 20px 0',
+            margin: '30px 0 20px 0',
             cursor: 'pointer',
             transition: 'all 0.3s ease',
             boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
@@ -194,7 +210,7 @@ const AtividadeCorrespondencia = () => {
 
         {buttonVisible && (
           <button
-            onClick={isRespostaCorreta ? handleNextQuestion : handleRetry}
+            onClick={isRespostaCorreta ? handleNextChapter : handleRetry}
             style={{
               width: '80%',
               padding: '12px',
@@ -210,7 +226,7 @@ const AtividadeCorrespondencia = () => {
               boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
             }}
           >
-            {isRespostaCorreta ? 'Próxima Questão' : 'Tente Novamente'}
+            {isRespostaCorreta ? 'Próximo Assunto' : 'Tente Novamente'}
           </button>
         )}
 

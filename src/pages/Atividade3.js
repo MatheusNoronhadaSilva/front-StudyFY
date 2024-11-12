@@ -18,7 +18,7 @@ const TelaOrganizarFrases = () => {
   const [mascoteImage, setMascoteImage] = useState(null);
 
   const navigate = useNavigate();
-  const idQuestao = 5;
+  const idQuestao = 3;
 
   const fetchEnunciado = async () => {
     try {

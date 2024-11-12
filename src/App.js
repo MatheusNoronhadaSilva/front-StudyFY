@@ -19,8 +19,6 @@ import MontagemAtividadesOrganizar from './pages/MontagemAtividadeOrganizar';
 import DesceuRank from './pages/DesceuRank'
 import Subiurank from './pages/SubiuRank';
 import FicouRank from './pages/ManteveRank';
-
-import * as C from './styles/app';
 import MontagemAtividadesTexto from './pages/MontagemAtividadeTexto';
 import ManteveRank from './pages/ManteveRank';
 import TelaAtividades from './pages/TelaAtividades';
@@ -28,6 +26,7 @@ import Atividades from './pages/Atividade';
 import Atividade2 from './pages/Atividade2';
 import Atividade3 from './pages/Atividade3';
 import Atividade4 from './pages/Atividade4';
+import Atividade5 from './pages/Atividade5';
 
 
 import VisualizacaoMentorias from './pages/visualizacaoMentoria';
@@ -62,6 +61,7 @@ function App() {
           <Route path="/atividade/2" element={<Atividade2 />} />
           <Route path="/atividade/3" element={<Atividade3 />} />
           <Route path="/atividade/4" element={<Atividade4 />}/>
+          <Route path="/atividade/5" element={<Atividade5 />}/>
           <Route exact path='/' element= {<Notificacao/>} />
           <Route exact path='/' element= {<Configuraçao/>} />
           <Route exact path='/' element= {<TelaAtividades/>} />
