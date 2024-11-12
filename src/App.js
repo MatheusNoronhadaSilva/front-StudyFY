@@ -29,7 +29,7 @@ import Atividades from './pages/Atividade';
 
 import VisualizacaoMentorias from './pages/visualizacaoMentoria';
 
-import * as C from './styles/app';
+
 import Ranking from './pages/Ranking';
 import Configuraçao from './pages/Configuracao';
 
