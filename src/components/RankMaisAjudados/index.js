@@ -4,8 +4,10 @@ import fotoMentor from '../../assets/Ellipse (1).png';
 import PrimeiroLugar from '../../assets/1 lugar.png';
 import SegundoLugar from '../../assets/2 lugar.png';
 import TerceiroLugar from '../../assets/3 lugar.png';
-import avancarTudo from '../../assets/avancar tudo.png'
+import voltarTudo from '../../assets/voltarTudo.png'
+import voltar from '../../assets/voltar.png'
 import avancar from '../../assets/avancar.png'
+import avancarTudo from '../../assets/avancarTudo.png'
 
 const RankMaisAjudados = () => {
 
@@ -44,11 +46,20 @@ const RankMaisAjudados = () => {
                     </C.AreaPontos>
                 </C.MentorRank>
             ))}
+
         </C.RankMaisAjudados>
         <C.NavegacaoRank>
-
+                <img src={voltarTudo}></img>
+                <img src={voltar}></img>
+                <span>1/100</span>
+                <img src={avancar}></img>
+                <img src={avancarTudo}></img>
         </C.NavegacaoRank>
+
                     </>
+                    
+
+                    
     );
 };
 

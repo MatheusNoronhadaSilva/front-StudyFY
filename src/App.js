@@ -39,16 +39,11 @@ function App() {
     <C.Container>
       <Router>
         <Routes>
-          <Route exact path='/' element= {<Notificacao/>} />
-          <Route exact path='/' element= {<Configuraçao/>} />
-          <Route exact path='/' element= {<TelaAtividades/>} />
+          <Route exact path='/' element= {<Rank/>} />
           <Route path='/perfil' element={<Perfil/>} />
           <Route path='/tela-atividades' element={<TelaAtividades/>} />
           <Route path='/atividade' element= {<Atividade/>} />
-          <Route exact path='/' element= {<Perfil/>} />
           <Route path='/perfil' element={<Perfil/>} />
-          <Route exact path='/' element= {<GrupoMentoria/>} />
-          <Route exact path='/' element= {<VisualizacaoMentorias/>} />
           <Route exact path ='/visualizar-mentorias' element = {<VisualizacaoMentorias/>}/>
           <Route path='/perfil' element={<Perfil/>}></Route>
           <Route path='/atividades' element= {<Atividades/>} />

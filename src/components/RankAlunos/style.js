@@ -7,6 +7,12 @@ export const RankAlunos = styled.div`
    min-height: 40%;
    max-height: 44vh;
    overflow-y: auto;
+
+   @media(min-width: 768px){
+      min-height: 18%;
+      max-height: 25%;
+      width: 50%;
+   }
 `
 
 export const AlunoRank = styled.div`

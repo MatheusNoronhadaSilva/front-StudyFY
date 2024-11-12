@@ -95,7 +95,10 @@ export const DescerRank = styled.div`
 export const NavegacaoRank = styled.div`
    width: 100%;
    min-height:6%;
-   background-color: blue;
+   border: 2px solid #D9D9D9;
    display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 5%;
    
    `
