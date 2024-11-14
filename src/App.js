@@ -21,6 +21,8 @@ import DesceuRank from './pages/DesceuRank'
 import Subiurank from './pages/SubiuRank';
 import FicouRank from './pages/ManteveRank';
 
+//teste
+
 import * as C from './styles/app';
 import MontagemAtividadesTexto from './pages/MontagemAtividadeTexto';
 import ManteveRank from './pages/ManteveRank';
