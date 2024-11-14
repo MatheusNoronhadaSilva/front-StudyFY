@@ -44,7 +44,7 @@ function App() {
     <C.Container>
       <Router>
         <Routes>
-          <Route path="/" element={<TelaAtividades/>} />
+          <Route path="/" element={<GrupoMentoria/>} />
           <Route path="/tela-atividades" element={<TelaAtividades />} />
           <Route path="/perfil" element={<Perfil />} />
           <Route path="/atividade/:id" element={<Atividade />} /> {/* Rota com parâmetro id */}

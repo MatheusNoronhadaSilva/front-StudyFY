@@ -1,15 +1,14 @@
-// src/components/Box.js
 import React, { useState } from 'react';
 import * as C from './style';
-//import lupa from '../../assets/Lupa.png'
-//import fitro from '../../assets/Filtro.png'
 import AbaMembros from '../MembrosGrupo';
+import AbaDuvidas from '../DuvidasGrupo';
 
 const AbasGrupoMentoria = () => {
-
   const [abaAtiva, setAbaAtiva] = useState(0); // Estado para rastrear a aba ativa
 
   const handleClick = (index) => {
+    console.log(index);
+    
     setAbaAtiva(index); // Atualiza a aba ativa ao clicar
   };
 
@@ -26,17 +25,11 @@ const AbasGrupoMentoria = () => {
           </C.Aba>
         ))}
       </C.Abas>
-      {/* <C.CampoAba>
-        <C.Pesquisa>
-          <C.BarraPesquisa>
-            <C.Lupa src={lupa} alt='lupa'></C.Lupa>
-            <C.InputPesquisa></C.InputPesquisa>
-          </C.BarraPesquisa>
-          <C.Filtro src={fitro} alt='filtro'></C.Filtro>
-        </C.Pesquisa>
-        <AbaMembros />
-      </C.CampoAba> */}
-      <AbaMembros />
+
+      <C.CampoAba>
+        {abaAtiva === 0 && <AbaMembros />}      {/* Exibe AbaMembros se abaAtiva for 0 */}
+        {abaAtiva === 2 && <AbaDuvidas />}      {/* Exibe AbaDuvidas se abaAtiva for 2 */}
+      </C.CampoAba>
     </C.AbasGrupo>
   );
 };
