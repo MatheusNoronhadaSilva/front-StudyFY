@@ -3,6 +3,8 @@ import React from 'react';
 import Container from '../styles/telaCheia';
 import Navegacao from '../components/Navegacao';
 import TituloTela from '../styles/tituloTela';
+//import fotousuario from '../assets/fotousuario.png';
+
 import Silvia from '../assets/silvia.png';
 import Estrelas from '../assets/estrela.png';
 import Pessoas from '../assets/pessoas.png';

@@ -1,8 +1,8 @@
 // src/components/Box.js
 import React, { useState } from 'react';
 import * as C from './style';
-import lupa from '../../assets/Lupa.png'
-import fitro from '../../assets/Filtro.png'
+//import lupa from '../../assets/Lupa.png'
+//import fitro from '../../assets/Filtro.png'
 import AbaMembros from '../MembrosGrupo';
 
 const AbasGrupoMentoria = () => {

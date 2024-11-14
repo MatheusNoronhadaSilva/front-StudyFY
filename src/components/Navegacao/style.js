@@ -19,6 +19,7 @@ export const ContainerNavegacao = styled.div`
    height: 100%;
    min-width: 16%;
    border-right: 1px solid #d9d9d9;
+   border-top: none;
    justify-content: flex-start;
    padding-top: 2%;
    gap: 5%;

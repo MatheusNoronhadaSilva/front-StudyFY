@@ -14,7 +14,7 @@ export const AbasGrupo = styled.div`
 
    @media(min-width: 768px){
       padding-right: 0%;
-      width: 58.2%;
+      width: 69.5%;
    }
 `;
 

@@ -78,8 +78,8 @@ export const VerGruposDiv = styled.div`
    width: 80%;
    flex-direction: column;
    align-items: center;
-   height: 15%;
-   justify-content: space-around;
+   height: 30%;
+   justify-content: center;
 `
 
 export const Descricao = styled.span`

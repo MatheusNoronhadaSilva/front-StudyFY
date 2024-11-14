@@ -24,14 +24,16 @@ const LoginAluno = () => {
 
     try {
 
-      if(dadosLogin.email == 'a' && dadosLogin.senha == '123456'){
+      if(dadosLogin.email === 'a' && dadosLogin.senha === '123456'){
         navigate('/grupo-mentoria')
       }
 
       const response = await axios.post('http://localhost:8080/v1/studyFy/login', dadosLogin);
       console.log('Registro completo com sucesso:', response.data);
 
-      navigate('/grupo-mentoria')
+      const userId = response.data.usuario_id
+      localStorage.setItem('userId', userId);
+      navigate('/visualizar-mentorias')
 
     } catch (error) {
 

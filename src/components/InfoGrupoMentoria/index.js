@@ -7,19 +7,20 @@ import iconeMentor from '../../assets/mentoria.png';
 import estrela from '../../assets/Star rate.png';
 import { useMediaQuery } from '@mui/material';
 import matematica from '../../assets/Matematica.png';
+import { useNavigate } from 'react-router-dom';
 
-const InfoGrupoMentoria = ({ id }) => {
+const InfoGrupoMentoria = ({ id, status }) => {
   const isDesktop = useMediaQuery('(min-width: 768px)');
   const [mentorData, setMentorData] = useState(null);
   const [grupoData, setGrupoData] = useState(null);
+  const navigate = useNavigate(); // Hook para navegação
 
-  id = 1
 
   useEffect(() => {
     const fetchMentorData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/v1/studyfy/mentor/grupo/${id}`);
-        setMentorData(response.data.mentor[0]); // Assume que você deseja o primeiro mentor
+        const response = await axios.get(`http://localhost:8080/v1/studyfy/mentorGrupo/${id}`);
+        setMentorData(response.data.mentor);
       } catch (error) {
         console.error("Erro ao buscar os dados do mentor:", error);
       }
@@ -27,12 +28,8 @@ const InfoGrupoMentoria = ({ id }) => {
 
     const fetchGrupoData = async () => {
       try {
-        console.log('oioiio');
-        
-        const response = await axios.get(`http://localhost:8080/v1/studyfy/mentoria/${id}`); // Novo endpoint
-        setGrupoData(response.data.grupo[0]); // Assume que você deseja o primeiro grupo
-        console.log(grupoData);
-        
+        const response = await axios.get(`http://localhost:8080/v1/studyfy/mentoria/${id}`);
+        setGrupoData(response.data.grupo[0]);
       } catch (error) {
         console.error("Erro ao buscar os dados do grupo:", error);
       }
@@ -41,6 +38,70 @@ const InfoGrupoMentoria = ({ id }) => {
     fetchMentorData();
     fetchGrupoData();
   }, [id]);
+
+  const handleEntrar = async () => {
+    try {
+
+      console.log('entrando');
+      const alunoId = localStorage.getItem('userId');  // Pegando o ID do aluno do localStorage
+      if (alunoId) {
+
+        // Requisição POST para o endpoint
+        const response = await axios.post(`http://localhost:8080/v1/studyfy/membros/grupo`, {
+          grupoId: id,
+          alunoId: alunoId,
+        });
+
+        console.log(response);
+
+
+        if (response.status === 201) {
+          console.log('Aluno entrou no grupo com sucesso');
+          navigate(`/grupo-mentoria/${id}?status=membro`)
+        } else {
+          console.log('aaaaaaaaa');
+        }
+
+      } else {
+        console.error('Aluno não encontrado no localStorage');
+        return;
+      }
+    } catch (error) {
+      console.error("Erro ao entrar no grupo:", error);
+    }
+  };
+
+const handleSair = async () => {
+  try {
+    console.log('saindo do grupo');
+    const alunoId = localStorage.getItem('userId'); // Pega o ID do aluno do localStorage
+
+    if (alunoId) {
+      // Requisição DELETE para o endpoint de saída do grupo
+      const response = await axios.delete(`http://localhost:8080/v1/studyfy/mentoria/membro`, {
+        data: {
+          grupoId: id,
+          alunoId: alunoId,
+        },
+      });
+
+      console.log(response);
+
+      if (response.status === 200) {
+        console.log('Aluno saiu do grupo com sucesso');
+        navigate(`/visualizar-mentorias`); // Redireciona para a página do grupo
+      } else {
+        console.log('Erro ao sair do grupo');
+      }
+    } else {
+      console.error('Aluno não encontrado no localStorage');
+      return;
+    }
+  } catch (error) {
+    console.error("Erro ao sair do grupo:", error);
+  }
+};
+
 
   return (
     <C.InfoGrupo>
@@ -56,7 +117,7 @@ const InfoGrupoMentoria = ({ id }) => {
               </C.FotoGrupoDiv>
               <C.IntroGrupo>
                 <C.NomeGrupo>{grupoData ? grupoData.nome : "Carregando..."}</C.NomeGrupo>
-                <C.Membros>Membros {grupoData ? `${grupoData.numero_membros}/${grupoData.capacidade}` : "Carregando..."}</C.Membros>
+                <C.Membros>{grupoData ? `MEMBROS: ${grupoData.quantidade_membros}/${grupoData.capacidade}` : "Carregando..."}</C.Membros>
               </C.IntroGrupo>
               <C.fundoAmarelo />
             </C.IntroGrupoDiv>
@@ -70,7 +131,7 @@ const InfoGrupoMentoria = ({ id }) => {
                   <C.FotoMentor alt='foto do mentor' src={fotoMentor} />
                   <C.InfoMentor>
                     <C.NomeMentor>{mentorData ? mentorData.mentor_nome : "Carregando..."}</C.NomeMentor>
-                    <C.TipoMentor>{mentorData ? mentorData.tipo_mentor : "Carregando..."}</C.TipoMentor>
+                    <C.TipoMentor>{mentorData ? mentorData.mentor_tipo : "Carregando..."}</C.TipoMentor>
                   </C.InfoMentor>
                 </C.DadosMentor>
                 <C.AvaliacaoMentor>
@@ -92,12 +153,15 @@ const InfoGrupoMentoria = ({ id }) => {
           </C.IntroducaoGrupo>
           <div style={{ justifyContent: 'space-between', paddingTop: '6%', width: '30%', height: '100%', display: 'flex', flexDirection: 'column' }}>
             <C.OpcoesGrupo>
-              <C.BotaoSair>
-                <C.Sair>Sair do grupo</C.Sair>
-              </C.BotaoSair>
-              <C.BotaoSair>
-                <C.Sair>Sair do grupo</C.Sair>
-              </C.BotaoSair>
+              {status == 'visitante' ? (
+                <C.BotaoEntrar onClick={handleEntrar}>
+                  <C.TituloBotao>ENTRAR</C.TituloBotao>
+                </C.BotaoEntrar>
+              ) : (
+                <C.BotaoSair onClick={handleSair}>
+                  <C.TituloBotao>SAIR</C.TituloBotao>
+                </C.BotaoSair>
+              )}
             </C.OpcoesGrupo>
             <C.DescricaoDiv>
               <C.Descricao>{grupoData ? grupoData.descricao : "Carregando..."}</C.Descricao>

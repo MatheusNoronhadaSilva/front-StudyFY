@@ -20,7 +20,7 @@ const TelaQuestao = () => {
   const [isRespostaCorreta, setIsRespostaCorreta] = useState(null);
   const [buttonVisible, setButtonVisible] = useState(false);
 
-  const idQuestao = 1;
+  const idQuestao = 7;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const TelaQuestao = () => {
         const response = await axios.get(`http://localhost:8080/v1/studyfy/resposta-multipla`);
         
         // Filtra alternativas para exibir apenas as com IDs de 1 a 5
-        const alternativasFiltradas = (response.data.respostas || []).filter((alt) => alt.id >= 1 && alt.id <= 5);
+        const alternativasFiltradas = (response.data.respostas || []).filter((alt) => alt.id >= 6 && alt.id <= 10);
         
         setAlternativas(alternativasFiltradas);
         setLoadingAlternativas(false);
@@ -96,7 +96,7 @@ const TelaQuestao = () => {
     <Container style={{ backgroundColor: 'white', alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
       <div style={{
         display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', padding: '10px',
-        backgroundColor: '#FFD700', borderBottom: '1px solid black'
+        backgroundColor: '#FFCC00', borderBottom: '1px solid black'
       }}>
         <AiOutlineClose size={30} color="#FFFFFF" onClick={handleCloseClick} />
         <img src={Calabreso} alt="Mascote" style={{ width: '50px', height: '50px' }} />
@@ -105,17 +105,17 @@ const TelaQuestao = () => {
       <div style={{ flexGrow: '1', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <div style={{
           width: '90%', padding: '55px', backgroundColor: '#f9f9f9', borderRadius: '10px',
-          boxShadow: '0px 4px 8px rgba(255, 215, 0, 0.5)', border: '1px solid #FFD700', marginTop: '20px', textAlign: 'center'
+          boxShadow: '0px 4px 8px rgba(255, 215, 0, 0.5)', border: '1px solid #FFCC00', marginTop: '20px', textAlign: 'center'
         }}>
           {loadingEnunciado ? <p>Carregando enunciado...</p> : <h4 style={{ fontSize: '1.1em', margin: '0' }}>{enunciado}</h4>}
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', marginTop: '40px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', marginTop: '20px' }}>
           <FaArrowsAltH size={20} color="black" />
-          <h2 style={{ fontSize: '1.2em', textTransform: 'uppercase', color: '#FFD700', margin: '0px 10px 0' }}>Múltipla escolha</h2>
+          <h2 style={{ fontSize: '1.2em', textTransform: 'uppercase', color: '#FFCC00', margin: '0px 10px 0' }}>Múltipla escolha</h2>
         </div>
 
-        <div style={{ width: '100%', textAlign: 'center', marginTop: '15px' }}>
+        <div style={{ width: '100%', textAlign: 'center', marginTop: '10px' }}>
           {loadingAlternativas ? <p>Carregando alternativas...</p> : (
             alternativas.map((alternativa, index) => {
               const buttonStyle = {
@@ -131,7 +131,7 @@ const TelaQuestao = () => {
                 fontWeight: 'bold',
                 cursor: 'pointer',
                 minHeight: '50px',
-                backgroundColor: selectedOption === index ? '#FFEB3B' : '#FFFFFF',
+                backgroundColor: selectedOption === index ? '#FFCC00' : '#FFFFFF',
               };
 
               if (isAnswered) {
@@ -156,7 +156,7 @@ const TelaQuestao = () => {
         <button
           onClick={handleResponderClick}
           style={{
-            width: '80%', padding: '12px', backgroundColor: '#FFD700', color: '#000', borderRadius: '25px', border: '1px solid #FFD700',
+            width: '80%', padding: '12px', backgroundColor: '#FFCC00', color: '#000', borderRadius: '25px', border: '1px solid #FFD700',
             fontSize: '1em', fontWeight: 'bold', margin: '40px 0', cursor: 'pointer', transition: 'all 0.3s ease', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)'
           }}
         >
@@ -167,7 +167,7 @@ const TelaQuestao = () => {
           <button
             onClick={isRespostaCorreta ? handleNextQuestion : handleRetry}
             style={{
-              position: 'absolute', top: 'calc(100% - 145px)', right: '20px', width: '40%', padding: '12px', backgroundColor: '#FFD700', color: '#000',
+              position: 'absolute', top: 'calc(100% - 185px)', right: '20px', width: '40%', padding: '12px', backgroundColor: '#FFCC00', color: '#000',
               borderRadius: '15px', border: '1px solid #FFD700', fontSize: '1em', fontWeight: 'bold', cursor: 'pointer', transition: 'all 0.3s ease',
               boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)'
             }}
@@ -176,19 +176,37 @@ const TelaQuestao = () => {
           </button>
         )}
 
-        {respostaFeedback && (
+{respostaFeedback && (
           <div style={{
-            display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
-            width: '80%', height: '300px', backgroundColor: isRespostaCorreta ? 'rgba(76, 175, 80, 0.8)' : 'rgba(244, 67, 54, 0.8)', color: '#fff',
-            borderRadius: '10px', textAlign: 'center', padding: '20px', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.3)'
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            position: 'fixed',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '80%',
+            height: '300px',
+            backgroundColor: isRespostaCorreta ? 'rgba(76, 175, 80, 0.8)' : 'rgba(244, 67, 54, 0.8)',
+            color: '#fff',
+            borderRadius: '10px',
+            textAlign: 'center',
+            padding: '20px',
+            boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.3)',
           }}>
             <div style={{ textAlign: 'center' }}>
-              <img src={isRespostaCorreta ? CalabresoFeliz : CalabresoTriste} alt="Mascote" style={{ width: '120px', height: '120px', marginBottom: '15px' }} />
+              <img src={isRespostaCorreta ? CalabresoFeliz : CalabresoTriste} alt="Mascote" style={{ 
+                width: '120px', 
+                height: '120px', 
+                marginBottom: '15px', 
+                animation: 'shake 1s ease' // Shake mais suave
+              }} />
               <h3 style={{ fontSize: '1.5em', marginTop: '0' }}>{respostaFeedback}</h3>
             </div>
           </div>
         )}
       </div>
+
       <Navegacao />
     </Container>
   );

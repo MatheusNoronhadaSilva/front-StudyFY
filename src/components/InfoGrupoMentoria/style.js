@@ -12,7 +12,8 @@ export const InfoGrupo = styled.div`
    width: 100%;
 
    @media(min-width: 768px){
-      width: 70%;
+      width: 80%;
+      gap: 6%;
       height: 42%;
       min-height: 32%;
       padding-top: 3%;
@@ -143,7 +144,7 @@ align-items: center;
    border-radius:0px;
    border: none;
    position: relative;
-   flex-grow: 1;
+   width: 30%;
    z-index: 100;
    gap: 1vh;
 }
@@ -237,7 +238,7 @@ export const NomeGrupo = styled.span`
 `
 
 export const FotoMateriaDiv = styled.div`
-   height: 60%;
+   height: 55%;
    width: 35%;
    background-color: white;
    border-radius: 360px;
@@ -410,7 +411,25 @@ export const BotaoSair = styled.div`
    }
 `
 
-export const Sair = styled.span`
+export const BotaoEntrar = styled.div`
+
+   background-color: green;
+   border: 3px solid green;
+   box-shadow: 0 0.5vh 0 0 green;
+   border-radius: 8px;
+   align-items: center;
+   justify-content: center;
+   display: flex;
+   cursor: pointer;
+
+   @media (min-width: 768px){
+      width: 45%;
+      height: 100%;
+      padding: 2% 2% 2% 2%;
+   }
+`
+
+export const TituloBotao = styled.span`
 
    text-align: center;
    color: white;

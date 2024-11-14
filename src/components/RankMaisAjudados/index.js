@@ -8,6 +8,8 @@ import voltarTudo from '../../assets/voltarTudo.png'
 import voltar from '../../assets/voltar.png'
 import avancar from '../../assets/avancar.png'
 import avancarTudo from '../../assets/avancarTudo.png'
+//import avancarTudo from '../../assets/avancar tudo.png'
+//import avancar from '../../assets/avancar.png'
 
 const RankMaisAjudados = () => {
 

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import Container from '../styles/telaCheia';
-import Navegacao from '../components/Navegacao';
+import Navegacao from '../components/Navegacao'
+//import TelaPadding from '../styles/TelaPadding';
 import TituloTela from '../styles/tituloTela';
+//import CampoPerfil from '../components/CampoPerfil'
 import AbaFechar from '../assets/iconeFechar.png';
 import Objetiva from '../assets/atividadeObjetiva.png';
 import adicionarAtividade from '../assets/botaoAdicionar.png';
