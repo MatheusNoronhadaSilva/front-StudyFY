@@ -19,6 +19,10 @@ import MontagemAtividadesOrganizar from './pages/MontagemAtividadeOrganizar';
 import DesceuRank from './pages/DesceuRank'
 import Subiurank from './pages/SubiuRank';
 import FicouRank from './pages/ManteveRank';
+
+//teste
+
+import * as C from './styles/app';
 import MontagemAtividadesTexto from './pages/MontagemAtividadeTexto';
 import ManteveRank from './pages/ManteveRank';
 import TelaAtividades from './pages/TelaAtividades';
@@ -35,7 +39,7 @@ import VisualizacaoMentorias from './pages/visualizacaoMentoria';
 import CriarGrupoMentoria from './pages/CriarGrupoMentoria';
 import GrupoMentoriaPrevia from './pages/GrupoMentoriaPrevia';
 
-import * as C from './styles/app';
+
 import Ranking from './pages/Ranking';
 import Configuraçao from './pages/Configuracao';
 
@@ -45,6 +49,7 @@ function App() {
     <C.Container>
       <Router>
         <Routes>
+          <Route exact path='/' element= {<Rank/>} />
           <Route path="/" element={<TelaAtividades/>} />
           <Route path="/tela-atividades" element={<TelaAtividades />} />
           <Route path="/perfil" element={<Perfil />} />
@@ -74,7 +79,6 @@ function App() {
           <Route path='/perfil' element={<Perfil/>} />
           <Route path='/tela-atividades' element={<TelaAtividades/>} />
           <Route path='/atividade' element= {<Atividade/>} />
-          <Route exact path='/' element= {<Perfil/>} />
           <Route path='/perfil' element={<Perfil/>} />
           <Route exact path='/' element= {<GrupoMentoria/>} />
           <Route exact path='/' element= {<VisualizacaoMentorias/>} />

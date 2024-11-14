@@ -12,6 +12,40 @@ export const CampoInfoRank = styled.div`
    min-height: 30%;
    width: 100%;
    margin-top: 5%;
+
+   @media(min-width: 768px){
+      min-height: 18%;
+      max-height: 25%;
+      width: 100%;
+   }
+`
+
+export const imgRank = styled.img`
+   height: 80%;
+   width: 28%;
+
+   @media(min-width: 768px){
+      height: 80%;
+      width: 10%;
+   }
+`
+
+export const descRank = styled.span`
+   font-size: 5vw;
+   font-weight: bold;
+   color: #CDA572;
+
+   @media(min-width: 768px){
+      font-size: 2vw;
+   }
+`
+
+export const descTemporada = styled.span`
+   font-size: 3vw;
+
+   @media(min-width: 768px){
+      font-size: 1.5vw;
+   }
 `
 
 export const InfoRank = styled.div`
@@ -31,4 +65,6 @@ export const Temporada = styled.div`
 export const Duracao = styled.span`
    font-size: 4vw;
    font-weight: bold;
+
+   @media
 `

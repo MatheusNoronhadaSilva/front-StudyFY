@@ -18,6 +18,10 @@ export const MentorRank = styled.div`
    border-bottom: solid #d9d9d9 3px;
    border-top: solid #d9d9d9 3px;
 
+     @media(min-width: 768px){
+      min-height: 4vh;
+      max-height: 4h;
+   }
 `
 
 export const Colocacao = styled.div`
@@ -95,7 +99,10 @@ export const DescerRank = styled.div`
 export const NavegacaoRank = styled.div`
    width: 100%;
    min-height:6%;
-   background-color: blue;
+   border: 2px solid #D9D9D9;
    display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 5%;
    
    `
