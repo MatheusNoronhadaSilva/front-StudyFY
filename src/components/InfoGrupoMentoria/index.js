@@ -9,7 +9,7 @@ import { useMediaQuery } from '@mui/material';
 import matematica from '../../assets/Matematica.png';
 import { useNavigate } from 'react-router-dom';
 
-const InfoGrupoMentoria = ({ id }) => {
+const InfoGrupoMentoria = ({ id, status }) => {
   const isDesktop = useMediaQuery('(min-width: 768px)');
   const [mentorData, setMentorData] = useState(null);
   const [grupoData, setGrupoData] = useState(null);
@@ -44,33 +44,64 @@ const InfoGrupoMentoria = ({ id }) => {
 
       console.log('entrando');
       const alunoId = localStorage.getItem('userId');  // Pegando o ID do aluno do localStorage
-      if (!alunoId) {
+      if (alunoId) {
+
+        // Requisição POST para o endpoint
+        const response = await axios.post(`http://localhost:8080/v1/studyfy/membros/grupo`, {
+          grupoId: id,
+          alunoId: alunoId,
+        });
+
+        console.log(response);
+
+
+        if (response.status === 201) {
+          console.log('Aluno entrou no grupo com sucesso');
+          navigate(`/grupo-mentoria/${id}?status=membro`)
+        } else {
+          console.log('aaaaaaaaa');
+        }
+
+      } else {
         console.error('Aluno não encontrado no localStorage');
         return;
-      }
-
-
-      
-      // Requisição POST para o endpoint
-      const response = await axios.post(`http://localhost:8080/v1/studyfy/membros/grupo`, {
-        grupoId: id,
-        alunoId: alunoId,
-      });
-
-      console.log(response);
-      
-      
-      if (response.status === 201) {
-        console.log('Aluno entrou no grupo com sucesso');
-        localStorage.setItem('statusGrupoMentoria', 'membro')
-        navigate(`/grupo-mentoria/${id}`)
-      } else {
-        console.log('aaaaaaaaa');
       }
     } catch (error) {
       console.error("Erro ao entrar no grupo:", error);
     }
   };
+
+const handleSair = async () => {
+  try {
+    console.log('saindo do grupo');
+    const alunoId = localStorage.getItem('userId'); // Pega o ID do aluno do localStorage
+
+    if (alunoId) {
+      // Requisição DELETE para o endpoint de saída do grupo
+      const response = await axios.delete(`http://localhost:8080/v1/studyfy/mentoria/membro`, {
+        data: {
+          grupoId: id,
+          alunoId: alunoId,
+        },
+      });
+
+      console.log(response);
+
+      if (response.status === 200) {
+        console.log('Aluno saiu do grupo com sucesso');
+        navigate(`/visualizar-mentorias`); // Redireciona para a página do grupo
+      } else {
+        console.log('Erro ao sair do grupo');
+      }
+    } else {
+      console.error('Aluno não encontrado no localStorage');
+      return;
+    }
+  } catch (error) {
+    console.error("Erro ao sair do grupo:", error);
+  }
+};
+
 
   return (
     <C.InfoGrupo>
@@ -86,7 +117,7 @@ const InfoGrupoMentoria = ({ id }) => {
               </C.FotoGrupoDiv>
               <C.IntroGrupo>
                 <C.NomeGrupo>{grupoData ? grupoData.nome : "Carregando..."}</C.NomeGrupo>
-                <C.Membros>{grupoData ? `${grupoData.quantidade_membros}/${grupoData.capacidade}` : "Carregando..."}</C.Membros>
+                <C.Membros>{grupoData ? `MEMBROS: ${grupoData.quantidade_membros}/${grupoData.capacidade}` : "Carregando..."}</C.Membros>
               </C.IntroGrupo>
               <C.fundoAmarelo />
             </C.IntroGrupoDiv>
@@ -122,9 +153,15 @@ const InfoGrupoMentoria = ({ id }) => {
           </C.IntroducaoGrupo>
           <div style={{ justifyContent: 'space-between', paddingTop: '6%', width: '30%', height: '100%', display: 'flex', flexDirection: 'column' }}>
             <C.OpcoesGrupo>
-              <C.BotaoEntrar>
-                <C.TituloBotao onClick={handleEntrar}>Entrar</C.TituloBotao>
-              </C.BotaoEntrar>
+              {status == 'visitante' ? (
+                <C.BotaoEntrar onClick={handleEntrar}>
+                  <C.TituloBotao>ENTRAR</C.TituloBotao>
+                </C.BotaoEntrar>
+              ) : (
+                <C.BotaoSair onClick={handleSair}>
+                  <C.TituloBotao>SAIR</C.TituloBotao>
+                </C.BotaoSair>
+              )}
             </C.OpcoesGrupo>
             <C.DescricaoDiv>
               <C.Descricao>{grupoData ? grupoData.descricao : "Carregando..."}</C.Descricao>
