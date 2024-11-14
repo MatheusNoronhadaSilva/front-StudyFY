@@ -77,7 +77,7 @@ const AtividadeCorrespondencia = () => {
     );
 
     setIsRespostaCorreta(isCorrect);
-    setRespostaFeedback(isCorrect ? 'PARABÉNS, VOCÊ PASSOU PARA O PRÓXIMO ASSUNTO!' : 'Errado, mas não desista, você consegue!');
+    setRespostaFeedback(isCorrect ? 'PARABÉNS, VOCÊ ACERTOU!' : 'Errado, mas não desista, você consegue!');
     setButtonVisible(true);
   };
 
@@ -86,7 +86,7 @@ const AtividadeCorrespondencia = () => {
   };
 
   const handleNextChapter = () => {
-    navigate('/tela-atividades'); // Aqui você deve mudar para a rota correspondente ao próximo capítulo
+    navigate('/atividade/7'); // Aqui você deve mudar para a rota correspondente ao próximo capítulo
   };
 
   const handleRetry = () => {

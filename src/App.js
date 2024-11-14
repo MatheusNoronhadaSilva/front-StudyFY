@@ -28,7 +28,8 @@ import Atividade3 from './pages/Atividade3';
 import Atividade4 from './pages/Atividade4';
 import Atividade5 from './pages/Atividade5';
 import Atividade6 from './pages/Atividade6';
-import Atividade7 from './pages/Atividade7'
+import Atividade7 from './pages/Atividade7';
+import Atividade8 from './pages/Atividade8';
 
 
 import VisualizacaoMentorias from './pages/visualizacaoMentoria';
@@ -66,6 +67,7 @@ function App() {
           <Route path="/atividade/5" element={<Atividade5 />}/>
           <Route path="/atividade/6" element={<Atividade6 />}/>
           <Route path="/atividade/7" element={<Atividade7 />}/>
+          <Route path="/atividade/8" element={<Atividade8 />}/>
           <Route exact path='/' element= {<Notificacao/>} />
           <Route exact path='/' element= {<Configuraçao/>} />
           <Route exact path='/' element= {<TelaAtividades/>} />
