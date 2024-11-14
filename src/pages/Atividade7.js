@@ -85,7 +85,7 @@ const TelaQuestao = () => {
   };
 
   const handleNextQuestion = () => {
-    navigate('/atividade/2');
+    navigate('/atividade/8');
   };
 
   const handleRetry = () => {
@@ -207,7 +207,7 @@ const TelaQuestao = () => {
         )}
       </div>
 
-      <Navegacao />
+      <Navegacao/>
     </Container>
   );
 };
