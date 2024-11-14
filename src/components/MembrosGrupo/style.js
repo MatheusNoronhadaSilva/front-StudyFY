@@ -45,7 +45,7 @@ export const AreaImg = styled.div`
    display: flex;
 
    @media (min-width: 768px){
-      width: 10%;
+      width: 9%;
    }
 `
 

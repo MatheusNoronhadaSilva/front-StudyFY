@@ -32,6 +32,8 @@ import Atividade7 from './pages/Atividade7'
 
 
 import VisualizacaoMentorias from './pages/visualizacaoMentoria';
+import CriarGrupoMentoria from './pages/CriarGrupoMentoria';
+import GrupoMentoriaPrevia from './pages/GrupoMentoriaPrevia';
 
 import * as C from './styles/app';
 import Ranking from './pages/Ranking';
@@ -76,7 +78,10 @@ function App() {
           <Route path='/perfil' element={<Perfil/>} />
           <Route exact path='/' element= {<GrupoMentoria/>} />
           <Route exact path='/' element= {<VisualizacaoMentorias/>} />
+          <Route exact path='/' element= {<Login/>} />
+          <Route exact path ='/criar-grupo-mentoria' element = {<CriarGrupoMentoria/>}/>
           <Route exact path ='/visualizar-mentorias' element = {<VisualizacaoMentorias/>}/>
+          <Route exact path ='/grupo-mentoria-previa/:id' element = {<GrupoMentoriaPrevia/>}/>
           <Route path='/perfil' element={<Perfil/>}></Route>
           <Route path='/atividades' element= {<Atividades/>} />
           <Route path='/caderno-virtual' element= {<CadernoVirtual/>} />
@@ -87,7 +92,7 @@ function App() {
           <Route path='/chatIA' element= {<ChatIA/>} />
           <Route path='/login' element= {<Login/>} />
           <Route path='/cadastro' element={<Cadastro />}/>
-          <Route path='/grupo-mentoria' element={<GrupoMentoria />}/>
+          <Route path='/grupo-mentoria/:id' element={<GrupoMentoria />}/>
           <Route path='/esqueceu-senha' element={<EsqueceuSenha />}/>
           <Route path='/mudar-senha' element={<MudarSenha />}/>
           <Route path='/emblemas' element={<Emblemas />}/>

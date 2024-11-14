@@ -8,15 +8,18 @@ import matematica from '../../assets/Matematica.png';
 import Membros from '../../assets/Membros.png';
 import duvidasRespondidas from '../../assets/dúvidasRespondidas.png';
 import Mentoria from '../../assets/mentoria.png';
+import { useNavigate } from 'react-router-dom'; // Importar o useNavigate
 
 const VisualizarGrupos = () => {
     const [expandedGroup, setExpandedGroup] = useState(null);
     const [grupos, setGrupos] = useState([]); // Estado para armazenar os grupos
     const grupoRef = useRef(null);
+    const navigate = useNavigate(); // Hook para navegação
 
     const pegarGrupos = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/v1/studyfy/gruposMentoria');
+            const id = localStorage.getItem("userId") 
+            const response = await axios.get(`http://localhost:8080/v1/studyfy/gruposMentoria/${id}`);
             // Atualiza o estado com os dados dos grupos
             setGrupos(response.data);
         } catch (error) {
@@ -41,6 +44,11 @@ const VisualizarGrupos = () => {
         if (grupoRef.current && !grupoRef.current.contains(event.target)) {
             setExpandedGroup(null);
         }
+    };
+
+    // Função para redirecionar ao clicar em "Ver grupo de mentoria"
+    const handleVerGrupoClick = (id) => {
+        navigate(`/grupo-mentoria/${id}?status=visitante`);
     };
 
     return (
@@ -84,7 +92,7 @@ const VisualizarGrupos = () => {
                                     <C.IconeMembros src={Membros} alt='Membros' />
                                     <C.ExpandendSpan>{grupo.quantidade_membros}/{grupo.capacidade_grupo}</C.ExpandendSpan>
                                 </C.InfoDiv>
-                                <C.VerGrupoDiv>
+                                <C.VerGrupoDiv onClick={() => handleVerGrupoClick(grupo.id)}> {/* Redireciona ao clicar */}
                                     <C.IconeMentoria src={Mentoria} />
                                     <C.VerGrupo>Ver grupo de mentoria</C.VerGrupo>
                                 </C.VerGrupoDiv>
