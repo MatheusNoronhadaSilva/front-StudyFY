@@ -55,10 +55,10 @@ const AbasGrupoMentoria = () => {
   const todasImagens = imagens.concat(imagensExtras);  
 
   const urlsNavegacao = [
-    'atividades',
+    'tela-atividades',
     'caderno-virtual',
     'rank',
-    'emblemas',
+    'perfil',
     'notificacao',
     'chat-privado',
     'chatIA',

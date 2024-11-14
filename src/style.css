@@ -1,0 +1,40 @@
+
+.divPerfil{
+    @media (min-width: 768px) {
+        width: 50%
+    }
+}
+
+.DadosProfessor{
+    @media (min-width: 768px) {
+        width: 50%
+    }
+}
+
+.botao{
+    @media (min-width: 768px) {
+        float: right;
+        margin-left: 10%; 
+    }
+
+}
+
+.estrela{
+    @media (min-width: 768px) {
+      margin-top: 10vw
+    }
+}
+
+/* shake.css */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+    75% { transform: translateX(-10px); }
+    100% { transform: translateX(0); }
+  }
+  
+  .shake {
+    animation: shake 0.5s ease-in-out;
+  }
+  

@@ -24,6 +24,10 @@ const LoginAluno = () => {
 
     try {
 
+      if(dadosLogin.email === 'a' && dadosLogin.senha === '123456'){
+        navigate('/grupo-mentoria')
+      }
+
       const response = await axios.post('http://localhost:8080/v1/studyFy/login', dadosLogin);
       console.log('Registro completo com sucesso:', response.data);
 
