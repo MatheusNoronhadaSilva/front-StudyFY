@@ -3,22 +3,36 @@ import InfoUsuario from '../InfoUsuario';
 import Desempenho from '../Desempenho';
 import Emblemas from '../EmblemasPerfil'
 import RankAlunos from '../RankAlunosPerfil'
-import RankMentor from '../../styles/rankMentores'
-import RankMaisAjudados from '../RankMaisAjudados'
-import RankMelhorAvaliado from '../RankMelhorAvaliado'
+import RankMentor from '../RankMentorPerfil'
+import * as C from './style'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGear } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom'; // Importar o useNavigate
+
 
 const CampoPerfil = () => {
+
+  const navigate = useNavigate();
+  const idMentor = localStorage.getItem("id_mentor") 
+  console.log(idMentor);
+
+  const TelaConfiguracao = () => {
+    navigate('/perfil-configuracao')
+  }
+  
   return (
-    <>
+    <C.Campo>
+    <C.Configuracao onClick={TelaConfiguracao} icon={faGear}/>
     <InfoUsuario />
     <Desempenho />
     <RankAlunos />
-    <RankMentor>
-      <RankMaisAjudados />
-      <RankMelhorAvaliado />
-    </RankMentor>
+    { idMentor != 0 ? (
+      <RankMentor />
+    ) : (
+      <></>
+    )}
     <Emblemas />
-    </>
+    </C.Campo>
   );
 };
 

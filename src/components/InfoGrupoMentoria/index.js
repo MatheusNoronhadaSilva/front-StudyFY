@@ -17,9 +17,12 @@ const InfoGrupoMentoria = ({ id, status }) => {
 
 
   useEffect(() => {
+    console.log(id);
     const fetchMentorData = async () => {
       try {
         const response = await axios.get(`http://localhost:8080/v1/studyfy/mentorGrupo/${id}`);
+        console.log(response.data.mentor);
+        
         setMentorData(response.data.mentor);
       } catch (error) {
         console.error("Erro ao buscar os dados do mentor:", error);
@@ -29,6 +32,7 @@ const InfoGrupoMentoria = ({ id, status }) => {
     const fetchGrupoData = async () => {
       try {
         const response = await axios.get(`http://localhost:8080/v1/studyfy/mentoria/${id}`);
+        console.log(response.data);
         setGrupoData(response.data.grupo[0]);
       } catch (error) {
         console.error("Erro ao buscar os dados do grupo:", error);
@@ -58,6 +62,7 @@ const InfoGrupoMentoria = ({ id, status }) => {
         if (response.status === 201) {
           console.log('Aluno entrou no grupo com sucesso');
           navigate(`/grupo-mentoria/${id}?status=membro`)
+          window.location.reload();
         } else {
           console.log('aaaaaaaaa');
         }
@@ -110,7 +115,7 @@ const handleSair = async () => {
           <C.IntroducaoGrupo>
             <C.IntroGrupoDiv>
               <C.FotoGrupoDiv>
-                <C.IconeGrupo src={fotoGrupo} alt='foto do grupo' />
+                <C.IconeGrupo src={grupoData ? grupoData.foto_grupo : "https://via.placeholder.com/100"} alt='foto do grupo' />
                 <C.FotoMateriaDiv>
                   <C.FotoMateria src={matematica} alt='matéria de matemática' />
                 </C.FotoMateriaDiv>
@@ -128,7 +133,7 @@ const handleSair = async () => {
               </C.MentorGrupo>
               <C.CampoInfoMentor>
                 <C.DadosMentor>
-                  <C.FotoMentor alt='foto do mentor' src={fotoMentor} />
+                  <C.FotoMentor alt='foto do mentor' src={mentorData ? mentorData.foto_perfil : "https://via.placeholder.com/100"} />
                   <C.InfoMentor>
                     <C.NomeMentor>{mentorData ? mentorData.mentor_nome : "Carregando..."}</C.NomeMentor>
                     <C.TipoMentor>{mentorData ? mentorData.mentor_tipo : "Carregando..."}</C.TipoMentor>

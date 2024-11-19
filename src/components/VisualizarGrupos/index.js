@@ -21,6 +21,8 @@ const VisualizarGrupos = () => {
             const id = localStorage.getItem("userId") 
             const response = await axios.get(`http://localhost:8080/v1/studyfy/gruposMentoria/${id}`);
             // Atualiza o estado com os dados dos grupos
+            console.log(response.data);
+            
             setGrupos(response.data);
         } catch (error) {
             console.error('Erro ao buscar os grupos de mentoria:', error);
@@ -48,6 +50,7 @@ const VisualizarGrupos = () => {
 
     // Função para redirecionar ao clicar em "Ver grupo de mentoria"
     const handleVerGrupoClick = (id) => {
+        
         navigate(`/grupo-mentoria/${id}?status=visitante`);
     };
 
@@ -71,12 +74,12 @@ const VisualizarGrupos = () => {
                     >
                         <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'row' }}>
                             <C.InfoGrupo>
-                                <C.FotoGrupo src={fotoMentoria} />
+                                <C.FotoGrupo src={grupo.foto_grupo} />
                                 <C.NomeGrupo>{grupo.nome_grupo}</C.NomeGrupo>
                             </C.InfoGrupo>
                             <C.MateriaGrupo>
                                 <C.FotoMateriaDiv>
-                                    <C.IconeMateria src={matematica} />
+                                    <C.IconeMateria src={grupo.materia_imagem} />
                                 </C.FotoMateriaDiv>
                                 <C.NomeMateria>{grupo.materia_grupo}</C.NomeMateria>
                             </C.MateriaGrupo>

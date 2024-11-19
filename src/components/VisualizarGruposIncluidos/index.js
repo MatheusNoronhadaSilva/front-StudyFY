@@ -18,8 +18,10 @@ const VisualizarGruposIncluidos = () => {
         setShowBorder(true);
 
         try {
-            // Envia o id do aluno, aqui definido como 1. Alterar conforme necessário.
-            const response = await axios.post('http://localhost:8080/v1/studyfy/grupoMentoriaAluno', { id: 1 });
+            const id = localStorage.getItem("userId") 
+            const response = await axios.get(`http://localhost:8080/v1/studyfy/grupoMentoriaAluno/${id}`);
+
+            console.log(response.data);
             
             if (response.status === 200) {
                 console.log(response.data);
@@ -44,8 +46,6 @@ const VisualizarGruposIncluidos = () => {
     // Função para redirecionar para a página de detalhes do grupo
     const handleGrupoClick = (id) => {
 
-        console.log(id);
-        
         navigate(`/grupo-mentoria/${id}?status=membro`); // Navega para a página do grupo, passando o id
     };
 
@@ -55,9 +55,9 @@ const VisualizarGruposIncluidos = () => {
                 <C.VerGruposDiv>
                     <C.Descricao>Veja os grupos que você faz parte!</C.Descricao>
                     <C.VerGrupo onClick={handleVerGruposClick}>Ver grupos</C.VerGrupo>
-                    <div style={{minHeight: '10%'}}></div>
+                    <div style={{ minHeight: '10%' }}></div>
                     <C.Descricao>OU</C.Descricao>
-                    <div style={{minHeight: '10%'}}></div>
+                    <div style={{ minHeight: '10%' }}></div>
                     <C.Descricao>Crie um grupo</C.Descricao>
                     <C.VerGrupo onClick={telaCriarGrupo}>Criar grupo</C.VerGrupo>
                 </C.VerGruposDiv>
@@ -67,19 +67,24 @@ const VisualizarGruposIncluidos = () => {
                         <C.Fechar icon={faClose} onClick={handleFecharClick} />
                         <C.DescricaoVisualizacao>Veja os grupos no qual faz parte</C.DescricaoVisualizacao>
                     </div>
-                    {grupos.map((grupo) => (
-                        
-                        <C.GrupoMentoria 
-                            key={grupo.grupo_id} 
-                            onClick={() => handleGrupoClick(grupo.grupo_id)} // Adicionando a ação de clique
-                        >
-                            <C.IconeGrupo src={fotoGrupo} />
-                            <C.FotoMateriaDiv>
-                                <C.IconeMateria src={matematica} />
-                            </C.FotoMateriaDiv>
-                            <C.NomeGrupo>{grupo.nome_grupo}</C.NomeGrupo>
-                        </C.GrupoMentoria>
-                    ))}
+                    {grupos != null && grupos.length > 0 ? (
+                        grupos.map((grupo) => (
+                            <C.GrupoMentoria
+                                key={grupo.grupo_id}
+                                onClick={() => handleGrupoClick(grupo.id_grupo)}
+                            >
+                                <C.IconeGrupo src={grupo.caminho_imagem_grupo} />
+                                <C.FotoMateriaDiv>
+                                    <C.IconeMateria src={grupo.caminho_imagem_materia} />
+                                </C.FotoMateriaDiv>
+                                <C.NomeGrupo>{grupo.nome_grupo}</C.NomeGrupo>
+                            </C.GrupoMentoria>
+                        ))
+                    ) : (
+                        <span>
+                            Você ainda não faz parte de nenhum grupo de mentoria.
+                        </span>
+                    )}
                 </C.VisualizacaoGrupos>
             )}
         </C.CampoVisualizarGruposIncluidos>

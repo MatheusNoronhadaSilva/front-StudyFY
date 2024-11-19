@@ -25,10 +25,19 @@ const LoginAluno = () => {
     try {
 
       const response = await axios.post('http://localhost:8080/v1/studyFy/login', dadosLogin);
-      console.log('Registro completo com sucesso:', response.data);
+      console.log('Registro completo com sucesso:', response.data.dadosUsuario);
 
-      const userId = response.data.usuario_id
+      const userId = response.data.dadosUsuario.usuario_id 
+      
       localStorage.setItem('userId', userId);
+
+      if (response.data.dadosUsuario.eh_mentor === 1) {
+        // Guardar o id_mentor no localStorage
+        localStorage.setItem("id_mentor", response.data.dadosUsuario.id_mentor);
+      } else {
+        localStorage.setItem("id_mentor", 0)
+      }
+
       navigate('/visualizar-mentorias')
 
     } catch (error) {

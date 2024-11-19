@@ -2,12 +2,11 @@
 import React from 'react';
 import Container from '../styles/telaCheia';
 import Navegacao from '../components/Navegacao'
-import TituloTela from '../styles/tituloTela';
-import CampoPerfil from '../components/CampoPerfil'
+import CampoPerfilConfiguracao from '../components/CampoPerfilConfiguracao';
 import { useMediaQuery } from '@mui/material';
 
 
-const Perfil = () => {
+const PerfilConfiguracao = () => {
 
   const isDesktop = useMediaQuery('(min-width: 768px)');
 
@@ -17,7 +16,7 @@ const Perfil = () => {
     {isDesktop ? (
       <Container style={{backgroundColor: 'white', alignItems: 'center'}}>
       <Navegacao></Navegacao>
-      <CampoPerfil></CampoPerfil>
+      <CampoPerfilConfiguracao />
   </Container>
     ) : (
       <></>
@@ -26,4 +25,4 @@ const Perfil = () => {
   );
 };
 
-export default Perfil;
+export default PerfilConfiguracao;

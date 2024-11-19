@@ -6,7 +6,7 @@ import Login from './pages/Login';
 import GrupoMentoria from './pages/GrupoMentoria';
 import ChatIA from './pages/chatIA'
 import ChatPrivado from './pages/ChatPrivado'
-import Atividades from './pages/Atividades';
+import Atividades from './pages/Questoes';
 import Ajuda from './pages/Ajuda';
 import CadernoVirtual from './pages/CadernoVirtual';
 import Notificacao from './pages/Notificacao';
@@ -18,6 +18,8 @@ import Emblemas from './pages/Emblemas';
 import VisualizacaoMentorias from './pages/visualizacaoMentoria';
 import CriarGrupoMentoria from './pages/CriarGrupoMentoria';
 import GrupoMentoriaPrevia from './pages/GrupoMentoriaPrevia';
+import PerfilConfiguracao from './pages/perfilConfiguracao';
+import TelaAtividades from './pages/telaAtividades';
 
 import * as C from './styles/app';
 
@@ -27,7 +29,9 @@ function App() {
     <C.Container>
       <Router>
         <Routes>
-          <Route exact path='/' element= {<Login/>} />
+          <Route exact path='/' element= {<Atividades/>} />
+          <Route path = '/perfil-configuracao' element={<PerfilConfiguracao/>}/>
+          <Route path = '/tela-atividades' element={<TelaAtividades/>}/>
           <Route exact path ='/criar-grupo-mentoria' element = {<CriarGrupoMentoria/>}/>
           <Route exact path ='/visualizar-mentorias' element = {<VisualizacaoMentorias/>}/>
           <Route exact path ='/grupo-mentoria-previa/:id' element = {<GrupoMentoriaPrevia/>}/>
