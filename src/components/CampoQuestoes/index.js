@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 // Estilos com styled-components
@@ -6,11 +7,9 @@ const Container = styled.div`
   background-color: #ffffff;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 800px;
-  height: 80vh;
-  overflow-y: auto;
+  width: 60%;
+  height: 80%;
+  background-color: red;
 `;
 
 const Header = styled.div`
@@ -120,15 +119,20 @@ const ConteudoTexto = styled.div`
 
 const CampoQuestao = () => {
   const [mostrarImagem, setMostrarImagem] = useState(false);
+  const navigate = useNavigate()
 
   const adicionarImagem = () => {
     setMostrarImagem(true);
   };
 
+  const TelaAtividades = () => {
+    navigate('/tela-atividades')
+}
+
   return (
     <Container>
       <Header>
-        <CloseButton>X</CloseButton>
+        <CloseButton onClick={TelaAtividades}>X</CloseButton>
         <QuestaoInfo>
           <QuestaoAndamento>1/10</QuestaoAndamento>
           <QuestaoTipo>

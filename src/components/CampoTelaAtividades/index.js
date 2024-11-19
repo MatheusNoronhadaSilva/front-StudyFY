@@ -1,14 +1,22 @@
 import * as C from './style';
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios'; // Biblioteca para chamadas HTTP
+import { useNavigate } from 'react-router-dom';
 
 const CampoTelaAtividade = () => {
+
+    const navigate = useNavigate()
+
     const [apiData, setApiData] = useState(null); // Estado para os dados da API
     const [selectedActivity, setSelectedActivity] = useState(null); // Estado para atividade selecionada
     const [currentTopic, setCurrentTopic] = useState(''); // Estado para o tópico atual
     const [currentColor, setCurrentColor] = useState(''); // Estado para a cor atual
     const campoAtividadesRef = useRef(null);
     const subTopicRefs = useRef([]);
+
+const TelaQuestoes = () => {
+    navigate('/atividades')
+}
 
     // Função para buscar dados da API
     useEffect(() => {
@@ -146,7 +154,7 @@ const CampoTelaAtividade = () => {
                                                         <C.ActivityDetails visible>
                                                             <h3>{selectedActivity.activity}</h3>
                                                             <p>Breve descrição da atividade {selectedActivity.activity}.</p>
-                                                            <C.StartButton>Iniciar</C.StartButton>
+                                                            <C.StartButton onClick={TelaQuestoes}>Iniciar</C.StartButton>
                                                         </C.ActivityDetails>
                                                     )
                                                 }

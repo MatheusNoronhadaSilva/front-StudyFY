@@ -103,8 +103,7 @@ const Atividades = () => {
     <>
     {isDesktop ? (
       // Este bloco será renderizado em telas desktop (>= 768px)
-      <Container style={{ backgroundColor: 'white', alignItems: 'center'}}>
-        <Navegacao/>
+      <Container style={{ justifyContent: 'center', backgroundColor: 'white', alignItems: 'center'}}>
         <CampoQuestao />
       </Container>
     ) : (

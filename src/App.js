@@ -23,6 +23,9 @@ import TelaAtividades from './pages/telaAtividades';
 import Subiurank from './pages/SubiuRank';
 import ManteveRank from './pages/ManteveRank';
 import DesceuRank from './pages/DesceuRank';
+import MontagemAtividades from './pages/MontagemAtividades';
+import MontagemAtividadesOrganizar from './pages/MontagemAtividadeOrganizar';
+import MontagemAtividadesTexto from './pages/MontagemAtividadeTexto';
 
 import * as C from './styles/app';
 
@@ -32,7 +35,10 @@ function App() {
     <C.Container>
       <Router>
         <Routes>
-          <Route exact path='/' element= {<GrupoMentoria/>} />
+          <Route exact path='/' element= {<MontagemAtividades/>} />
+          <Route path='/montagem-atividades' element= {<MontagemAtividades/>} />
+          <Route path='/montagem-atividades-organizar' element= {<MontagemAtividadesOrganizar/>} />
+          <Route path='/montagem-atividades-texto' element= {<MontagemAtividadesTexto/>} />
           <Route path = '/subiu-rank' element={<Subiurank/>}/>
           <Route path = '/desceu-rank' element={<DesceuRank/>}/>
           <Route path = '/manteve-rank' element={<ManteveRank/>}/>
