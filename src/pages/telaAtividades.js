@@ -22,7 +22,7 @@ const TelaAtividades = () => {
         // Este bloco será renderizado em telas menores (móveis/tablets < 768px)
         <Container style={{ backgroundColor: 'white', alignItems: 'center', paddingTop: '1vh' }}>
           <TituloTela>Emblemas</TituloTela>
-          <CampoEmblemas />
+          <></>
           <Navegacao />
         </Container>
       )}

@@ -20,6 +20,9 @@ import CriarGrupoMentoria from './pages/CriarGrupoMentoria';
 import GrupoMentoriaPrevia from './pages/GrupoMentoriaPrevia';
 import PerfilConfiguracao from './pages/perfilConfiguracao';
 import TelaAtividades from './pages/telaAtividades';
+import Subiurank from './pages/SubiuRank';
+import ManteveRank from './pages/ManteveRank';
+import DesceuRank from './pages/DesceuRank';
 
 import * as C from './styles/app';
 
@@ -29,7 +32,10 @@ function App() {
     <C.Container>
       <Router>
         <Routes>
-          <Route exact path='/' element= {<Atividades/>} />
+          <Route exact path='/' element= {<GrupoMentoria/>} />
+          <Route path = '/subiu-rank' element={<Subiurank/>}/>
+          <Route path = '/desceu-rank' element={<DesceuRank/>}/>
+          <Route path = '/manteve-rank' element={<ManteveRank/>}/>
           <Route path = '/perfil-configuracao' element={<PerfilConfiguracao/>}/>
           <Route path = '/tela-atividades' element={<TelaAtividades/>}/>
           <Route exact path ='/criar-grupo-mentoria' element = {<CriarGrupoMentoria/>}/>
