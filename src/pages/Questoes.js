@@ -91,7 +91,7 @@ const Atividades = () => {
     <>
       {isDesktop ? (
         // Renderizado para telas desktop
-        <Container style={{ justifyContent: 'center', backgroundColor: 'white', alignItems: 'center' }}>
+        <Container style={{backgroundColor: 'white', flexDirection: 'column', alignItems: 'center'}}>
           <CampoQuestao dadosQuestoes={questoes} />
         </Container>
       ) : (

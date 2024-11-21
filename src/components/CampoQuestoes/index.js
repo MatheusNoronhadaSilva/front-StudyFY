@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 // Estilos gerais
-const Container = styled.div`
+const AreaQuestao = styled.div`
   background-color: #ffffff;
   padding: 3%;
   border-radius: 8px;
   width: 60%;
   height: 80%;
 `;
+
+const FaixaAmarela = styled.div`
+   width: 100%;
+   height:10%;
+   min-height: 10%;
+   background-color: #fee101;
+`
 
 const Header = styled.div`
   display: flex;
@@ -31,7 +38,10 @@ const CloseButton = styled.button`
 const Conteudo = styled.div`
   flex-grow: 1;
   display: flex;
+  width: 100%;
+  height: 80%;
   flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
   margin-bottom: 20px;
 `;
@@ -43,7 +53,6 @@ const Enunciado = styled.h2`
   max-height: 30%;
 `;
 
-// Estilos para opções de seleção
 const OpcaoEstilo = styled.div`
   border: 2px solid ${({ selecionada }) => (selecionada ? "#E9CE03" : "#d9d9d9")};
   box-shadow: 0 0 8px ${({ selecionada }) => (selecionada ? "#E9CE03" : "#d9d9d9")};
@@ -51,8 +60,12 @@ const OpcaoEstilo = styled.div`
   border-radius: 8px;
   padding: 10px 20px;
   cursor: pointer;
-  margin: 10px;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin: 3%;
+  align-items: center;
+  width: 80%;
+  height: 60%;
 
   &:hover {
     border-color: #E9CE03;
@@ -60,7 +73,6 @@ const OpcaoEstilo = styled.div`
   }
 `;
 
-// Estilos para preencher lacunas
 const CampoTexto = styled.input`
   border: 2px solid #d9d9d9;
   border-radius: 5px;
@@ -74,7 +86,6 @@ const CampoTexto = styled.input`
   }
 `;
 
-// Estilos para correspondência
 const Colunas = styled.div`
   display: flex;
   justify-content: space-between;
@@ -103,9 +114,46 @@ const ItemColuna = styled.div`
   }
 `;
 
+const BotaoResponder = styled.div`
+  width: 60%;
+  background-color: white;
+  place-self: center;
+  padding: 1.5%;
+  text-align: center;
+  font-weight: bold;
+  font-size: 2vw;
+  height: 12%;
+  border: solid 2px #d9d9d9;
+  box-shadow: 0 5px 0px #d9d9d9;
+  border-radius: 8px;
+  cursor: pointer;
+
+    &:hover {
+    background-color: #fee101;
+    border: solid 2px #E9CE03;
+    box-shadow: 0 5px 0px #E9CE03;
+
+  }
+`
+
+const OpcoesDiv = styled.div`
+  display: grid;
+  width: 100%;
+  height: 60%;
+  min-height: 60%;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  justify-items: center; /* Centraliza horizontalmente */
+  align-items: center;  /* Centraliza verticalmente */
+`;
+
+
+
 // Componente principal
 const CampoQuestao = ({ dadosQuestoes }) => {
   const [questaoAtual, setQuestaoAtual] = useState(0);
+  const [questoesErradas, setQuestoesErradas] = useState(0);
+  const [questoesAcertadas, setQuestoesAcertadas] = useState(0);
   const [respostaSelecionada, setRespostaSelecionada] = useState(null);
   const [respostasLacunas, setRespostasLacunas] = useState({});
   const navigate = useNavigate();
@@ -126,9 +174,39 @@ const CampoQuestao = ({ dadosQuestoes }) => {
     setRespostasLacunas({ ...respostasLacunas, [posicao]: valor });
   };
 
+  const validarRespostasLacunas = () => {
+    let acertou = true;
+
+    questao.respostas.forEach((resposta) => {
+      const valor = respostasLacunas[resposta.posicao_inicial]?.trim().toLowerCase();
+      if (valor !== resposta.palavra.trim().toLowerCase()) {
+        acertou = false;
+      }
+    });
+
+    return acertou;
+  };
+
   const responderQuestao = () => {
-    // Validação da resposta
-    alert("Resposta enviada!");
+    let acertou = false;
+
+    if (questao.questao_tipo_id === 1 || questao.questao_tipo_id === 2) {
+      const respostaCorreta = questao.respostas.find(
+        (resposta) => resposta.autenticacao === 1
+      );
+      acertou = respostaSelecionada === respostaCorreta?.id;
+    } else if (questao.questao_tipo_id === 3) {
+      acertou = validarRespostasLacunas();
+    }
+
+    if (acertou) {
+      setQuestoesAcertadas((prev) => prev + 1);
+      alert("Resposta correta!");
+    } else {
+      setQuestoesErradas((prev) => prev + 1);
+      alert("Resposta incorreta.");
+    }
+
     if (questaoAtual < questoes.length - 1) {
       setQuestaoAtual(questaoAtual + 1);
       setRespostaSelecionada(null);
@@ -139,61 +217,59 @@ const CampoQuestao = ({ dadosQuestoes }) => {
   };
 
   return (
-    <Container>
+    <>
+    <FaixaAmarela />
+    <AreaQuestao>
       <Header>
-        <CloseButton onClick={() => navigate('/tela-atividades')}>X</CloseButton>
+        <CloseButton onClick={() => navigate("/tela-atividades")}>X</CloseButton>
         <h3>
           Questão {questaoAtual + 1} de {questoes.length}
         </h3>
       </Header>
 
       <Conteudo>
-        <Enunciado>{questao.questao_pergunta}</Enunciado>
+  <Enunciado>{questao.questao_pergunta}</Enunciado>
+  {questao.questao_tipo_id === 1 || questao.questao_tipo_id === 2 ? (
+    <OpcoesDiv>
+      {questao.respostas?.map((opcao) => (
+        <OpcaoEstilo
+          key={opcao.id}
+          selecionada={respostaSelecionada === opcao.id}
+          onClick={() => handleOpcaoSelecionada(opcao.id)}
+        >
+          {opcao.conteudo}
+        </OpcaoEstilo>
+      ))}
+    </OpcoesDiv>
+  ) : questao.questao_tipo_id === 3 ? (
+    <p>
+      {questao.questao_pergunta.split("").map((char, index) => {
+        const lacuna = questao.respostas?.find(
+          (resposta) =>
+            index >= resposta.posicao_inicial && index <= resposta.posicao_fim
+        );
 
-        {questao.questao_tipo_id === 1 || questao.questao_tipo_id === 2 ? (
-          // Tipo 1 e 2: Múltipla escolha e verdadeiro ou falso
-          questao.respostas.map((opcao) => (
-            <OpcaoEstilo
-              key={opcao.id}
-              selecionada={respostaSelecionada === opcao.id}
-              onClick={() => handleOpcaoSelecionada(opcao.id)}
-            >
-              {opcao.conteudo}
-            </OpcaoEstilo>
-          ))
-        ) : questao.questao_tipo_id === 3 ? (
-          // Tipo 3: Preencher lacunas
-          <p>
-            {questao.questao_pergunta.map((parte, index) => (
-              parte.lacuna ? (
-                <CampoTexto
-                  key={index}
-                  onChange={(e) => handlePreencherLacuna(index, e.target.value)}
-                />
-              ) : (
-                parte.texto
-              )
-            ))}
-          </p>
-        ) : questao.questao_tipo_id === 4 ? (
-          // Tipo 4: Correspondência
-          <Colunas>
-            <Coluna>
-              {questao.opcoesA.map((item) => (
-                <ItemColuna key={item.id}>{item.texto}</ItemColuna>
-              ))}
-            </Coluna>
-            <Coluna>
-              {questao.opcoesB.map((item) => (
-                <ItemColuna key={item.id}>{item.texto}</ItemColuna>
-              ))}
-            </Coluna>
-          </Colunas>
-        ) : null}
-      </Conteudo>
+        if (lacuna) {
+          return (
+            <CampoTexto
+              key={`lacuna-${index}`} // Índice mais descritivo
+              onChange={(e) =>
+                handlePreencherLacuna(lacuna.posicao_inicial, e.target.value)
+              }
+            />
+          );
+        }
 
-      <button onClick={responderQuestao}>Responder</button>
-    </Container>
+        return <span key={`char-${index}`}>{char}</span>;
+      })}
+    </p>
+  ) : null}
+</Conteudo>
+
+
+      <BotaoResponder onClick={responderQuestao}>Responder</BotaoResponder>
+    </AreaQuestao>
+    </>
   );
 };
 
