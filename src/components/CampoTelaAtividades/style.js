@@ -13,16 +13,15 @@ export const AppContainer = styled.div`
 
 // Quadrado fixo (Série + Assunto)
 export const FixedBox = styled.div`
-  background-color: #fee101;
-  color: rgba(0, 0, 0, 0.5);
   min-height: 10%;
+  max-height: 10%;
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   font-size: 1.7vw;
   font-weight: bold;
-  padding: 1.8% 5%;
+  padding: 0.5% 5%;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
@@ -81,6 +80,7 @@ export const CampoQuadradinhos = styled.div`
 
 
 const hexToRgba = (hex, alpha = 0.3) => {
+  
     const match = hex.match(/^#?([\da-f]{2})([\da-f]{2})([\da-f]{2})$/i);
     if (!match) return hex;
     const [_, r, g, b] = match;
@@ -190,3 +190,49 @@ export const Loading = styled.div`
    width: 100%;
    height: 100%;
 `
+
+export const MateriaDiv = styled.div`
+   height: 100%;
+   width: 20%;
+   display: flex;
+   gap: 10%;
+   align-items:center;
+`
+
+export const IconeMateriaDiv = styled.div`
+   display: flex;
+   flex-direction: column;
+   height: 80%;
+   width: 20%;
+   padding: 4%;
+   background-color: white;
+   border-radius: 360px;
+`
+
+export const IconeMateria = styled.img`
+   height: 100%;
+   width: 100%;
+  `
+
+export const NomeMateria = styled.span`
+   font-size: 1.5vw;
+`
+
+export const DescMateria = styled.div`
+   display: flex;
+   flex-direction: column;
+   justify-content: space-evenly;
+   height: 100%;
+   flex-grow: 1;
+   align-items: center;
+  `
+
+export const TrocarMateria = styled.span`
+   font-size: 0.8vw;
+   cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+   
+   `
