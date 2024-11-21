@@ -7,6 +7,11 @@ export const RankAlunos = styled.div`
    min-height: 40%;
    max-height: 44vh;
    overflow-y: auto;
+
+   @media(min-width: 768px){
+      width: 80%;
+      place-self: center;
+   }
 `
 
 export const AlunoRank = styled.div`
@@ -16,7 +21,6 @@ export const AlunoRank = styled.div`
    max-height: 7.5vh;
    border-bottom: solid #d9d9d9 3px;
    border-top: solid #d9d9d9 3px;
-
 `
 
 export const Colocacao = styled.div`
@@ -33,6 +37,10 @@ export const AreaImg = styled.div`
    align-items: center;
    justify-content: center;
    display: flex;
+
+   @media(min-width: 768px){
+      width: 12%;
+   }
 `
 
 export const FtPerfil = styled.img`
@@ -70,6 +78,24 @@ export const SubirRank = styled.div`
    justify-content: center;
    width: 100%;
    margin-block: 5%;
+
+   span{
+   fontSize: 3vw; 
+   color: #51FF25;
+   marginLeft: 0.5rem;
+   }
+
+   @media(min-width:768px){
+
+      margin-block: 3%;
+
+      span{
+   fontSize: 1vw; 
+   color: #51FF25;
+   marginLeft: 0.5rem;
+   }
+   }
+
 `
 
 export const DescerRankAlunos = styled.div`
@@ -82,11 +108,26 @@ export const DescerRankAlunos = styled.div`
 `
 
 export const DescerRank = styled.div`
-   display: flex;
-   margin-block: 5%;
+display: flex;
    flex-direction: column;
    align-items: center;
    justify-content: center;
    width: 100%;
    margin-block: 5%;
+
+   span{
+   fontSize: 3vw; 
+   color: red;
+   marginLeft: 0.5rem;
+   }
+
+   @media(min-width:768px){
+
+      margin-block: 0%;
+
+      span{
+   fontSize: 1vw;
+   marginLeft: 0.5rem;
+   }
+   }
 `

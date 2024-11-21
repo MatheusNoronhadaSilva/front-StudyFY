@@ -8,6 +8,12 @@ export const Titulo = styled.div`
    justify-content: center;
    align-items: center;
    margin-top: 10%;
+
+   @media(min-width: 768px){
+      span{
+         font-size: 2vw;
+      }
+   }
 `
 
 export default Titulo

@@ -4,10 +4,16 @@ export const RankMaisAjudados = styled.div`
    display: flex;
    flex-direction: column;
    border: solid #d9d9d9 3px;
-   min-height: 41.5%;
+   min-height: 38.2%;
    max-height: 44vh;
    overflow-y: auto;
    margin-top: 10%;
+
+   @media(min-width: 768px){
+      margin-top: 5%;
+      width: 80%;
+      place-self: center;
+   }
 `
 
 export const MentorRank = styled.div`
@@ -20,12 +26,29 @@ export const MentorRank = styled.div`
 
 `
 
-export const Colocacao = styled.div`
+export const ColocacaoDiv = styled.div`
    display: flex;
    align-items: center;
    justify-content: center;
    height: 100%;
    width: 15%;
+
+   @media(min-width: 768px){
+      width: 12%;
+   }
+`
+
+export const ColocacaoMedalha = styled.img`
+   height: 50%;
+   width: 60%;
+
+   @media(min-width: 768px){
+      width: 45%;
+   }
+`
+
+export const Colocacao = styled.span`
+   font-size; 2vw;
 `
 
 export const AreaImg = styled.div`
@@ -34,6 +57,10 @@ export const AreaImg = styled.div`
    align-items: center;
    justify-content: center;
    display: flex;
+
+   @media(min-width: 768px){
+      width: 12%;
+   }
 `
 
 export const FtPerfil = styled.img`

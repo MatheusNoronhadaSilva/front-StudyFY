@@ -35,7 +35,7 @@ function App() {
     <C.Container>
       <Router>
         <Routes>
-          <Route exact path='/' element= {<TelaAtividades/>} />
+          <Route exact path='/' element= {<Login/>} />
           <Route path='/montagem-atividades' element= {<MontagemAtividades/>} />
           <Route path='/montagem-atividades-organizar' element= {<MontagemAtividadesOrganizar/>} />
           <Route path='/montagem-atividades-texto' element= {<MontagemAtividadesTexto/>} />

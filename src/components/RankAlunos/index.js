@@ -40,16 +40,16 @@ const RankAlunos = () => {
               <C.FtPerfil src={fotoAluno} alt="Foto do Aluno" />
             </C.AreaImg>
             <C.AreaNome>
-              <span style={{fontSize: '3vw'}}>{aluno.nome}</span>
+              <span>{aluno.nome}</span>
             </C.AreaNome>
             <C.AreaPontos>
-              <span style={{fontSize: '3vw', fontWeight: 'bold'}}>{aluno.pontos} Pts</span>
+              <span>{aluno.pontos} Pts</span>
             </C.AreaPontos>
           </C.AlunoRank>
         ))}
             <C.SubirRank>
                 <FontAwesomeIcon icon={faArrowUp} style={{height: '2vh', width: '3vw', color: '#51FF25'}} />
-                <span style={{fontSize: '3vw', color: '#51FF25', marginLeft: '0.5rem'}}>Subir de rank</span>
+                <span>Subir de rank</span>
             </C.SubirRank>
       </C.SubirRankAlunos>
 
@@ -63,10 +63,10 @@ const RankAlunos = () => {
             <C.FtPerfil src={fotoAluno} alt="Foto do Aluno" />
           </C.AreaImg>
           <C.AreaNome>
-            <span style={{fontSize: '3vw'}}>{aluno.nome}</span>
+            <span>{aluno.nome}</span>
           </C.AreaNome>
           <C.AreaPontos>
-            <span style={{fontSize: '3vw', fontWeight: 'bold'}}>{aluno.pontos} Pts</span>
+            <span>{aluno.pontos} Pts</span>
           </C.AreaPontos>
         </C.AlunoRank>
       ))}
@@ -75,7 +75,7 @@ const RankAlunos = () => {
       <C.DescerRankAlunos>
       <C.DescerRank>
               <FontAwesomeIcon icon={faArrowDown} style={{height: '2vh', width: '3vw', color: 'red'}} />
-              <span style={{fontSize: '3vw', color: 'red', marginLeft: '0.5rem'}}>Descer de rank</span>
+              <span>Descer de rank</span>
             </C.DescerRank>
         {alunosRebaixados.map((aluno, index) => (
           <C.AlunoRank key={index + promover + neutros}>
@@ -86,10 +86,10 @@ const RankAlunos = () => {
               <C.FtPerfil src={fotoAluno} alt="Foto do Aluno" />
             </C.AreaImg>
             <C.AreaNome>
-              <span style={{fontSize: '3vw'}}>{aluno.nome}</span>
+              <span>{aluno.nome}</span>
             </C.AreaNome>
             <C.AreaPontos>
-              <span style={{fontSize: '3vw', fontWeight: 'bold'}}>{aluno.pontos} Pts</span>
+              <span>{aluno.pontos} Pts</span>
             </C.AreaPontos>
           </C.AlunoRank>
         ))}

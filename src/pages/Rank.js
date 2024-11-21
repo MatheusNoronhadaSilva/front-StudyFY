@@ -39,15 +39,17 @@ const Rank = () => {
                         <RankAlunos />
 
                         <Titulo>
-                            <span style={{ fontWeight: 'bold', fontSize: '7vw' }}>Rank de mentores</span>
+                            <span>Rank de mentores</span>
                             <FaixaAmarela />
+                        </Titulo>
 
+                        <Titulo style={{marginTop: '3%', fontSize: '1vw'}}>
                             <span>Mentores que mais ajudam</span>
                         </Titulo>
 
                         <RankMaisAjudados />
 
-                        <Titulo>
+                        <Titulo style={{marginTop: '0%'}}>
                             <span>Mentores com melhores avaliações</span>
                         </Titulo>
                         

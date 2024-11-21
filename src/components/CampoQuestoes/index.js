@@ -55,7 +55,7 @@ const Enunciado = styled.h2`
 
 const OpcaoEstilo = styled.div`
   border: 2px solid ${({ selecionada }) => (selecionada ? "#E9CE03" : "#d9d9d9")};
-  box-shadow: 0 0 8px ${({ selecionada }) => (selecionada ? "#E9CE03" : "#d9d9d9")};
+  box-shadow: 0 3px 0px ${({ selecionada }) => (selecionada ? "#E9CE03" : "#d9d9d9")};
   background-color: ${({ selecionada }) => (selecionada ? "#fee101" : "white")};
   border-radius: 8px;
   padding: 10px 20px;
@@ -66,10 +66,11 @@ const OpcaoEstilo = styled.div`
   align-items: center;
   width: 80%;
   height: 60%;
+  font-size: 2vw;
 
   &:hover {
     border-color: #E9CE03;
-    box-shadow: 0 0 8px #E9CE03;
+    box-shadow: 0 3px 0px #E9CE03;
   }
 `;
 

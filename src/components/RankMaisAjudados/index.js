@@ -27,12 +27,12 @@ const RankMaisAjudados = () => {
             {/* Mapeando e exibindo os mentores já ordenados */}
             {mentoresOrdenados.map((mentor, index) => (
                 <C.MentorRank key={index}>
-                    <C.Colocacao>
-                        {index === 0 && <img src={PrimeiroLugar} alt="1º Lugar" />}
-                        {index === 1 && <img src={SegundoLugar} alt="2º Lugar" />}
-                        {index === 2 && <img src={TerceiroLugar} alt="3º Lugar" />}
-                        {index > 2 && <span>#{index + 1}</span>} {/* Mostrar a posição para 4º lugar em diante */}
-                    </C.Colocacao>
+                    <C.ColocacaoDiv>
+                        {index === 0 && <C.ColocacaoMedalha src={PrimeiroLugar} alt="1º Lugar" />}
+                        {index === 1 && <C.ColocacaoMedalha src={SegundoLugar} alt="2º Lugar" />}
+                        {index === 2 && <C.ColocacaoMedalha src={TerceiroLugar} alt="3º Lugar" />}
+                        {index > 2 && <C.Colocacao>#{index + 1}</C.Colocacao>} {/* Mostrar a posição para 4º lugar em diante */}
+                    </C.ColocacaoDiv>
                     <C.AreaImg>
                         <C.FtPerfil src={fotoMentor} alt="Foto do Mentor" />
                     </C.AreaImg>
