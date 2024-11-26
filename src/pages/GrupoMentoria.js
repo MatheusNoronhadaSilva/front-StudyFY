@@ -25,7 +25,7 @@ const GrupoMentoria = () => {
           <Navegacao />
           <div style={{height: '100%', width: '100%', flexDirection: 'column'}}>
             <InfoGrupoMentoria id={id} status={status} /> {/* Passa o id para o componente */}
-            <AbasGrupoMentoria />
+            <AbasGrupoMentoria grupoId={id}/>
           </div>
         </Container>
       ) : (

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const Campo = styled.div`
    flex-grow: 1;
@@ -9,6 +10,16 @@ export const Campo = styled.div`
    padding: 5% 25%;
    overflow-y: auto;
    gap: 5%;
+   position: relative;
+`
+
+export const Engrenagem = styled(FontAwesomeIcon)`
+   position: absolute;
+   height: 2.5%;
+   width: 2.5%;
+   top: 5%;
+   right: 29.4%;
+   cursor: pointer
 `
 
 export const Campos = styled.div`
@@ -28,6 +39,8 @@ export const CampoInfoUsuario = styled.div`
 export const CampoInfoPrincipal = styled.div`
    width: 100%;
    min-height: 33%;
+   padding-top: 3%;
+   gap: 5%;
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -35,8 +48,8 @@ export const CampoInfoPrincipal = styled.div`
 `
 
 export const IconePerfil = styled.img`
-   width: 23%;
-   height: 60%;
+   width: 26%;
+   height: 70%;
    z-index: 1;
 `
 
@@ -47,7 +60,7 @@ export const NomeUsuario = styled.span`
 `
 
 export const DataEntrada = styled.span`
-   font-size: 1vw;
+   font-size: 1.5vw;
    font-weight: bold;
    z-index: 1;
 `

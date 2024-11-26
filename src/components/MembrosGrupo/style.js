@@ -13,10 +13,21 @@ flex-direction: column;
 flex-grow: 1;
 width: 100%;
 overflow-y: auto;
+position: relative;
 
 @media(min-width: 768px){
-   max-height: 62%;
+   max-height: 100%;
 }
+`
+
+export const SemMembros = styled.span`
+   position: absolute;
+   font-size: 2vw;
+   width: 30%;
+   text-align: center;
+   place-self: center;
+   right: 35%;
+   top: 45%;
 `
 
 export const Membro = styled.div`
@@ -31,7 +42,7 @@ export const Membro = styled.div`
    }
 
    @media(min-width: 768px){
-      min-height: 25%;
+      min-height: 35%;
    }
 `;
 

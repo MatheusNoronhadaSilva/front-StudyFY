@@ -3,7 +3,7 @@ import * as C from './style';
 import AbaMembros from '../MembrosGrupo';
 import AbaDuvidas from '../DuvidasGrupo';
 
-const AbasGrupoMentoria = () => {
+const AbasGrupoMentoria = (grupoId) => {
   const [abaAtiva, setAbaAtiva] = useState(0); // Estado para rastrear a aba ativa
 
   const handleClick = (index) => {
@@ -27,7 +27,7 @@ const AbasGrupoMentoria = () => {
       </C.Abas>
 
       <C.CampoAba>
-        {abaAtiva === 0 && <AbaMembros />}      {/* Exibe AbaMembros se abaAtiva for 0 */}
+        {abaAtiva === 0 && <AbaMembros grupoId={grupoId}/>}      {/* Exibe AbaMembros se abaAtiva for 0 */}
         {abaAtiva === 2 && <AbaDuvidas />}      {/* Exibe AbaDuvidas se abaAtiva for 2 */}
       </C.CampoAba>
     </C.AbasGrupo>

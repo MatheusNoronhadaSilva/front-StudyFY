@@ -1,38 +1,43 @@
 // src/pages/Entrada.js
 import React from 'react';
 import * as C from './style';
-import IconePerfil from '../../assets/Ellipse (1).png';
+import IconePerfil from '../../assets/Ellipse (1).png'; // Imagem de exemplo
 
-const InfoUsuario = () => {
+const InfoUsuario = ({ dados }) => {  // Recebe os dados como props
 
-  const idMentor = localStorage.getItem("id_mentor")
-
+  const aluno = dados  
+    
+  console.log(aluno);
+  
   return (
     <C.CampoInfoUsuario>
       <C.CampoInfoPrincipal>
         <C.FundoAmarelo />
-        <C.IconePerfil src={IconePerfil} />
-        <C.NomeUsuario> alololollo</C.NomeUsuario>
-        <C.DataEtrada>10/10/1000</C.DataEtrada>
+        {/* Usando a foto do aluno se disponível */}
+        <C.IconePerfil src={aluno.foto_aluno || IconePerfil} />
+        <C.NomeUsuario>{aluno.nome_aluno}</C.NomeUsuario>
+        <C.DataEtrada>{aluno.data_criacao_conta}</C.DataEtrada>
       </C.CampoInfoPrincipal>
       <C.CampoInfoAdicionais>
         <C.InfoAdicionaisP1>
           <C.InfoDiv>
             <C.InfoTitulo>Estudando</C.InfoTitulo>
-            <C.Info>História</C.Info>
+            {/* Exibindo as matérias associadas */}
+            <C.Info>{aluno.materias_associadas}</C.Info>
           </C.InfoDiv>
           <C.InfoDiv>
             <C.InfoTitulo>Série</C.InfoTitulo>
-            <C.Info>3º fund1</C.Info>
+            <C.Info>{aluno.nome_serie}</C.Info>
           </C.InfoDiv>
           <C.InfoDiv>
             <C.InfoTitulo>Atividade atual</C.InfoTitulo>
-            <C.Info>Bahche</C.Info>
+            <C.Info>{aluno.tipo_aluno}</C.Info> {/* Exibindo o tipo de aluno/mentor */}
           </C.InfoDiv>
         </C.InfoAdicionaisP1>
         <C.InfoAdicionaisP2>
-          <C.Identificacao>Aluno/mentor</C.Identificacao>
-          {idMentor != 0 ? (
+          <C.Identificacao>{aluno.tipo_aluno}</C.Identificacao>
+          {/* Se for mentor, exibe o link de mentoria */}
+          {aluno.tipo_aluno === 'Aluno/Mentor' ? (
             <C.VerGrupoMentoria>Ver mentoria</C.VerGrupoMentoria>
           ) : (
             <></>
