@@ -1,6 +1,23 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+export const BlocoDeNotas = styled.div`
+
+    height: 70%;
+    .ql-container {
+        height: 30vh; /* Define a altura do editor */
+    }
+    .ql-editor {
+        font-size: 0.9em; /* Ajusta o tamanho da fonte do conteúdo */
+        line-height: 1.5; /* Define o espaçamento entre linhas */
+        padding: 3%; /* Define o espaçamento interno */
+    }
+    .ql-toolbar {
+        height: 7vh;
+        width: 100%;
+    }
+`;
+
 export const Container = styled.div`
   font-family: 'Arial', sans-serif;
   width: 100%;
@@ -86,6 +103,8 @@ export const NotePreview = styled.div`
 
 export const NoteEditor = styled.div`
   flex: 2;
+  height: 100%;
+  width: 100%;
   background: #fff;
   border-radius: 10px;
   padding: 20px;
@@ -101,12 +120,11 @@ export const NoteEditor = styled.div`
 export const ButtonGroup = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-top: 10%;
+  gap: 3%;
 `;
 
 export const Button = styled.button`
-  padding: 10px 20px;
-  margin-left: 10px;
+  padding: 2% 4%;
   background-color: ${(props) => props.bg || '#007bff'};
   color: #fff;
   border: none;

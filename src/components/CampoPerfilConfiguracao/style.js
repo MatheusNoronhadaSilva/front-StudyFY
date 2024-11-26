@@ -48,7 +48,7 @@ export const CampoInfoPrincipal = styled.div`
 `
 
 export const IconePerfil = styled.img`
-   width: 26%;
+   width: 23%;
    height: 70%;
    z-index: 1;
 `

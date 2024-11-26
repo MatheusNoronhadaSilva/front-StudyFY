@@ -14,6 +14,7 @@ const VisualizarGrupos = () => {
     const [expandedGroup, setExpandedGroup] = useState(null);
     const [grupos, setGrupos] = useState([]); // Estado para armazenar os grupos
     const grupoRef = useRef(null);
+    const idMentor = localStorage.getItem("id_mentor");
     const navigate = useNavigate(); // Hook para navegação
 
     const pegarGrupos = async () => {
@@ -51,7 +52,7 @@ const VisualizarGrupos = () => {
     // Função para redirecionar ao clicar em "Ver grupo de mentoria"
     const handleVerGrupoClick = (id) => {
         
-        navigate(`/grupo-mentoria/${id}?status=visitante`);
+        navigate(`/grupo-mentoria/${id}`, { state: { status: 'visitante' } });
     };
 
     return (

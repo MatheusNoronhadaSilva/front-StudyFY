@@ -35,7 +35,7 @@ const LoginAluno = () => {
         // Guardar o id_mentor no localStorage
         localStorage.setItem("id_mentor", response.data.dadosUsuario.id_mentor);
       } else {
-        localStorage.setItem("id_mentor", 0)
+        localStorage.setItem("id_mentor", "0")
       }
 
       navigate('/visualizar-mentorias')

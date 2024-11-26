@@ -56,7 +56,7 @@ const VisualizarGruposIncluidos = () => {
     // Função para redirecionar para a página de detalhes do grupo
     const handleGrupoClick = (id) => {
 
-        navigate(`/grupo-mentoria/${id}?status=membro`); // Navega para a página do grupo, passando o id
+        navigate(`/grupo-mentoria/${id}`, { state: { status: 'membro' } });
     };
 
     return (

@@ -6,12 +6,14 @@ import ReactQuill from 'react-quill';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import Swal from 'sweetalert2';
+import 'react-quill/dist/quill.snow.css'; // Inclua o estilo padrão do Quill
 
 const CampoCadernoVirtual = () => {
     const [notes, setNotes] = useState([]);
     const [currentNote, setCurrentNote] = useState('');
     const [selectedNoteIndex, setSelectedNoteIndex] = useState(null);
-    const alunoId = localStorage.getItem("userId") 
+    const alunoId = localStorage.getItem("userId")
 
     // Busca as notas ao carregar a página
     useEffect(() => {
@@ -35,7 +37,7 @@ const CampoCadernoVirtual = () => {
                 // Atualiza nota existente
                 const noteId = notes[selectedNoteIndex].id;
                 console.log('oiooii');
-                
+
                 await axios.put(`http://localhost:8080/v1/studyFy/cadernoVirtual/${alunoId}/${noteId}`, { conteudo: currentNote });
             } else {
                 // Cria uma nova nota
@@ -68,11 +70,30 @@ const CampoCadernoVirtual = () => {
 
     const handleDeleteNote = async (index) => {
         try {
-            const noteId = notes[index].id;
-            await axios.delete(`http://localhost:8080/v1/studyFy/cadernoVirtual/${alunoId}/${noteId}`);
-            fetchNotes(); // Atualiza as notas na interface
+
+            Swal.fire({
+                title: "Tem certeza?",
+                text: "Esta nota será deletada para sempre",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Deletar mesmo assim"
+            }).then(async (result) => {
+
+                if (result.isConfirmed) {
+
+                    const noteId = notes[index].id;
+                    await axios.delete(`http://localhost:8080/v1/studyFy/cadernoVirtual/${alunoId}/${noteId}`);
+                    fetchNotes(); // Atualiza as notas na interface
+                }
+            });
         } catch (error) {
-            console.error('Erro ao deletar a nota:', error);
+            Swal.fire({
+                title: "Erro ao deletar nota",
+                text: "Tente novamente mais tarde, se o erro persistir, contate nossa equipe",
+                icon: "error"
+            });
         }
     };
 
@@ -96,16 +117,16 @@ const CampoCadernoVirtual = () => {
                                 }}
                             />
                             <div style={{ display: 'flex', width: '100%', paddingTop: '5%', justifyContent: 'space-between' }}>
-                                <div style={{display: 'flex', gap: '5%', width: '50%'}}>
-                                <span>Nota {index + 1}</span>
-                                <C.DeleteButton icon={faTrash} onClick={(e) => {
-                                e.stopPropagation(); // Impede a propagação do evento para a função de edição
-                                handleDeleteNote(index);
-                            }}>
-                                Deletar
-                            </C.DeleteButton>
+                                <div style={{ display: 'flex', gap: '5%', width: '50%' }}>
+                                    <span>Nota {index + 1}</span>
+                                    <C.DeleteButton icon={faTrash} onClick={(e) => {
+                                        e.stopPropagation(); // Impede a propagação do evento para a função de edição
+                                        handleDeleteNote(index);
+                                    }}>
+                                        Deletar
+                                    </C.DeleteButton>
                                 </div>
-                               <span>{note.data_criacao}</span>
+                                <span>{note.data_criacao}</span>
                             </div>
                         </C.NotePreview>
                     ))}
@@ -114,12 +135,13 @@ const CampoCadernoVirtual = () => {
                 {/* Editor de Notas */}
                 <C.NoteEditor>
                     <h2>{selectedNoteIndex !== null ? 'Editar Nota' : 'Nova Nota'}</h2>
+                    <C.BlocoDeNotas>
                     <ReactQuill
                         theme="snow"
                         value={currentNote}
                         onChange={setCurrentNote}
-                        style={{ height: '70%' }}
                     />
+                    </C.BlocoDeNotas>
                     <C.ButtonGroup>
                         <C.Button bg="#28a745" hover="#218838" onClick={handleSaveNote}>
                             {selectedNoteIndex !== null ? 'Atualizar Nota' : 'Salvar Nota'}

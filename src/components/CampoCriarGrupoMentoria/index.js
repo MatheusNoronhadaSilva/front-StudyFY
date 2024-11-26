@@ -2,6 +2,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import * as C from "./style"; // Importa os styled-components com alias "C"
+import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
+import swal from "sweetalert";
 
 const CriarGrupo = () => {
   const [materias, setMaterias] = useState([]);
@@ -16,6 +19,7 @@ const CriarGrupo = () => {
   const [serieMin, setSerieMin] = useState(1); // Série-min
   const [serieMax, setSerieMax] = useState(3); // Série-max
   const [mentorId, setMentorId] = useState(1); // ID do mentor (exemplo de valor fixo, pois é obrigatório)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchMaterias = async () => {
@@ -48,11 +52,11 @@ const CriarGrupo = () => {
           setSeries(response.data.series);
         }
       } catch (error) {
-        console.error("Erro ao buscar series:", error);
+        console.error("Erro ao buscar séries:", error);
       }
     };
 
-    fetchSeries()
+    fetchSeries();
     fetchMaterias();
     fetchImagens();
   }, []);
@@ -73,13 +77,13 @@ const CriarGrupo = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Cria o objeto JSON com as informações do grupo
     const grupoData = {
       nome, // Nome do grupo
-      capacidade, // Capacidade do grupo
+      capacidade: parseInt(capacidade), // Capacidade do grupo
       descricao, // Descrição do grupo
       materia: parseInt(materia), // Matéria selecionada
       serie_min: serieMin, // Série mínima
@@ -88,7 +92,36 @@ const CriarGrupo = () => {
       mentor_id: mentorId, // ID do mentor
     };
 
-    console.log("Grupo criado:", grupoData);
+    try {
+      // Faz a chamada POST para o endpoint
+
+      console.log('ioioio');
+      console.log(grupoData);
+      
+      
+      const response = await axios.post("http://localhost:8080/v1/studyfy/mentorias", grupoData);
+
+      console.log(response.data.grupo.id);
+      
+      if (response.status === 201) {
+        swal("Parabéns", "Grupo criado com sucesso", "success");
+
+        const idGrupoCriado = response.data.grupo.id
+
+        localStorage.setItem("id_grupo", idGrupoCriado);
+        navigate(`/grupo-mentoria/${idGrupoCriado}`, { state: { status: 'mentor' } });
+      } else {
+        swal("OOooopss", "Houve um problema na criação de um grupo de mentoria", "error");
+      }
+    } catch (error) {
+      swal({
+        title: "Error",
+        text: "Falha na tentativa de criar um grupo de mentoria, verifique os dados e tente novamente",
+        icon: "error",
+        className: "swal-centralizar-texto", // Classe customizada
+      });
+      
+    }
   };
 
   return (

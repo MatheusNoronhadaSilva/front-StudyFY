@@ -39,29 +39,64 @@ const CampoPerfilConfiguracao = () => {
     // Função para tornar o usuário mentor
     const tornarSeMentor = async () => {
         try {
-            // Aqui você envia a requisição POST para o servidor
-            const response = await axios.post(`http://localhost:8080/v1/studyFy/mentor`, {
-                idUsuario: idUsuario,
-            });            
 
-            console.log(response.data.mentorCriado);
+            Swal.fire({
+                title: "Tem certeza?",
+                text: "Você será retirado de todos os grupos de mentoria que faz parte, e não poderá ingressar em nenhum sendo mentor",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Tornar-se mentor"
+            }).then(async (result) => {
+                if (result.isConfirmed) {
 
-            if (response.status = 201) {
-                swal("Parabéns", "agora você será capaz de ajudar outros alunos com grupo de mentoria e ajuda personalizada", "success");
-                // Atualiza o estado do idMentor, caso seja necessário para renderizar a tela novamente
-                localStorage.setItem("id_mentor", `${response.data.mentorCriado}`); // Atualizando o status para "mentor"
-                setConfiguracoes({
-                    ...aluno,
-                    // Modifique conforme necessário
-                });
-            } else {
-                alert('Falha ao tornar-se mentor. Tente novamente.');
-            }
+                    // Buscar grupos de mentoria que o aluno participa
+                    const gruposResponse = await axios.get(`http://localhost:8080/v1/studyfy/grupoMentoriaAluno/${idUsuario}`);
+                    const grupos = gruposResponse.data;
+
+                    console.log(gruposResponse);
+
+                    if (gruposResponse.data !== null) {
+
+                        // Remover o aluno de todos os grupos
+                        for (const grupo of grupos) {
+                            await axios.delete('http://localhost:8080/v1/studyfy/mentoria/membro', {
+                                data: {
+                                    grupoId: grupo.id_grupo,
+                                    alunoId: idUsuario,
+                                },
+                            });
+                        }
+                    }
+
+                    // Tornar o aluno mentor
+                    const response = await axios.post(`http://localhost:8080/v1/studyFy/mentor`, {
+                        idUsuario: idUsuario,
+                    });
+
+                    console.log(response.data.mentorCriado);
+
+                    if (response.status === 201) {
+                        swal("Parabéns", "Agora você será capaz de ajudar outros alunos com grupo de mentoria e ajuda personalizada", "success");
+
+                        // Atualiza o estado do idMentor
+                        localStorage.setItem("id_mentor", `${response.data.mentorCriado}`);
+                        setConfiguracoes({
+                            ...aluno,
+                            // Atualize outras informações aqui, se necessário
+                        });
+                    } else {
+                        swal("Falha ao se tornar mentor", "Houve um erro ao se tornar mentor", "error");
+                    }
+                }
+            })
         } catch (error) {
             console.error('Erro ao tornar-se mentor:', error);
-            alert('Ocorreu um erro. Tente novamente mais tarde.');
+            swal("OOooopsss...", "Tente novamente mais tarde", "error");
         }
     };
+
 
     const deixarDeSerMentor = async () => {
         try {
@@ -74,7 +109,7 @@ const CampoPerfilConfiguracao = () => {
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
                 confirmButtonText: "Deletar mesmo assim"
-              }).then(async(result) => {
+            }).then(async (result) => {
                 if (result.isConfirmed) {
 
                     // Envia a requisição DELETE para o servidor
@@ -85,7 +120,7 @@ const CampoPerfilConfiguracao = () => {
                             title: "Você deixou de ser mentor, tudo bem",
                             text: "Que tal tentar de novo outra vez?",
                             icon: "success"
-                          });
+                        });
                         localStorage.setItem("id_mentor", "0"); // Atualiza o status para "não mentor"
                         setConfiguracoes({
                             ...aluno,
@@ -96,10 +131,10 @@ const CampoPerfilConfiguracao = () => {
                             title: "Erro ao deixar de ser mentor",
                             text: "Tente novamente mais tarde, se o erro persistir, contate nossa equipe",
                             icon: "error"
-                          });
+                        });
                     }
                 }
-              });
+            });
         } catch (error) {
             console.error('Erro ao deixar de ser mentor:', error);
             alert('Ocorreu um erro. Tente novamente mais tarde.');

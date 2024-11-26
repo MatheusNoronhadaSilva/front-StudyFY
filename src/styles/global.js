@@ -13,6 +13,10 @@ const GlobalStyle = createGlobalStyle`
      height: 100vh;
      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
      }
+
+    .swal-centralizar-texto .swal-text {
+    text-align: center; /* Centraliza o texto */
+  }
 `;
 
 export default GlobalStyle

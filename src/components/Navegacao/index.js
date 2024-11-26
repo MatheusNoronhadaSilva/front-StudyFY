@@ -12,11 +12,16 @@ import chatIA from '../../assets/chatIA.png';
 import mentoria from '../../assets/mentoria.png';
 import usuario from '../../assets/user.png'
 import { useMediaQuery } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { logDOM } from '@testing-library/react';
 
 const AbasGrupoMentoria = () => {
   const [imgAtiva, setImgAtiva] = useState(null); // Índice ativo para as imagens principais
   const [imgExtraAtiva, setImgExtraAtiva] = useState(null); // Índice ativo para as imagens extras
   const [mostrarImagens, setMostrarImagens] = useState(false);
+  const idMentor = localStorage.getItem("id_mentor");
+  const idGrupo = localStorage.getItem("id_grupo");
+  const navigate = useNavigate()
 
   useEffect(() => {
     const storedImgAtiva = localStorage.getItem('imgAtiva');
@@ -54,7 +59,11 @@ const AbasGrupoMentoria = () => {
 
   const todasImagens = imagens.concat(imagensExtras);  
 
-  const urlsNavegacao = [
+  const MaisImagens = () => {
+    setMostrarImagens((prev) => !prev); // Alterna a visibilidade da div
+  };
+
+  const urlsNavegacaoBase = [
     'tela-atividades',
     'caderno-virtual',
     'rank',
@@ -64,10 +73,33 @@ const AbasGrupoMentoria = () => {
     'chatIA',
     'visualizar-mentorias',
     'ajuda',
-  ]
+  ];
+  
+  // Atualizando a URL de navegação condicionalmente
+  const urlsNavegacao = [...urlsNavegacaoBase];
+  
+  console.log('idMentor' + idMentor);
+  console.log('idgrupo' + idGrupo);
 
-  const MaisImagens = () => {
-    setMostrarImagens((prev) => !prev); // Alterna a visibilidade da div
+  
+  if (idMentor && idMentor !== "0") {
+    urlsNavegacao[7] = 'criar-grupo-mentoria';
+  } else if (idGrupo && idGrupo !== "0") {
+    urlsNavegacao[7] = `grupo-mentoria/${idGrupo}`;
+  } else {
+    urlsNavegacao[7] = 'visualizar-mentorias';
+  }
+  
+  // No momento de renderizar as imagens:
+  const handleNavigation = (index) => {
+    const selectedUrl = `/${urlsNavegacao[index]}`;
+  
+    // Condicional para tratar o `state` ao navegar
+    if (index === 7 && idGrupo && idGrupo !== "0") {
+      navigate(selectedUrl, { state: { status: 'mentor' } });
+    } else {
+      navigate(selectedUrl);
+    }
   };
 
   const isDesktop =  useMediaQuery('(min-width: 768px)')
@@ -104,32 +136,32 @@ const AbasGrupoMentoria = () => {
       ) : (
 
         <>
-        <C.DivImgs>
-        {imagens.map((item, index) => (
-          <C.ImgDiv
-            key={index}
-            onClick={() => ClickImg(index)}
-            style={{ backgroundColor: imgAtiva === index ? '#d9d9d9' : 'transparent' }}
-          >
-            <C.CampoIcone to={`/${urlsNavegacao[index]}`}>
-              <C.imgIcone src={item.src} alt={`Imagem ${index + 1}`} />
-            </C.CampoIcone>
-          </C.ImgDiv>
-        ))}
-        <C.DivImagensExtras mostrar={mostrarImagens}>
-          {imagensExtras.map((item, index) => (
-            <C.ImgDivExtras // Aplicando estilo na imagem extra também
-              key={index}
-              onClick={() => ClickImgExtra(index)}
-              style={{ backgroundColor: imgExtraAtiva === index ? '#d9d9d9' : 'transparent' }}
-            >
-              <C.CampoIcone to={`/${urlsNavegacao[index + 5]}`}>
-                <C.imgIcone src={item.src} alt={`Imagem Extra ${index + 1}`} />
-              </C.CampoIcone>
-            </C.ImgDivExtras>
-          ))}
-        </C.DivImagensExtras>
-      </C.DivImgs>
+<C.DivImgs>
+    {todasImagens.map((item, index) => (
+      <C.ImgDiv
+        key={index}
+        imgAtiva={imgAtiva}
+        index={index}
+        onClick={() => {
+          ClickImg(index); 
+          handleNavigation(index);
+        }}
+        style={{
+          backgroundColor: imgAtiva === index ? '#FFFCE6' : 'transparent',
+          border: imgAtiva === index ? 'solid 1px #fee101' : 'transparent',
+        }}
+      >
+        <C.CampoIcone>
+          <C.AreaImg>
+            <C.imgIcone src={item.src} alt={`Imagem ${index + 1}`} />
+          </C.AreaImg>
+          <C.AreaDescricao>
+            <C.DescricaoIcone>{item.label}</C.DescricaoIcone>
+          </C.AreaDescricao>
+        </C.CampoIcone>
+      </C.ImgDiv>
+    ))}
+  </C.DivImgs>
       <img src={mais} style={{ marginRight: '5vw' }} alt="Mais" onClick={MaisImagens} />
       </>
       )}

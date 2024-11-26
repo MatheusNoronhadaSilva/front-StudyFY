@@ -11,8 +11,7 @@ import { useLocation } from 'react-router-dom';
 const GrupoMentoria = () => {
   const location = useLocation();
   const { id } = useParams(); // Pega o id da URL
-  const queryParams = new URLSearchParams(location.search);
-  const status = queryParams.get('status') || 'default';
+  const { status } = location.state || {};
   const isDesktop = useMediaQuery('(min-width: 768px)');
 
   console.log(status);
