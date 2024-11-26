@@ -6,6 +6,9 @@ import ToggleButton from '../BotaoToggleConfiguracao';
 import { faGear } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import swal from 'sweetalert';
+import Swal from 'sweetalert2';
+
 
 const CampoPerfilConfiguracao = () => {
     const [aluno, setConfiguracoes] = useState(null); // Estado para armazenar as configurações
@@ -39,15 +42,14 @@ const CampoPerfilConfiguracao = () => {
             // Aqui você envia a requisição POST para o servidor
             const response = await axios.post(`http://localhost:8080/v1/studyFy/mentor`, {
                 idUsuario: idUsuario,
-            });
+            });            
 
-            console.log(response);
-            
+            console.log(response.data.mentorCriado);
 
             if (response.status = 201) {
-                alert('Você agora é um mentor!');
+                swal("Parabéns", "agora você será capaz de ajudar outros alunos com grupo de mentoria e ajuda personalizada", "success");
                 // Atualiza o estado do idMentor, caso seja necessário para renderizar a tela novamente
-                localStorage.setItem("id_mentor", "1"); // Atualizando o status para "mentor"
+                localStorage.setItem("id_mentor", `${response.data.mentorCriado}`); // Atualizando o status para "mentor"
                 setConfiguracoes({
                     ...aluno,
                     // Modifique conforme necessário
@@ -63,19 +65,41 @@ const CampoPerfilConfiguracao = () => {
 
     const deixarDeSerMentor = async () => {
         try {
-            // Envia a requisição DELETE para o servidor
-            const response = await axios.delete(`http://localhost:8080/v1/studyFy/mentor/${idMentor}`);
-            
-            if (response.status === 200) {
-                alert('Você não é mais um mentor.');
-                localStorage.setItem("id_mentor", "0"); // Atualiza o status para "não mentor"
-                setConfiguracoes({
-                    ...aluno,
-                    // Atualize outras informações, se necessário
-                });
-            } else {
-                alert('Não foi possível remover o status de mentor. Tente novamente.');
-            }
+
+            Swal.fire({
+                title: "Tem certeza?",
+                text: "Caso tenha um grupo de mentoria ela será deletada ao deixar de ser mentor",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Deletar mesmo assim"
+              }).then(async(result) => {
+                if (result.isConfirmed) {
+
+                    // Envia a requisição DELETE para o servidor
+                    const response = await axios.delete(`http://localhost:8080/v1/studyFy/mentor/${idMentor}`);
+
+                    if (response.status === 200) {
+                        Swal.fire({
+                            title: "Você deixou de ser mentor, tudo bem",
+                            text: "Que tal tentar de novo outra vez?",
+                            icon: "success"
+                          });
+                        localStorage.setItem("id_mentor", "0"); // Atualiza o status para "não mentor"
+                        setConfiguracoes({
+                            ...aluno,
+                            // Atualize outras informações, se necessário
+                        });
+                    } else {
+                        Swal.fire({
+                            title: "Erro ao deixar de ser mentor",
+                            text: "Tente novamente mais tarde, se o erro persistir, contate nossa equipe",
+                            icon: "error"
+                          });
+                    }
+                }
+              });
         } catch (error) {
             console.error('Erro ao deixar de ser mentor:', error);
             alert('Ocorreu um erro. Tente novamente mais tarde.');

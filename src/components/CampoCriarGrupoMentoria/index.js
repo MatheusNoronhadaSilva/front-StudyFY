@@ -6,6 +6,7 @@ import * as C from "./style"; // Importa os styled-components com alias "C"
 const CriarGrupo = () => {
   const [materias, setMaterias] = useState([]);
   const [imagens, setImagens] = useState([]);
+  const [series, setSeries] = useState([]);
   const [imagemSelecionada, setImagemSelecionada] = useState(null);
   const [menuSuspenso, setMenuSuspenso] = useState(false);
   const [capacidade, setCapacidade] = useState("");
@@ -39,6 +40,19 @@ const CriarGrupo = () => {
       }
     };
 
+    const fetchSeries = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/v1/studyfy/series");
+        if (response.status === 200) {
+          console.log(response.data.series);
+          setSeries(response.data.series);
+        }
+      } catch (error) {
+        console.error("Erro ao buscar series:", error);
+      }
+    };
+
+    fetchSeries()
     fetchMaterias();
     fetchImagens();
   }, []);
@@ -80,7 +94,7 @@ const CriarGrupo = () => {
   return (
     <C.CampoCriar>
       <C.Title>Crie um grupo de mentoria e ajude outros alunos</C.Title>
-      
+
       {/* Campo de escolher imagem com menu suspenso */}
       <C.Avatar onClick={toggleMenuSuspenso}>
         {imagemSelecionada ? (
@@ -124,26 +138,47 @@ const CriarGrupo = () => {
             Série-min
             <C.Select
               value={serieMin}
-              onChange={(e) => setSerieMin(e.target.value)}
+              onChange={(e) => {
+                const valor = parseInt(e.target.value, 10);
+                setSerieMin(valor);
+
+                // Ajusta a série máxima automaticamente, se necessário
+                if (valor > serieMax) {
+                  setSerieMax(valor);
+                }
+              }}
             >
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              {/* Adicione mais opções conforme necessário */}
+              <option value="">Selecione</option>
+              {series.map((serie) => (
+                <option key={serie.id} value={serie.id}>
+                  {serie.nome}
+                </option>
+              ))}
             </C.Select>
           </C.Label>
           <C.Label>
             Série-max
             <C.Select
               value={serieMax}
-              onChange={(e) => setSerieMax(e.target.value)}
+              onChange={(e) => {
+                const valor = parseInt(e.target.value, 10);
+                setSerieMax(valor);
+
+                // Garante que a série mínima não seja maior que a máxima
+                if (valor < serieMin) {
+                  setSerieMin(valor);
+                }
+              }}
             >
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              {/* Adicione mais opções conforme necessário */}
+              <option value="">Selecione</option>
+              {series.map((serie) => (
+                <option key={serie.id} value={serie.id}>
+                  {serie.nome}
+                </option>
+              ))}
             </C.Select>
           </C.Label>
+
           <C.Label>
             Matéria
             <C.Select

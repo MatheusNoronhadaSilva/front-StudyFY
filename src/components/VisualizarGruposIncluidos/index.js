@@ -6,12 +6,15 @@ import { faClose } from '@fortawesome/free-solid-svg-icons';
 import fotoGrupo from '../../assets/Ellipse (1).png';
 import matematica from '../../assets/Matematica.png';
 import { useNavigate } from 'react-router-dom'; // Importando o hook useNavigate
+import swal from 'sweetalert';
+
 
 const VisualizarGruposIncluidos = () => {
     const [isVisualizando, setIsVisualizando] = useState(false);
     const [showBorder, setShowBorder] = useState(false);
     const [grupos, setGrupos] = useState([]); // Estado para armazenar os dados dos grupos
     const navigate = useNavigate(); // Inicializando o hook navigate
+    const idMentor = localStorage.getItem("id_mentor");
 
     const handleVerGruposClick = async () => {
         setIsVisualizando(true);
@@ -40,7 +43,14 @@ const VisualizarGruposIncluidos = () => {
     };
 
     const telaCriarGrupo = () => {
-        navigate('/criar-grupo-mentoria')
+
+        console.log('oiioi' + idMentor);
+
+        if(idMentor == 0){
+            swal("Você precisa ser um mentor para isso!", "Vá para as configurações do seu perfil e se torne um", "error");
+        } else {
+            navigate('/criar-grupo-mentoria')
+        }
     }
 
     // Função para redirecionar para a página de detalhes do grupo
