@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as C from './style';
 import Enunciado from "../../styles/enunciadoQuestao";
-import CampoQuestao from "../CampoQuestoes";
+import CampoQuestao from "../../styles/campoQuestao";
 import styled from "styled-components";
 
 export const CampoAlternativas = styled.div`

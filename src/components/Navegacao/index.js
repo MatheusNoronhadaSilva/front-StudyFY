@@ -13,7 +13,6 @@ import mentoria from '../../assets/mentoria.png';
 import usuario from '../../assets/user.png'
 import { useMediaQuery } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { logDOM } from '@testing-library/react';
 
 const AbasGrupoMentoria = () => {
   const [imgAtiva, setImgAtiva] = useState(null); // Índice ativo para as imagens principais
@@ -81,17 +80,20 @@ const AbasGrupoMentoria = () => {
   console.log('idMentor' + idMentor);
   console.log('idgrupo' + idGrupo);
 
-  
-  if (idMentor && idMentor !== "0") {
+  if (idMentor && idMentor !== "0" && idGrupo === "0") {
     urlsNavegacao[7] = 'criar-grupo-mentoria';
+    console.log('criar');  
   } else if (idGrupo && idGrupo !== "0") {
     urlsNavegacao[7] = `grupo-mentoria/${idGrupo}`;
+    console.log('grupoMentor');  
   } else {
     urlsNavegacao[7] = 'visualizar-mentorias';
-  }
+    console.log('visualizar');
+  }  
   
   // No momento de renderizar as imagens:
   const handleNavigation = (index) => {
+
     const selectedUrl = `/${urlsNavegacao[index]}`;
   
     // Condicional para tratar o `state` ao navegar

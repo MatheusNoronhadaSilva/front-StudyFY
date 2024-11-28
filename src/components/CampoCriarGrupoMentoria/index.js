@@ -18,7 +18,7 @@ const CriarGrupo = () => {
   const [materia, setMateria] = useState(""); // Matéria selecionada
   const [serieMin, setSerieMin] = useState(1); // Série-min
   const [serieMax, setSerieMax] = useState(3); // Série-max
-  const [mentorId, setMentorId] = useState(1); // ID do mentor (exemplo de valor fixo, pois é obrigatório)
+  const mentorId = parseInt(localStorage.getItem("id_mentor"));
   const navigate = useNavigate()
 
   useEffect(() => {

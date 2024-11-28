@@ -61,7 +61,7 @@ const InfoGrupoMentoria = ({ id, status }) => {
 
         if (response.status === 201) {
           console.log('Aluno entrou no grupo com sucesso');
-          navigate(`/grupo-mentoria/${id}?status=membro`)
+          navigate(`/grupo-mentoria/${id}`, { state: { status: 'membro' } });
           window.location.reload();
         } else {
           console.log('aaaaaaaaa');

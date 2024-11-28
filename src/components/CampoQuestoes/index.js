@@ -51,31 +51,15 @@ const CampoQuestao = ({ dadosQuestoes }) => {
           </C.Contagem>
         </C.HeaderQuestao>
         <C.Questao>
-          {/* {questao.questao_tipo_id === 1 && (
-            <CampoQuestao>
-            <Enunciado>{questao.questao_pergunta}</Enunciado>
-            <C.CampoAlternativas>
-              {questao.respostas.map((resposta) => (
-                <C.ItemColuna
-                  key={resposta.id}
-                  isSelected={respostaSelecionadaMultiplaEscolha === resposta.id.toString()} // Passa se o item está selecionado
-                  onClick={() => setRespostaSelecionada(resposta.id.toString())} // Atualiza a resposta selecionada
-                >
-                  <C.CampoTexto>{resposta.conteudo}</C.CampoTexto>
-                </C.ItemColuna>
-              ))}
-            </C.CampoAlternativas>
-            <C.BotaoResposta
-              onClick={() => {
-                validarRespostaMultiplaEscolha();
-                avancarQuestao();
-              }}
-            >
-              Responder
-            </C.BotaoResposta>
-          </CampoQuestao>
-          )} */}
-          {/* {questao.questao_tipo_id === 2 && (
+          {questao.questao_tipo_id === 1 && (
+            <QuestaoMultiplaEscolha
+              questao={questao}
+              setQuestoesAcertadas={setQuestoesAcertadas}
+              setQuestoesErradas={setQuestoesErradas}
+              avancarQuestao={avancarQuestao}
+            />
+          )}
+          {questao.questao_tipo_id === 2 && (
             <QuestaoVerdadeiroFalso
               questao={questao}
               setQuestoesAcertadas={setQuestoesAcertadas}
@@ -90,7 +74,7 @@ const CampoQuestao = ({ dadosQuestoes }) => {
               setQuestoesErradas={setQuestoesErradas}
               avancarQuestao={avancarQuestao}
             />
-          )} */}
+          )}
         </C.Questao>
       </C.CampoQuestoesDiv>
     </TelaCheia>

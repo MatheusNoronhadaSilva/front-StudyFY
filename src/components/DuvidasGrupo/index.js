@@ -5,11 +5,12 @@ import questionIconClicked from '../../assets/question (1) 1.png';
 
 const AbaDuvidas = () => {
   const [duvidas, setDuvidas] = useState([]);
-  const [clickedStates, setClickedStates] = useState({}); // Estado para armazenar os cliques de cada dúvida
+  const [showResposta, setShowResposta] = useState({}); // Estado para exibir a resposta de cada dúvida
   const [showForm, setShowForm] = useState(false);
   const [newDuvida, setNewDuvida] = useState({
     conteudo_duvida: '',
   });
+  const [clickedIcons, setClickedIcons] = useState({}); // Estado para controlar quais ícones foram clicados
 
   const fetchDuvidas = async () => {
     try {
@@ -21,6 +22,20 @@ const AbaDuvidas = () => {
     }
   };
 
+  const fetchResposta = async (duvidaId) => {
+    try {
+      const response = await fetch(`http://localhost:8080/v1/studyFy/respostas/${duvidaId}`);
+      const data = await response.json();
+      if (data.resposta) {
+        return data.resposta.conteudo;
+      }
+      return 'Nenhuma resposta disponível.';
+    } catch (error) {
+      console.error('Erro ao buscar a resposta:', error);
+      return 'Erro ao carregar a resposta.';
+    }
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewDuvida((prev) => ({ ...prev, [name]: value }));
@@ -29,36 +44,57 @@ const AbaDuvidas = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      const today = new Date().toISOString().split('T')[0]; // Data de hoje no formato YYYY-MM-DD
+      const today = new Date().toISOString().split('T')[0];
       const response = await fetch('http://localhost:8080/v1/studyfy/duvidaCompartilhada', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          conteudo_duvida: newDuvida.conteudo_duvida,
+          conteudo: newDuvida.conteudo_duvida,
           data_envio: today,
-          membro_id: 1,
+          membro_id: 1, // Ajuste o ID conforme necessário
         }),
       });
 
       if (response.ok) {
-        const createdDuvida = await response.json();
-        setDuvidas((prev) => [...prev, createdDuvida]);
+        console.log('Dúvida criada com sucesso!');
+        await fetchDuvidas(); // Recarrega a lista de dúvidas
         setNewDuvida({ conteudo_duvida: '' });
         setShowForm(false);
-        console.log('Dúvida criada com sucesso!');
       } else {
-        console.error('Erro ao criar dúvida');
+        const errorResponse = await response.json();
+        console.error('Erro ao criar dúvida:', errorResponse);
       }
     } catch (error) {
       console.error('Erro na requisição:', error);
     }
   };
 
+  const handleCancelClick = () => {
+    setShowForm(false);
+  };
+
+  const toggleResposta = async (id_duvida) => {
+    // Verifica se a resposta já foi carregada
+    if (!showResposta[id_duvida]) {
+      const resposta = await fetchResposta(id_duvida); // Busca a resposta da dúvida
+      setShowResposta((prev) => ({
+        ...prev,
+        [id_duvida]: resposta, // Armazena a resposta no estado
+      }));
+    } else {
+      setShowResposta((prev) => ({
+        ...prev,
+        [id_duvida]: null, // Remove a resposta do estado
+      }));
+    }
+  };
+
   const handleIconClick = (id_duvida) => {
-    setClickedStates((prev) => ({
-      ...prev,
-      [id_duvida]: !prev[id_duvida], // Alterna o estado do ícone da dúvida clicada
-    }));
+    setClickedIcons((prev) => {
+      const newClickedIcons = { ...prev };
+      newClickedIcons[id_duvida] = newClickedIcons[id_duvida] ? 0 : 1; // Alterna entre 0 e 1 para marcar/desmarcar
+      return newClickedIcons;
+    });
   };
 
   useEffect(() => {
@@ -89,10 +125,10 @@ const AbaDuvidas = () => {
         {duvidas.map((duvida) => (
           <div key={duvida.id_duvida} style={{
             display: 'flex',
-            alignItems: 'center',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
             width: '100%',
-            minHeight: '17%',
-            borderRadius: '2px',
+            borderRadius: '8px',
             padding: '10px',
             backgroundColor: 'white',
             boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
@@ -100,96 +136,121 @@ const AbaDuvidas = () => {
             position: 'relative',
           }}>
             <div style={{
-              position: 'absolute',
-              left: '0',
-              top: '0',
-              bottom: '0',
-              width: '5px',
-              backgroundColor: duvida.respondida === 1 ? 'yellow' : 'gray',
-              borderTopLeftRadius: '2px',
-              borderBottomLeftRadius: '2px',
-            }}></div>
-            <img 
-              src={ftPerfil} 
-              alt="Foto de perfil" 
-              style={{
-                width: '50px',
-                height: '50px',
-                borderRadius: '50%',
-                marginRight: '10px',
-                marginLeft: '10px',
-              }} 
-            />
-            <div style={{ flex: 1 }}>
-              <div style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}>
-                <span style={{
-                  fontWeight: 'bold',
-                  fontSize: '1rem',
-                }}>{duvida.nome_aluno || 'Aluno Anônimo'}</span>
-                <span style={{
-                  fontSize: '0.8rem',
-                  color: '#666',
-                }}>{duvida.data_envio}</span>
-              </div>
-              <p style={{
-                fontSize: '0.9rem',
-                color: '#333',
-                marginTop: '5px',
-              }}>
-                {duvida.conteudo_duvida || 'Sem conteúdo'}
-              </p>
-            </div>
-            <div style={{
               display: 'flex',
               alignItems: 'center',
-              marginLeft: '10px',
+              width: '100%',
             }}>
-              <button 
-                onClick={() => handleIconClick(duvida.id_duvida)}
+              <img 
+                src={ftPerfil} 
+                alt="Foto de perfil" 
                 style={{
-                  backgroundColor: 'transparent',
-                  border: 'none',
-                  cursor: 'pointer',
+                  width: '50px',
+                  height: '50px',
+                  borderRadius: '50%',
+                  marginRight: '10px',
+                  marginLeft: '10px',
+                }} 
+              />
+              <div style={{ flex: 1 }}>
+                <div style={{
                   display: 'flex',
-                  flexDirection: 'column',
+                  justifyContent: 'space-between',
                   alignItems: 'center',
-                }}
-              >
-                <img 
-                  src={clickedStates[duvida.id_duvida] ? questionIconClicked : questionIcon} 
-                  alt="Resposta" 
-                  style={{
-                    width: '25px',
-                    height: '25px',
-                    marginBottom: '2px'
-                  }} 
-                />
-                {clickedStates[duvida.id_duvida] && (
+                }}>
+                  <span style={{
+                    fontWeight: 'bold',
+                    fontSize: '1rem',
+                  }}>{duvida.nome_aluno || 'Aluno Anônimo'}</span>
                   <span style={{
                     fontSize: '0.8rem',
                     color: '#666',
-                    fontWeight: 'bold',
-                  }}>1</span>
-                )}
-              </button>
+                    marginBottom: '20px'
+                  }}>{duvida.data_envio}</span>
+                </div>
+                <p style={{
+                  fontSize: '0.9rem',
+                  color: '#333',
+                  marginTop: '5px',
+                }}>
+                  {duvida.conteudo_duvida || 'Sem conteúdo'}
+                </p>
+              </div>
             </div>
+
+            {/* Ícone de Pergunta e Contador à direita */}
+            <div style={{ 
+              position: 'absolute',
+              top: '10px',
+              right: '10px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+              <img 
+                src={clickedIcons[duvida.id_duvida] ? questionIconClicked : questionIcon}
+                alt="Ícone de Pergunta"
+                onClick={() => handleIconClick(duvida.id_duvida)}
+                style={{
+                  width: '20px', // Tamanho reduzido
+                  height: '20px', // Tamanho reduzido
+                  cursor: 'pointer',
+                  marginRight: '5px',
+                  marginTop: '35px' // Espaçamento à direita
+                }}
+              />
+              <span style={{
+                fontSize: '1.0rem',
+                color: '#666',
+                marginTop: '80px'
+              }}>
+                {clickedIcons[duvida.id_duvida] ? 1 : 0} {/* Exibe 1 se clicado, 0 se não */}
+              </span>
+            </div>
+
+            <button 
+              style={{
+                marginTop: '10px',
+                backgroundColor: '#FEE101',
+                color: 'black',
+                border: 'none',
+                padding: '4px 8px',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                fontSize: '0.9rem',
+                boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
+              }}
+              onClick={() => toggleResposta(duvida.id_duvida)}
+            >
+              Ver Resposta
+            </button>
+
+            {showResposta[duvida.id_duvida] && (
+              <div style={{
+                marginTop: '10px',
+                padding: '10px',
+                borderRadius: '4px',
+                backgroundColor: '#f1f1f1',
+                color: '#333',
+                boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
+              }}>
+                <strong>Resposta:</strong>
+                <p>{showResposta[duvida.id_duvida]}</p>
+              </div>
+            )}
           </div>
         ))}
       </div>
 
+      {/* Botão flutuante para adicionar uma nova dúvida */}
       <button 
         style={{
           position: 'fixed',
-          bottom: '20px',
-          right: '20px',
-          width: '60px',
-          height: '60px',
+          top: '82%',
+          right: '32%',
+          width: '50px',
+          height: '50px',
           borderRadius: '50%',
-          backgroundColor: 'yellow',
+          backgroundColor: '#FEE101', // Mostarda
           border: 'none',
           boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.3)',
           cursor: 'pointer',
@@ -207,46 +268,71 @@ const AbaDuvidas = () => {
       {showForm && (
         <div style={{
           position: 'fixed',
-          top: '50%',
-          left: '50%',
+          top: '68%',
+          left: '76%',
           transform: 'translate(-50%, -50%)',
           backgroundColor: 'white',
           padding: '20px',
           borderRadius: '8px',
-          boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.2)',
+          boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)', // Aumentado para maior destaque
           zIndex: 1000,
+          width: '400px',
+          maxHeight: 'auto',
+          border: '2px solid #FEE101',
         }}>
-          <h3>Nova Dúvida</h3>
+          <h3 style={{ color: '#333' }}>Adicionar nova dúvida</h3>
           <form onSubmit={handleFormSubmit}>
-            <div style={{ marginBottom: '10px' }}>
-              <label>Conteúdo:</label>
-              <textarea
-                name="conteudo_duvida"
-                value={newDuvida.conteudo_duvida}
-                onChange={handleInputChange}
-                style={{
-                  width: '100%',
-                  height: '80px',
-                  marginTop: '5px',
-                  padding: '10px',
-                  border: '1px solid #ccc',
-                  borderRadius: '4px',
-                }}
-                required
-              />
-            </div>
-            <button type="submit" style={{
-              width: '100%',
-              padding: '10px',
-              backgroundColor: 'yellow',
-              color: 'black',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer',
-              fontWeight: 'bold',
+            <textarea 
+              name="conteudo_duvida" 
+              value={newDuvida.conteudo_duvida} 
+              onChange={handleInputChange} 
+              placeholder="Digite sua dúvida..."
+              rows="4"
+              style={{
+                width: '100%',
+                padding: '10px',
+                fontSize: '0.9rem',
+                borderRadius: '8px',
+                border: '1px solid #ddd',
+                marginBottom: '10px',
+                resize: 'none',
+                boxSizing: 'border-box',
+              }}
+            />
+            <div style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
             }}>
-              Enviar
-            </button>
+              <button 
+                type="submit"
+                style={{
+                  backgroundColor: '#FEE101', 
+                  border: 'none',
+                  padding: '6px 12px',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  fontSize: '0.9rem',
+                }}
+              >
+                Enviar
+              </button>
+              <button 
+                type="button" 
+                onClick={handleCancelClick} 
+                style={{
+                  backgroundColor: 'red',
+                  border: 'none',
+                  padding: '6px 12px',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  fontSize: '0.9rem',
+                  color: 'white'
+                }}
+              >
+                Cancelar
+              </button>
+            </div>
           </form>
         </div>
       )}

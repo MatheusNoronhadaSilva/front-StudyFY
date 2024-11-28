@@ -14,7 +14,7 @@ const GrupoMentoria = () => {
   const { status } = location.state || {};
   const isDesktop = useMediaQuery('(min-width: 768px)');
 
-  console.log(status);
+  console.log('status: ' + status);
   
 
   return (

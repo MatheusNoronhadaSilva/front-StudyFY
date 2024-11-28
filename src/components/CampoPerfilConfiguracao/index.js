@@ -69,8 +69,7 @@ const CampoPerfilConfiguracao = () => {
                             });
                         }
                     }
-
-                    // Tornar o aluno mentor
+                    
                     const response = await axios.post(`http://localhost:8080/v1/studyFy/mentor`, {
                         idUsuario: idUsuario,
                     });
@@ -121,7 +120,8 @@ const CampoPerfilConfiguracao = () => {
                             text: "Que tal tentar de novo outra vez?",
                             icon: "success"
                         });
-                        localStorage.setItem("id_mentor", "0"); // Atualiza o status para "não mentor"
+                        localStorage.setItem("id_mentor", "0");
+                        localStorage.setItem("id_grupo", "0");
                         setConfiguracoes({
                             ...aluno,
                             // Atualize outras informações, se necessário

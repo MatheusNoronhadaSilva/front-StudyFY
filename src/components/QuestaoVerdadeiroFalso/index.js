@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Enunciado from "../../styles/enunciadoQuestao";
-import CampoQuestao from "../CampoQuestoes";
+import CampoQuestao from "../../styles/campoQuestao";
 
 const ItemColuna = styled.div`
   padding: 10px;
