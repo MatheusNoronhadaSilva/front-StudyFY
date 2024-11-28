@@ -53,11 +53,11 @@ const QuestaoMultiplaEscolha = ({ questao, setQuestoesAcertadas, setQuestoesErra
 
     console.log('multipla' + questao);
     
-  const [respostaSelecionada, setRespostaSelecionada] = useState("");
+  const [respostaSelecionadaMultiplaEscolha, setRespostaSelecionada] = useState("");
 
-  const validarResposta = () => {
+  const validarRespostaMultiplaEscolha = () => {
     const respostaCorreta = questao.respostas.find((resposta) => resposta.autenticacao === 1);
-    if (respostaSelecionada === respostaCorreta?.id.toString()) {
+    if (respostaSelecionadaMultiplaEscolha === respostaCorreta?.id.toString()) {
       setQuestoesAcertadas((prev) => prev + 1);
       alert("Resposta correta!");
     } else {
@@ -73,7 +73,7 @@ const QuestaoMultiplaEscolha = ({ questao, setQuestoesAcertadas, setQuestoesErra
         {questao.respostas.map((resposta) => (
           <C.ItemColuna
             key={resposta.id}
-            isSelected={respostaSelecionada === resposta.id.toString()} // Passa se o item está selecionado
+            isSelected={respostaSelecionadaMultiplaEscolha === resposta.id.toString()} // Passa se o item está selecionado
             onClick={() => setRespostaSelecionada(resposta.id.toString())} // Atualiza a resposta selecionada
           >
             <C.CampoTexto>{resposta.conteudo}</C.CampoTexto>
@@ -82,7 +82,7 @@ const QuestaoMultiplaEscolha = ({ questao, setQuestoesAcertadas, setQuestoesErra
       </C.CampoAlternativas>
       <C.BotaoResposta
         onClick={() => {
-          validarResposta();
+          validarRespostaMultiplaEscolha();
           avancarQuestao();
         }}
       >

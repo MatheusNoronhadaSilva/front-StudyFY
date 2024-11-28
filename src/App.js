@@ -6,7 +6,7 @@ import Login from './pages/Login';
 import GrupoMentoria from './pages/GrupoMentoria';
 import ChatIA from './pages/chatIA'
 import ChatPrivado from './pages/ChatPrivado'
-import Atividades from './pages/Questoes';
+import Questoes from './pages/Questoes';
 import Ajuda from './pages/Ajuda';
 import CadernoVirtual from './pages/CadernoVirtual';
 import Notificacao from './pages/Notificacao';
@@ -48,7 +48,7 @@ function App() {
           <Route exact path ='/visualizar-mentorias' element = {<VisualizacaoMentorias/>}/>
           <Route exact path ='/grupo-mentoria-previa/:id' element = {<GrupoMentoriaPrevia/>}/>
           <Route path='/perfil' element={<Perfil/>}></Route>
-          <Route path='/atividades/:id' element= {<Atividades/>} />
+          <Route path='/questoes/:id' element= {<Questoes/>} />
           <Route path='/caderno-virtual' element= {<CadernoVirtual/>} />
           <Route path='/rank' element= {<Rank/>} />
           <Route path='/ajuda' element= {<Ajuda/>} />

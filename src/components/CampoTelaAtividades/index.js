@@ -18,7 +18,7 @@ const CampoTelaAtividade = () => {
 
     const TelaQuestoes = (atividadeId) => {
         
-        navigate(`/atividades/${atividadeId}`);
+        navigate(`/questoes/${atividadeId}`);
     };
     
 
@@ -129,6 +129,8 @@ const CampoTelaAtividade = () => {
     }, [apiData]);
 
     const handleActivityClick = (activity, topicIndex, subTopicIndex) => {
+        console.log(activity);
+        
         if (selectedActivity &&
             selectedActivity.activity === activity &&
             selectedActivity.topicIndex === topicIndex &&

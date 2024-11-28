@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import QuestaoMultiplaEscolha from "../QuestaoMultiplaEscolha";
 import QuestaoVerdadeiroFalso from "../QuestaoVerdadeiroFalso";
 import QuestaoCorrespondencia from "../QuestaoCorrespondencia";
+import Enunciado from "../../styles/enunciadoQuestao";
 import * as C from './style';
 import TelaCheia from "../../styles/telaCheia";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
@@ -13,12 +14,10 @@ const CampoQuestao = ({ dadosQuestoes }) => {
   const [questaoAtual, setQuestaoAtual] = useState(0);
   const [questoesErradas, setQuestoesErradas] = useState(0);
   const [questoesAcertadas, setQuestoesAcertadas] = useState(0);
+  const [respostaSelecionadaMultiplaEscolha, setRespostaSelecionada] = useState("");
   const navigate = useNavigate();
 
-  const questao = dadosQuestoes[questaoAtual];
-
-  console.log('teste' + questao);
-  
+  const questao = dadosQuestoes[questaoAtual];  
 
   const avancarQuestao = () => {
     if (questaoAtual < dadosQuestoes.length - 1) {
@@ -28,7 +27,16 @@ const CampoQuestao = ({ dadosQuestoes }) => {
     }
   };
 
-  console.log('teste2' + questao);
+  const validarRespostaMultiplaEscolha = () => {
+    const respostaCorreta = questao.respostas.find((resposta) => resposta.autenticacao === 1);
+    if (respostaSelecionadaMultiplaEscolha === respostaCorreta?.id.toString()) {
+      setQuestoesAcertadas((prev) => prev + 1);
+      alert("Resposta correta!");
+    } else {
+      setQuestoesErradas((prev) => prev + 1);
+      alert("Resposta incorreta.");
+    }
+  };
   
   return (
     <TelaCheia style={{ alignItems: 'center', flexDirection: 'column' }}>
@@ -39,19 +47,35 @@ const CampoQuestao = ({ dadosQuestoes }) => {
             <C.IconeFechar icon={faClose} />
           </C.Fechar>
           <C.Contagem>
-            {questaoAtual + 1}/{dadosQuestoes.length} {/* Progresso Atual */}
+            {questaoAtual + 1}/{dadosQuestoes.length}
           </C.Contagem>
         </C.HeaderQuestao>
         <C.Questao>
-          {questao.questao_tipo_id === 1 && (
-            <QuestaoMultiplaEscolha
-              questao={questao}
-              setQuestoesAcertadas={setQuestoesAcertadas}
-              setQuestoesErradas={setQuestoesErradas}
-              avancarQuestao={avancarQuestao}
-            />
-          )}
-          {questao.questao_tipo_id === 2 && (
+          {/* {questao.questao_tipo_id === 1 && (
+            <CampoQuestao>
+            <Enunciado>{questao.questao_pergunta}</Enunciado>
+            <C.CampoAlternativas>
+              {questao.respostas.map((resposta) => (
+                <C.ItemColuna
+                  key={resposta.id}
+                  isSelected={respostaSelecionadaMultiplaEscolha === resposta.id.toString()} // Passa se o item está selecionado
+                  onClick={() => setRespostaSelecionada(resposta.id.toString())} // Atualiza a resposta selecionada
+                >
+                  <C.CampoTexto>{resposta.conteudo}</C.CampoTexto>
+                </C.ItemColuna>
+              ))}
+            </C.CampoAlternativas>
+            <C.BotaoResposta
+              onClick={() => {
+                validarRespostaMultiplaEscolha();
+                avancarQuestao();
+              }}
+            >
+              Responder
+            </C.BotaoResposta>
+          </CampoQuestao>
+          )} */}
+          {/* {questao.questao_tipo_id === 2 && (
             <QuestaoVerdadeiroFalso
               questao={questao}
               setQuestoesAcertadas={setQuestoesAcertadas}
@@ -66,7 +90,7 @@ const CampoQuestao = ({ dadosQuestoes }) => {
               setQuestoesErradas={setQuestoesErradas}
               avancarQuestao={avancarQuestao}
             />
-          )}
+          )} */}
         </C.Questao>
       </C.CampoQuestoesDiv>
     </TelaCheia>
