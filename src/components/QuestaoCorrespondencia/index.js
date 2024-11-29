@@ -1,41 +1,7 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import Enunciado from "../../styles/enunciadoQuestao";
 import CampoQuestao from "../../styles/campoQuestao";
-
-const Colunas = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  align-items: center;
-`;
-
-const ItemColuna = styled.div`
-  padding: 10px;
-  border: 2px solid #d9d9d9;
-  border-radius: 8px;
-  text-align: center;
-  cursor: pointer;
-  background-color: white;
-
-  &:hover {
-    border-color: #E9CE03;
-    box-shadow: 0 0 8px #E9CE03;
-  }
-`;
-
-const CampoTexto = styled.select`
-  border: 2px solid #d9d9d9;
-  border-radius: 5px;
-  padding: 5px;
-  width: 100%;
-  text-align: center;
-
-  &:focus {
-    border-color: #E9CE03;
-    outline: none;
-  }
-`;
+import * as C from './style'
 
 const QuestaoCorrespondencia = ({ questao, setQuestoesAcertadas, setQuestoesErradas, avancarQuestao }) => {
   const [correspondencias, setCorrespondencias] = useState({});
@@ -65,34 +31,34 @@ const QuestaoCorrespondencia = ({ questao, setQuestoesAcertadas, setQuestoesErra
   return (
     <CampoQuestao>
       <Enunciado>{questao.questao_pergunta}</Enunciado>
-      <Colunas>
-        <div>
+      <C.ColunasDiv>
+        <C.Coluna>
           {questao.respostas.map((resposta) => (
-            <ItemColuna key={resposta.id}>
+            <C.ItemColuna key={resposta.id}>
               {resposta.palavra_correspondente}
-            </ItemColuna>
+            </C.ItemColuna>
           ))}
-        </div>
-        <div>
+        </C.Coluna>
+        <C.Coluna>
           {questao.respostas.map((resposta) => (
-            <ItemColuna key={resposta.id}>
-              <CampoTexto
+            <C.ItemColuna key={resposta.id}>
+              <C.CampoTexto
                 onChange={(e) =>
                   handleCorrespondencia(resposta.palavra_correspondente, e.target.value)
                 }
               >
-                <option value="">Selecione...</option>
+                <C.Opcao value="">Selecione...</C.Opcao>
                 {questao.respostas.map((opcao) => (
-                  <option key={opcao.id} value={opcao.resposta_correspondente}>
+                  <C.Opcao key={opcao.id} value={opcao.resposta_correspondente}>
                     {opcao.resposta_correspondente}
-                  </option>
+                  </C.Opcao>
                 ))}
-              </CampoTexto>
-            </ItemColuna>
+              </C.CampoTexto>
+            </C.ItemColuna>
           ))}
-        </div>
-      </Colunas>
-      <button onClick={() => { validarResposta(); avancarQuestao(); }}>Responder</button>
+        </C.Coluna>
+      </C.ColunasDiv>
+      <C.BotaoResposta onClick={() => { validarResposta(); avancarQuestao(); }}>Responder</C.BotaoResposta>
     </CampoQuestao>
   );
 };

@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import QuestaoMultiplaEscolha from "../QuestaoMultiplaEscolha";
 import QuestaoVerdadeiroFalso from "../QuestaoVerdadeiroFalso";
 import QuestaoCorrespondencia from "../QuestaoCorrespondencia";
-import Enunciado from "../../styles/enunciadoQuestao";
+import QuestaoMultiplaEscolha from "../QuestaoMultiplaEscolha";
 import * as C from './style';
 import TelaCheia from "../../styles/telaCheia";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
@@ -23,18 +22,7 @@ const CampoQuestao = ({ dadosQuestoes }) => {
     if (questaoAtual < dadosQuestoes.length - 1) {
       setQuestaoAtual(questaoAtual + 1);
     } else {
-      alert("Você completou todas as questões!");
-    }
-  };
-
-  const validarRespostaMultiplaEscolha = () => {
-    const respostaCorreta = questao.respostas.find((resposta) => resposta.autenticacao === 1);
-    if (respostaSelecionadaMultiplaEscolha === respostaCorreta?.id.toString()) {
-      setQuestoesAcertadas((prev) => prev + 1);
-      alert("Resposta correta!");
-    } else {
-      setQuestoesErradas((prev) => prev + 1);
-      alert("Resposta incorreta.");
+      navigate('/resultado-questoes')
     }
   };
   

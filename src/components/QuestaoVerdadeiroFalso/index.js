@@ -1,27 +1,18 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import Enunciado from "../../styles/enunciadoQuestao";
 import CampoQuestao from "../../styles/campoQuestao";
+import * as C from './style'
 
-const ItemColuna = styled.div`
-  padding: 10px;
-  border: 2px solid #d9d9d9;
-  border-radius: 8px;
-  text-align: center;
-  cursor: pointer;
-  background-color: white;
-
-  &:hover {
-    border-color: #E9CE03;
-    box-shadow: 0 0 8px #E9CE03;
-  }
-`;
 
 const QuestaoVerdadeiroFalso = ({ questao, setQuestoesAcertadas, setQuestoesErradas, avancarQuestao }) => {
   const [respostaSelecionada, setRespostaSelecionada] = useState("");
 
   const validarResposta = () => {
-    if (respostaSelecionada === questao.resposta_correta) {
+    const respostaCorreta = questao.respostas.find((resposta) => resposta.autenticacao === 1);
+    console.log(respostaCorreta);
+    console.log(respostaSelecionada);
+    
+    if (respostaSelecionada === respostaCorreta?.id.toString()) {
       setQuestoesAcertadas((prev) => prev + 1);
       alert("Resposta correta!");
     } else {
@@ -33,25 +24,18 @@ const QuestaoVerdadeiroFalso = ({ questao, setQuestoesAcertadas, setQuestoesErra
   return (
     <CampoQuestao>
       <Enunciado>{questao.questao_pergunta}</Enunciado>
-      <ItemColuna>
-        <input
-          type="radio"
-          name="resposta"
-          value="Verdadeiro"
-          onChange={(e) => setRespostaSelecionada(e.target.value)}
-        />
-        <label>Verdadeiro</label>
-      </ItemColuna>
-      <ItemColuna>
-        <input
-          type="radio"
-          name="resposta"
-          value="Falso"
-          onChange={(e) => setRespostaSelecionada(e.target.value)}
-        />
-        <label>Falso</label>
-      </ItemColuna>
-      <button onClick={() => { validarResposta(); avancarQuestao(); }}>Responder</button>
+      <C.CampoAlternativas>
+      {questao.respostas.map((resposta) => (
+          <C.ItemColuna
+            key={resposta.id}
+            isSelected={respostaSelecionada === resposta.id.toString()} // Passa se o item está selecionado
+            onClick={() => setRespostaSelecionada(resposta.id.toString())} // Atualiza a resposta selecionada
+          >
+            <C.CampoTexto>{resposta.conteudo}</C.CampoTexto>
+          </C.ItemColuna>
+        ))}
+      </C.CampoAlternativas>
+      <C.BotaoResposta onClick={() => { validarResposta(); avancarQuestao(); }}>Responder</C.BotaoResposta>
     </CampoQuestao>
   );
 };

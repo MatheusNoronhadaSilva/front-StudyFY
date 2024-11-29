@@ -6,6 +6,7 @@ export const CampoQuestao = styled.div`
    gap: 15%;
    display: flex;
    flex-direction: column;
+   align-items: center;
 `
 
 export default CampoQuestao

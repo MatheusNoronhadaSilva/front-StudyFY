@@ -28,6 +28,7 @@ import MontagemAtividadesOrganizar from './pages/MontagemAtividadeOrganizar';
 import MontagemAtividadesTexto from './pages/MontagemAtividadeTexto';
 
 import * as C from './styles/app';
+import QuestoesTerminadas from './pages/QuestoesTerminadas';
 
 function App() {
 
@@ -35,7 +36,8 @@ function App() {
     <C.Container>
       <Router>
         <Routes>
-          <Route exact path='/' element= {<Login/>} />
+          <Route exact path='/' element= {<QuestoesTerminadas/>} />
+          <Route path = '/resultado-questoes' element={<QuestoesTerminadas/>} />
           <Route path='/montagem-atividades' element= {<MontagemAtividades/>} />
           <Route path='/montagem-atividades-organizar' element= {<MontagemAtividadesOrganizar/>} />
           <Route path='/montagem-atividades-texto' element= {<MontagemAtividadesTexto/>} />
