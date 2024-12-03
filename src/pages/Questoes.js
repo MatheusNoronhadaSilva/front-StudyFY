@@ -4,12 +4,14 @@ import Container from '../styles/telaCheia';
 import axios from 'axios';
 import { useMediaQuery } from '@mui/material';
 import CampoQuestao from '../components/CampoQuestoes';
-import { useParams } from 'react-router-dom';
-import { Campo } from '../components/CadastrarInfo/style';
+import { useLocation } from 'react-router-dom';
 
 const Questoes = () => {
-  const { id } = useParams();  // Pega o ID da atividade da URL
-  const atividade_id = id
+
+  const location = useLocation()
+  const corAtual = location.state?.corAtual;
+  const atividade_id = location.state?.idAtividade;
+
   const [questoes, setQuestoes] = useState([]);
   const [loadingQuestoes, setLoadingQuestoes] = useState(true);
 
@@ -53,7 +55,7 @@ const Questoes = () => {
     ) : (
        isDesktop ? (
         <Container style={{backgroundColor: 'white', flexDirection: 'column', alignItems: 'center'}}>
-          <CampoQuestao dadosQuestoes={questoes} />
+          <CampoQuestao dadosQuestoes={questoes} corAtual={corAtual} />
         </ Container>
       ) : (
         <>regergr</>

@@ -10,7 +10,7 @@ export const TelaRank = styled.div`
 export const CampoInfoRank = styled.div`
    display: flex;
    flex-direction: column;
-   min-height: 30%;
+   min-height: 45%;
    width: 100%;
    margin-top: 5%;
 

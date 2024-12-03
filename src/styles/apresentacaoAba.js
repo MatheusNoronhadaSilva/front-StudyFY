@@ -8,6 +8,7 @@ export const ApresentacaoAba = styled.div`
    width: 100%;
 
    @media(min-width: 768px){
+   gap: 42%;
       span{
          font-size: 1.5vw;
       }

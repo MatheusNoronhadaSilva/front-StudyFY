@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import * as C from './style';
 import Enunciado from "../../styles/enunciadoQuestao";
 import CampoQuestao from "../../styles/campoQuestao";
+import BotaoResponderQuestao from "../../styles/botaoResponderQuestao";
+import Swal from "sweetalert2";
 
 const QuestaoMultiplaEscolha = ({ questao, setQuestoesAcertadas, setQuestoesErradas, avancarQuestao }) => {
 
@@ -13,10 +15,26 @@ const QuestaoMultiplaEscolha = ({ questao, setQuestoesAcertadas, setQuestoesErra
     const respostaCorreta = questao.respostas.find((resposta) => resposta.autenticacao === 1);
     if (respostaSelecionadaMultiplaEscolha === respostaCorreta?.id.toString()) {
       setQuestoesAcertadas((prev) => prev + 1);
-      alert("Resposta correta!");
+      Swal.fire({
+        title: "Continue assim!",
+        icon: "success",
+        confirmButtonText: "Continuar",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          avancarQuestao()
+        }
+      });
     } else {
       setQuestoesErradas((prev) => prev + 1);
-      alert("Resposta incorreta.");
+      Swal.fire({
+        title: "Que pena",
+        icon: "error",
+        confirmButtonText: "Continuar",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          avancarQuestao()
+        }
+      });
     }
   };
 
@@ -34,14 +52,14 @@ const QuestaoMultiplaEscolha = ({ questao, setQuestoesAcertadas, setQuestoesErra
           </C.ItemColuna>
         ))}
       </C.CampoAlternativas>
-      <C.BotaoResposta
+      <BotaoResponderQuestao
         onClick={() => {
           validarRespostaMultiplaEscolha();
           avancarQuestao();
         }}
       >
         Responder
-      </C.BotaoResposta>
+      </BotaoResponderQuestao>
     </CampoQuestao>
   );
 };

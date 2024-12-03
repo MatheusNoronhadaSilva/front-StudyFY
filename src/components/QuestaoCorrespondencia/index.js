@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Enunciado from "../../styles/enunciadoQuestao";
 import CampoQuestao from "../../styles/campoQuestao";
 import * as C from './style'
+import BotaoResponderQuestao from "../../styles/botaoResponderQuestao";
+import Swal from "sweetalert2";
 
 const QuestaoCorrespondencia = ({ questao, setQuestoesAcertadas, setQuestoesErradas, avancarQuestao }) => {
   const [correspondencias, setCorrespondencias] = useState({});
@@ -21,10 +23,26 @@ const QuestaoCorrespondencia = ({ questao, setQuestoesAcertadas, setQuestoesErra
 
     if (acertou) {
       setQuestoesAcertadas((prev) => prev + 1);
-      alert("Resposta correta!");
+      Swal.fire({
+        title: "Continue assim!",
+        icon: "success",
+        confirmButtonText: "Continuar",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          avancarQuestao()
+        }
+      });
     } else {
       setQuestoesErradas((prev) => prev + 1);
-      alert("Resposta incorreta.");
+      Swal.fire({
+        title: "Que pena",
+        icon: "error",
+        confirmButtonText: "Continuar",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          avancarQuestao()
+        }
+      });
     }
   };
 
@@ -58,7 +76,7 @@ const QuestaoCorrespondencia = ({ questao, setQuestoesAcertadas, setQuestoesErra
           ))}
         </C.Coluna>
       </C.ColunasDiv>
-      <C.BotaoResposta onClick={() => { validarResposta(); avancarQuestao(); }}>Responder</C.BotaoResposta>
+      <BotaoResponderQuestao onClick={() => { validarResposta()}}>Responder</BotaoResponderQuestao>
     </CampoQuestao>
   );
 };

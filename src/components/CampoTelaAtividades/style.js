@@ -193,6 +193,8 @@ export const Loading = styled.div`
 
 export const MateriaDiv = styled.div`
    height: 100%;
+   background-color: white;
+   border-radius: 8px;
    width: 20%;
    display: flex;
    gap: 10%;
@@ -202,8 +204,8 @@ export const MateriaDiv = styled.div`
 export const IconeMateriaDiv = styled.div`
    display: flex;
    flex-direction: column;
-   height: 80%;
-   width: 20%;
+   height: 90%;
+   width: 25%;
    padding: 4%;
    background-color: white;
    border-radius: 360px;
@@ -234,5 +236,107 @@ export const TrocarMateria = styled.span`
   &:hover {
     text-decoration: underline;
   }
-   
-   `
+`
+//--------------------
+//Swal personalizado
+//--------------------
+
+
+
+export const CardsContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 40vh;
+`
+
+export const CardMateria = styled.div`
+  flex: 0.25 0 10%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  padding-inline: 5%;
+  box-shadow: 0px 3px 0px #d9d9d9;
+  border: solid 2px #d9d9d9;
+  border-radius: 8px;
+  justify-content: space-evenly;
+  align-items: center;
+  cursor: pointer;
+`
+
+export const CardIconeMateria = styled.img`
+  height: 40%;
+   width: 65%;
+   background-color: white;
+`
+
+export const CardMateriaNome = styled.span`
+  font-size: 1.3rem;
+  font-weight: bold;
+`
+
+export const SerieAtual = styled.div`
+  display: flex;
+  font-size: 1.5rem;
+`
+
+export const InfoSerie = styled.div`
+   height: 30%;
+   width: 90%;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   align-items: center;`
+
+
+export const SeriesContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    height: 35vh;
+`;
+
+export const SeriesCard = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3%;
+    width: 30%;
+    height: 100%;
+    border: 3px solid ${({ selected }) => (selected ? '#fee101' : '#d9d9d9')};
+    background-color: ${({ locked }) => (locked ? '#f0f0f0' : '#ffffff')};
+    box-shadow: ${({ selected }) => (selected ? '0px 4px 0px #fee101' : 'none')};
+    pointer-events: ${({ locked }) => (locked ? 'none' : 'auto')};
+    opacity: ${({ locked }) => (locked ? '0.6' : '1')};
+    transition: all 0.3s ease-in-out;
+    border-radius: 10px;
+`;
+
+export const SerieItem = styled.div`
+    font-size: 1rem;
+    font-weight: bold;
+    color: ${({ locked }) => (locked ? '#cccccc' : '#000000')};
+    text-decoration: ${({ locked }) => (locked ? 'line-through' : 'none')};
+    cursor: ${({ locked }) => (locked ? 'not-allowed' : 'pointer')};
+
+    &:hover {
+        color: ${({ locked }) => (locked ? '#cccccc' : '#007BFF')};
+    }
+
+    ${({ selected }) =>
+        selected &&
+        `
+        color: #fee101;
+        font-weight: 900;
+    `}
+`;
+
+export const IconeSerie = styled.img`
+width: 40%;
+height: 70%;
+`
+
+export const Ensino = styled.span`
+`

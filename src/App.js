@@ -36,7 +36,7 @@ function App() {
     <C.Container>
       <Router>
         <Routes>
-          <Route exact path='/' element= {<QuestoesTerminadas/>} />
+          <Route exact path='/' element= {<Login/>} />
           <Route path = '/resultado-questoes' element={<QuestoesTerminadas/>} />
           <Route path='/montagem-atividades' element= {<MontagemAtividades/>} />
           <Route path='/montagem-atividades-organizar' element= {<MontagemAtividadesOrganizar/>} />
@@ -50,7 +50,7 @@ function App() {
           <Route exact path ='/visualizar-mentorias' element = {<VisualizacaoMentorias/>}/>
           <Route exact path ='/grupo-mentoria-previa/:id' element = {<GrupoMentoriaPrevia/>}/>
           <Route path='/perfil' element={<Perfil/>}></Route>
-          <Route path='/questoes/:id' element= {<Questoes/>} />
+          <Route path='/questoes' element= {<Questoes/>} />
           <Route path='/caderno-virtual' element= {<CadernoVirtual/>} />
           <Route path='/rank' element= {<Rank/>} />
           <Route path='/ajuda' element= {<Ajuda/>} />

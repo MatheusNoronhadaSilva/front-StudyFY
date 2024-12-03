@@ -13,7 +13,7 @@ const CadernoVirtual = () => {
   return (
     <>
     { isDesktop ? (
-      <Container style={{backgroundColor: 'white', alignItems: 'center', paddingTop: '1vh'}}>
+      <Container style={{backgroundColor: 'white', alignItems: 'center'}}>
       <Navegacao />
       <CampoCadernoVirtual/>
       </Container>

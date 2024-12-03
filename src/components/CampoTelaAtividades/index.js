@@ -4,35 +4,132 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookOpen } from '@fortawesome/free-solid-svg-icons';
-import Matematica from '../../assets/Matematica.png';
+import withReactContent from "sweetalert2-react-content";
+import Swal from 'sweetalert2';
+import fundamentalI from '../../assets/fundamentalI.png'
+import fundamentalII from '../../assets/fundamentalII.png'
+import ensinoMedio from '../../assets/ensino medio.png'
 
 const CampoTelaAtividade = () => {
+
+    const MySwal = withReactContent(Swal);
+
     const navigate = useNavigate();
 
     const [apiData, setApiData] = useState(null); // Dados da API
+    const [dadosMateriaAluno, setDadosMateriaAluno] = useState(null)
+    const [materiaAtual, setMateriaAtual] = useState(null)
+    const [serieAtual, setSerieAtual] = useState(null)
     const [selectedActivity, setSelectedActivity] = useState(null); // Atividade selecionada
     const [currentTopic, setCurrentTopic] = useState(''); // Tópico atual
     const [currentColor, setCurrentColor] = useState(''); // Cor atual
+    const [serieAluno, setSerieAluno] = useState(null)
+    const [series, setSeries] = useState(null)
     const campoAtividadesRef = useRef(null);
-    const subTopicRefs = useRef([]);
+    const subTopicRefs = useRef([])
+    const idAluno = localStorage.getItem("userId")
 
     const TelaQuestoes = (atividadeId) => {
-        
-        navigate(`/questoes/${atividadeId}`);
+
+        navigate(`/questoes`, { state: { idAtividade: atividadeId, corAtual: currentColor } });
     };
-    
+
+    useEffect(() => {
+        const fetchMateriasAluno = async () => {
+            try {
+                const response = await axios.get(`http://localhost:8080/v1/studyfy/alunos/materias/${idAluno}`);
+                if (response.status === 200) {
+                    const materias = response.data.materias;
+                    setDadosMateriaAluno(materias);
+
+                    // Defina a primeira matéria automaticamente como padrão
+                    if (materias.length > 0) {
+                        setMateriaAtual(materias[0]);
+                    }
+                }
+            } catch (error) {
+                console.log('Erro ao buscar matérias do aluno:', error);
+            }
+        };
+
+        fetchMateriasAluno();
+    }, []);
+
+    useEffect(() => {
+        const fetchSerieAluno = async () => {
+            try {
+                const response = await axios.get(`http://localhost:8080/v1/studyfy/series/aluno/${idAluno}`);
+                if (response.status === 200) {
+
+                    setSerieAluno(response.data.serieAluno[0])
+
+                    setSerieAtual(response.data.serieAluno[0])
+
+                    setSeries(response.data.series)
+
+                }
+            } catch (error) {
+                console.log('Erro ao buscar matérias do aluno:', error);
+            }
+        };
+
+        fetchSerieAluno();
+    }, []);
+
+
+    const showSelectionAlert = () => {
+        MySwal.fire({
+            title: "Escolha uma de suas matérias",
+            width: 1000,
+            heightAuto: true,
+            html: (
+
+                <C.CardsContainer>
+                    {dadosMateriaAluno.map(materia => (
+                        <C.CardMateria key={materia.id}
+                            onClick={() => setMateriaAtual(materia)}>
+                            <C.CardIconeMateria src={materia.imagem_materia}></C.CardIconeMateria>
+                            <C.CardMateriaNome>{materia.materia}</C.CardMateriaNome>
+                        </C.CardMateria>
+                    ))}
+                </C.CardsContainer>
+            ),
+            showConfirmButton: false,
+        });
+    };
+
+
+
 
     // Função para buscar dados da API
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/v1/studyfy/atividades/3/9');
+                const response = await axios.get(`http://localhost:8080/v1/studyfy/atividades/3/9`);
                 if (response.status === 200) {
                     const data = response.data.atividades;
-                    console.log(data);
+
+                    // Processar cada atividade para verificar o status
+                    const processedActivities = await Promise.all(
+                        data.map(async (atividade) => {
+                            try {
+                                const statusResponse = await axios.get(
+                                    `http://localhost:8080/v1/studyfy/atividadesFeitas/${atividade.id_da_atividade}/${idAluno}`
+                                );
+
+                                // Verifica se a atividade já foi feita
+                                atividade.statusAtividade =
+                                    statusResponse.data.statusAtividade.length > 0 ? 1 : 0;
+                            } catch (error) {
+                                console.error(`Erro ao verificar status da atividade ${atividade.id_da_atividade}:`, error);
+                                atividade.statusAtividade = 0; // Define como 0 em caso de erro
+                            }
+                            return atividade;
+                        })
+                    );
 
                     // Transformar os dados para a estrutura necessária
-                    const topics = transformApiDataToTopics(data);
+                    const topics = transformApiDataToTopics(processedActivities);
 
                     setApiData({ series: '9º Fund 2', topics });
                     setCurrentTopic(topics[0]?.topic || '');
@@ -44,23 +141,28 @@ const CampoTelaAtividade = () => {
         };
 
         fetchData();
-    }, []);
+    }, [materiaAtual, serieAtual]);
+
 
     // Função para transformar os dados da API
     const transformApiDataToTopics = (data) => {
+
         const groupedByTopic = data.reduce((acc, activity) => {
             const topicIndex = acc.findIndex(t => t.topic === activity.nome_do_assunto);
-            
+
             if (topicIndex >= 0) {
-    
+
                 // Adiciona sub-assunto no tópico existente
                 const subTopicIndex = acc[topicIndex].subTopics.findIndex(st => st.name === activity.nome_do_sub_assunto);
                 if (subTopicIndex >= 0) {
+
                     // Adiciona a atividade com o ID
                     acc[topicIndex].subTopics[subTopicIndex].activities.push({
                         id: activity.id_da_atividade,
                         title: activity.titulo_da_atividade,
-                        descricao: activity.descricao_da_atividade
+                        descricao: activity.descricao_da_atividade,
+                        statusAtividade: activity.statusAtividade
+
                     });
                 } else {
                     // Cria novo sub-assunto e adiciona a atividade com o ID
@@ -70,12 +172,13 @@ const CampoTelaAtividade = () => {
                             {
                                 id: activity.id_da_atividade,
                                 title: activity.titulo_da_atividade,
-                                descricao: activity.descricao_da_atividade
+                                descricao: activity.descricao_da_atividade,
+                                statusAtividade: activity.statusAtividade
                             }
                         ]
                     });
                 }
-                
+
             } else {
                 // Cria um novo tópico
                 acc.push({
@@ -87,7 +190,8 @@ const CampoTelaAtividade = () => {
                             activities: [
                                 {
                                     id: activity.id_da_atividade,
-                                    title: activity.titulo_da_atividade
+                                    title: activity.titulo_da_atividade,
+                                    statusAtividade: activity.statusAtividade
                                 }
                             ]
                         }
@@ -98,7 +202,7 @@ const CampoTelaAtividade = () => {
         }, []);
         return groupedByTopic;
     };
-    
+
 
     const handleScroll = () => {
         if (!apiData) return;
@@ -130,7 +234,7 @@ const CampoTelaAtividade = () => {
 
     const handleActivityClick = (activity, topicIndex, subTopicIndex) => {
         console.log(activity);
-        
+
         if (selectedActivity &&
             selectedActivity.activity === activity &&
             selectedActivity.topicIndex === topicIndex &&
@@ -141,8 +245,82 @@ const CampoTelaAtividade = () => {
         }
     };
 
-    console.log(apiData);
-    
+    const handleSeriesSelection = () => {
+        if (!series) return;
+
+        // Definindo os intervalos e imagens de cada quadro
+        const cards = [
+            { range: { start: 1, end: 5 }, image: fundamentalI, ensino: 'Fundamental 1' },
+            { range: { start: 6, end: 9 }, image: fundamentalII, ensino: 'Fundamental 2' },
+            { range: { start: 10, end: 12 }, image: ensinoMedio, ensino: 'Ensino médio' },
+        ];
+
+        MySwal.fire({
+            title: "Escolha uma série",
+            width: 800,
+            html: (
+                <C.SeriesContainer>
+                    {cards.map((card, index) => {
+                        // Filtrar as séries pertencentes ao intervalo do quadro
+                        const seriesSubset = series.filter(
+                            (serie) =>
+                                serie.id >= card.range.start &&
+                                serie.id <= card.range.end
+                        );
+
+                        // Verificar se todas as séries do quadro estão bloqueadas
+                        const isCardLocked = seriesSubset.every(
+                            (serie) => serie.id > serieAluno.id
+                        );
+
+                        return (
+                            <C.SeriesCard
+                                key={index}
+                                locked={isCardLocked}
+                                selected={seriesSubset.some(
+                                    (s) => s.id === serieAtual?.id
+                                )}
+                                onClick={() => {
+                                    if (!isCardLocked) {
+                                        MySwal.close(); // Fecha o modal ao selecionar qualquer série desbloqueada
+                                    }
+                                }}
+                            >
+                                <C.InfoSerie>
+                                    <C.IconeSerie src={card.image} alt={`Imagem do quadro ${index + 1}`} />
+                                    <C.Ensino>{card.ensino}</C.Ensino>
+                                </C.InfoSerie>
+                                {seriesSubset.map((serie) => (
+                                    <C.SerieItem
+                                        key={serie.id}
+                                        locked={serie.id > serieAluno.id}
+                                        selected={serieAtual?.id === serie.id}
+                                        onClick={(e) => {
+                                            e.stopPropagation(); // Evita cliques no card
+                                            if (serie.id <= serieAluno.id) {
+                                                setSerieAtual(serie);
+                                                MySwal.close();
+                                            }
+                                        }}
+                                    >
+                                        {serie.nome}
+                                    </C.SerieItem>
+                                ))}
+                            </C.SeriesCard>
+                        );
+                    })}
+                </C.SeriesContainer>
+            ),
+            showConfirmButton: false,
+        });
+    };
+
+
+
+
+
+
+
 
     if (!apiData) {
         return <C.Loading>Carregando...</C.Loading>;
@@ -154,14 +332,24 @@ const CampoTelaAtividade = () => {
             <C.FixedBox style={{ backgroundColor: currentColor }}>
                 <C.MateriaDiv>
                     <C.IconeMateriaDiv>
-                        <C.IconeMateria src={Matematica} />
+                        {materiaAtual !== null ? (
+                            <C.IconeMateria src={materiaAtual.imagem_materia} />
+                        ) : (
+                            <span>Carregando</span>
+                        )}
                     </C.IconeMateriaDiv>
                     <C.DescMateria>
-                        <C.NomeMateria>Matematica</C.NomeMateria>
-                        <C.TrocarMateria>Trocar de matéria</C.TrocarMateria>
+                        {materiaAtual !== null ? (
+                            <C.NomeMateria>{materiaAtual.materia}</C.NomeMateria>
+                        ) : (
+                            <span>Carregando</span>
+                        )}
+                        <C.TrocarMateria onClick={showSelectionAlert}>Trocar de matéria</C.TrocarMateria>
                     </C.DescMateria>
                 </C.MateriaDiv>
-                {`${apiData.series} - ${currentTopic}`}
+                <C.SerieAtual onClick={() => handleSeriesSelection()}>
+                    {serieAtual ? `${serieAtual.nome} - ${currentTopic}` : 'Carregando série...'}
+                </C.SerieAtual>
             </C.FixedBox>
 
             <C.CampoAtividades ref={campoAtividadesRef}>
@@ -189,8 +377,17 @@ const CampoTelaAtividade = () => {
                                     {subTopic.activities.map((activity, idx) => (
                                         <C.CampoQuadradinhos key={idx} zigzag={idx % 2 === 1}>
                                             <C.ActivityCard
-                                                onClick={() => handleActivityClick(activity, topicIndex, subTopicIndex)}
-                                                topicColor={topic.color}
+                                                onClick={() => {
+                                                    if (activity.statusAtividade === 0) {
+                                                        // Exibe um alerta se o statusAvaliacao for 0
+                                                        alert("Esta atividade ainda não foi avaliada. Você não pode iniciar.");
+                                                    } else {
+                                                        console.log(activity);
+                                                        
+                                                        handleActivityClick(activity, topicIndex, subTopicIndex);
+                                                    }
+                                                }}
+                                                topicColor={activity.statusAtividade === 0 ? '#d9d9d9' : topic.color} // Alterando a cor do tema
                                             >
                                                 <FontAwesomeIcon icon={faBookOpen} color='white' />
                                                 {selectedActivity &&
@@ -204,7 +401,6 @@ const CampoTelaAtividade = () => {
                                                         </C.ActivityDetails>
                                                     )}
                                             </C.ActivityCard>
-
                                         </C.CampoQuadradinhos>
                                     ))}
                                 </C.ActivitiesContainer>
