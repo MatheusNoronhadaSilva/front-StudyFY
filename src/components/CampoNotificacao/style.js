@@ -16,9 +16,7 @@ export const Cartao = styled.div`
   min-height: 30%;
   max-height: 30%;
   width: 100%;
-  border: solid 2px #d9d9d9;
   border-radius: 8px;
-  box-shadow: 0 4px 0px #d9d9d9;
   display: flex;
   flex-direction: column;
 `;
@@ -51,6 +49,12 @@ export const CorpoCartao = styled.div`
   display: flex;
   padding: 10px;
   flex-grow: 1;
+  box-shadow: 0 4px 0px #d9d9d9;
+  border-left: solid 2px #d9d9d9;
+  border-right: solid 2px #d9d9d9;
+  border-bottom: solid 2px #d9d9d9;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
 `;
 
 export const TextoCorpo = styled.span`
@@ -74,7 +78,7 @@ export const DivImagens = styled.div`
 `;
 
 export const Imagem = styled.img`
-  height: 70%;
+  height: 60%;
   width: 30%;
 `;
 

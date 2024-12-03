@@ -25,6 +25,7 @@ const CampoTelaAtividade = () => {
     const [currentColor, setCurrentColor] = useState(''); // Cor atual
     const [serieAluno, setSerieAluno] = useState(null)
     const [series, setSeries] = useState(null)
+    const [Atividade, setAtividade] = useState(false)
     const campoAtividadesRef = useRef(null);
     const subTopicRefs = useRef([])
     const idAluno = localStorage.getItem("userId")
@@ -87,7 +88,9 @@ const CampoTelaAtividade = () => {
                 <C.CardsContainer>
                     {dadosMateriaAluno.map(materia => (
                         <C.CardMateria key={materia.id}
-                            onClick={() => setMateriaAtual(materia)}>
+                            onClick={() => {setMateriaAtual(materia);                                               MySwal.close();
+                                MySwal.close();
+                            }}>
                             <C.CardIconeMateria src={materia.imagem_materia}></C.CardIconeMateria>
                             <C.CardMateriaNome>{materia.materia}</C.CardMateriaNome>
                         </C.CardMateria>
@@ -105,11 +108,13 @@ const CampoTelaAtividade = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/v1/studyfy/atividades/3/9`);
+
+                console.log(materiaAtual);
+                console.log(serieAtual);
+                const response = await axios.get(`http://localhost:8080/v1/studyfy/atividades/${materiaAtual.id}/${serieAtual.id}`);
                 if (response.status === 200) {
                     const data = response.data.atividades;
 
-                    // Processar cada atividade para verificar o status
                     const processedActivities = await Promise.all(
                         data.map(async (atividade) => {
                             try {
@@ -326,6 +331,8 @@ const CampoTelaAtividade = () => {
         return <C.Loading>Carregando...</C.Loading>;
     }
 
+    console.log(apiData.topics);
+
     return (
         <C.AppContainer>
             {/* Componente fixo */}
@@ -348,66 +355,73 @@ const CampoTelaAtividade = () => {
                     </C.DescMateria>
                 </C.MateriaDiv>
                 <C.SerieAtual onClick={() => handleSeriesSelection()}>
-                    {serieAtual ? `${serieAtual.nome} - ${currentTopic}` : 'Carregando série...'}
+                    {serieAtual ? `${serieAtual.nome}  ${currentTopic}` : 'Carregando série...'}
                 </C.SerieAtual>
             </C.FixedBox>
 
             <C.CampoAtividades ref={campoAtividadesRef}>
-                {apiData.topics.map((topic, topicIndex) => (
-                    <React.Fragment key={topicIndex}>
-                        <C.TopicoDiv>
-                            <C.Topic>{topic.topic}</C.Topic>
-                        </C.TopicoDiv>
-                        {topic.subTopics.map((subTopic, subTopicIndex) => (
-                            <C.campoSubAssunto
-                                key={subTopicIndex}
-                                ref={(el) => {
-                                    if (!subTopicRefs.current[topicIndex]) {
-                                        subTopicRefs.current[topicIndex] = [];
-                                    }
-                                    subTopicRefs.current[topicIndex][subTopicIndex] = el;
-                                }}
-                            >
-                                <C.SubTopicDiv>
-                                    <C.Linha />
-                                    <C.SubTopic>{subTopic.name}</C.SubTopic>
-                                    <C.Linha />
-                                </C.SubTopicDiv>
-                                <C.ActivitiesContainer>
-                                    {subTopic.activities.map((activity, idx) => (
-                                        <C.CampoQuadradinhos key={idx} zigzag={idx % 2 === 1}>
-                                            <C.ActivityCard
-                                                onClick={() => {
-                                                    if (activity.statusAtividade === 0) {
-                                                        // Exibe um alerta se o statusAvaliacao for 0
-                                                        alert("Esta atividade ainda não foi avaliada. Você não pode iniciar.");
-                                                    } else {
-                                                        console.log(activity);
-                                                        
-                                                        handleActivityClick(activity, topicIndex, subTopicIndex);
-                                                    }
-                                                }}
-                                                topicColor={activity.statusAtividade === 0 ? '#d9d9d9' : topic.color} // Alterando a cor do tema
-                                            >
-                                                <FontAwesomeIcon icon={faBookOpen} color='white' />
-                                                {selectedActivity &&
-                                                    selectedActivity.activity === activity &&
-                                                    selectedActivity.topicIndex === topicIndex &&
-                                                    selectedActivity.subTopicIndex === subTopicIndex && (
-                                                        <C.ActivityDetails visible>
-                                                            <h3>{selectedActivity.activity.title}</h3>
-                                                            <p>{selectedActivity.activity.descricao}.</p>
-                                                            <C.StartButton onClick={() => TelaQuestoes(selectedActivity.activity.id)}>Iniciar</C.StartButton> {/* Passando o ID da atividade */}
-                                                        </C.ActivityDetails>
-                                                    )}
-                                            </C.ActivityCard>
-                                        </C.CampoQuadradinhos>
-                                    ))}
-                                </C.ActivitiesContainer>
-                            </C.campoSubAssunto>
-                        ))}
-                    </React.Fragment>
-                ))}
+                { apiData.topics.length == 0 ? (
+                    <C.SemAtividade>
+                        <span>No momento não há atividades para esta matéria/série, tente novamente mais tarde</span>
+                    </C.SemAtividade>
+                ) : (
+                    
+                    apiData.topics.map((topic, topicIndex) => (
+                        <React.Fragment key={topicIndex}>
+                            <C.TopicoDiv>
+                                <C.Topic>{topic.topic}</C.Topic>
+                            </C.TopicoDiv>
+                            {topic.subTopics.map((subTopic, subTopicIndex) => (
+                                <C.campoSubAssunto
+                                    key={subTopicIndex}
+                                    ref={(el) => {
+                                        if (!subTopicRefs.current[topicIndex]) {
+                                            subTopicRefs.current[topicIndex] = [];
+                                        }
+                                        subTopicRefs.current[topicIndex][subTopicIndex] = el;
+                                    }}
+                                >
+                                    <C.SubTopicDiv>
+                                        <C.Linha />
+                                        <C.SubTopic>{subTopic.name}</C.SubTopic>
+                                        <C.Linha />
+                                    </C.SubTopicDiv>
+                                    <C.ActivitiesContainer>
+                                        {subTopic.activities.map((activity, idx) => (
+                                            <C.CampoQuadradinhos key={idx} zigzag={idx % 2 === 1}>
+                                                <C.ActivityCard
+                                                    onClick={() => {
+                                                        if (activity.statusAtividade === 0) {
+                                                            // Exibe um alerta se o statusAvaliacao for 0
+                                                            alert("Esta atividade ainda não foi avaliada. Você não pode iniciar.");
+                                                        } else {
+                                                            console.log(activity);
+                                                            
+                                                            handleActivityClick(activity, topicIndex, subTopicIndex);
+                                                        }
+                                                    }}
+                                                    topicColor={activity.statusAtividade === 0 ? '#d9d9d9' : topic.color} // Alterando a cor do tema
+                                                >
+                                                    <FontAwesomeIcon icon={faBookOpen} color='white' />
+                                                    {selectedActivity &&
+                                                        selectedActivity.activity === activity &&
+                                                        selectedActivity.topicIndex === topicIndex &&
+                                                        selectedActivity.subTopicIndex === subTopicIndex && (
+                                                            <C.ActivityDetails visible>
+                                                                <h3>{selectedActivity.activity.title}</h3>
+                                                                <p>{selectedActivity.activity.descricao}.</p>
+                                                                <C.StartButton onClick={() => TelaQuestoes(selectedActivity.activity.id)}>Iniciar</C.StartButton> {/* Passando o ID da atividade */}
+                                                            </C.ActivityDetails>
+                                                        )}
+                                                </C.ActivityCard>
+                                            </C.CampoQuadradinhos>
+                                        ))}
+                                    </C.ActivitiesContainer>
+                                </C.campoSubAssunto>
+                            ))}
+                        </React.Fragment>
+                    ))
+                )}
             </C.CampoAtividades>
         </C.AppContainer>
     );

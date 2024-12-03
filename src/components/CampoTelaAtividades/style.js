@@ -133,8 +133,9 @@ export const ActivityDetails = styled.div`
   width: 300px;
   text-align: center;
   position: absolute;
-  top: -20%;
-  left: 50%;
+  top: 70%;
+  left: -140%;
+  z-index: 100;
   display: ${(props) => (props.visible ? 'block' : 'none')};
 `;
 
@@ -337,6 +338,21 @@ export const IconeSerie = styled.img`
 width: 40%;
 height: 70%;
 `
+
+export const SemAtividade = styled.div`
+   height: 100%;
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+
+   span{
+    width: 50%;
+    text-align: center;
+    font-size: 2rem;
+   }
+  `
 
 export const Ensino = styled.span`
 `

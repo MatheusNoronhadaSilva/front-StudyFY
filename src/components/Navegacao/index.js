@@ -89,7 +89,10 @@ const AbasGrupoMentoria = () => {
                 key={index}
                 imgAtiva={imgAtiva}
                 index={index}
-                onClick={() => ClickImg(index)}
+                onClick={() => {
+                  ClickImg(index);
+                  handleNavigation(index);
+                }}
                 style={{
                   backgroundColor: imgAtiva === index ? '#FFFCE6' : 'transparent',
                   border: imgAtiva === index ? 'solid 1px #fee101' : 'transparent',

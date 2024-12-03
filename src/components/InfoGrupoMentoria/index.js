@@ -22,7 +22,7 @@ const InfoGrupoMentoria = ({ id, status }) => {
       try {
         const response = await axios.get(`http://localhost:8080/v1/studyfy/mentorGrupo/${id}`);
         console.log(response.data.mentor);
-        
+
         setMentorData(response.data.mentor);
       } catch (error) {
         console.error("Erro ao buscar os dados do mentor:", error);
@@ -76,38 +76,65 @@ const InfoGrupoMentoria = ({ id, status }) => {
     }
   };
 
-const handleSair = async () => {
-  try {
-    console.log('saindo do grupo');
-    const alunoId = localStorage.getItem('userId'); // Pega o ID do aluno do localStorage
+  const handleExcluirGrupo = async () => {
 
-    if (alunoId) {
-      // Requisição DELETE para o endpoint de saída do grupo
-      const response = await axios.delete(`http://localhost:8080/v1/studyfy/mentoria/membro`, {
-        data: {
-          grupoId: id,
-          alunoId: alunoId,
-        },
-      });
+    try {
+      console.log('Excluindo grupo');
 
-      console.log(response);
+      if (id) {
+        // Requisição DELETE para o endpoint de saída do grupo
+        const response = await axios.delete(`http://localhost:8080/v1/studyfy/mentorias/${id}`);
 
-      if (response.status === 200) {
-        console.log('Aluno saiu do grupo com sucesso');
-        navigate(`/visualizar-mentorias`); // Redireciona para a página do grupo
+        console.log(response);
+
+        if (response.status === 200) {
+          console.log('Grupo excluído com sucesso');
+          navigate(`/criar-grupo-mentoria`); // Redireciona para a página do grupo
+        } else {
+          console.log('Erro ao deletar grupo');
+        }
       } else {
-        console.log('Erro ao sair do grupo');
+        console.error('grupo não encontrado no localStorage');
+        return;
       }
-    } else {
-      console.error('Aluno não encontrado no localStorage');
-      return;
+    } catch (error) {
+      console.error("Erro ao deletar grupo:", error);
     }
-  } catch (error) {
-    console.error("Erro ao sair do grupo:", error);
   }
-};
+
+  const handleSair = async () => {
+    try {
+      console.log('saindo do grupo');
+      const alunoId = localStorage.getItem('userId'); // Pega o ID do aluno do localStorage
+
+      if (alunoId) {
+        // Requisição DELETE para o endpoint de saída do grupo
+        const response = await axios.delete(`http://localhost:8080/v1/studyfy/mentoria/membro`, {
+          data: {
+            grupoId: id,
+            alunoId: alunoId,
+          },
+        });
+
+        console.log(response);
+
+        if (response.status === 200) {
+          console.log('Aluno saiu do grupo com sucesso');
+          navigate(`/visualizar-mentorias`); // Redireciona para a página do grupo
+        } else {
+          console.log('Erro ao sair do grupo');
+        }
+      } else {
+        console.error('Aluno não encontrado no localStorage');
+        return;
+      }
+    } catch (error) {
+      console.error("Erro ao sair do grupo:", error);
+    }
+  };
 
 
+  console.log(status);
   return (
     <C.InfoGrupo>
       {isDesktop ? (
@@ -162,6 +189,10 @@ const handleSair = async () => {
                 <C.BotaoEntrar onClick={handleEntrar}>
                   <C.TituloBotao>ENTRAR</C.TituloBotao>
                 </C.BotaoEntrar>
+              ) : status == 'mentor' ? (
+                <C.BotaoSair onClick={handleExcluirGrupo}>
+                  <C.TituloBotao>Excluir grupo</C.TituloBotao>
+                </C.BotaoSair>
               ) : (
                 <C.BotaoSair onClick={handleSair}>
                   <C.TituloBotao>SAIR</C.TituloBotao>

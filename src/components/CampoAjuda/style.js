@@ -44,7 +44,7 @@ flex-direction: column;
 
 img{
    height: 30%;
-   width: 30%;
+   width: 35%;
 }
 
 span{

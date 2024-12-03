@@ -38,7 +38,7 @@ const LoginAluno = () => {
         localStorage.setItem("id_mentor", "0")
       }
 
-      navigate('/visualizar-mentorias')
+      navigate('/tela-atividades')
 
     } catch (error) {
 

@@ -12,7 +12,7 @@ const Ajuda = () => {
   return (
     <>
       {isDesktop ? (
-        <Container style={{ backgroundColor: 'white', alignItems: 'center', paddingTop: '1vh' }}>
+        <Container style={{ backgroundColor: 'white', alignItems: 'center'}}>
           <Navegacao></Navegacao>
           <CampoAjuda />
         </Container>

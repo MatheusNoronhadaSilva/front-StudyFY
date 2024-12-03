@@ -1,3 +1,4 @@
+import { style } from "@mui/system";
 import styled from "styled-components";
 
 export const RankMaisAjudados = styled.div`
@@ -19,8 +20,7 @@ export const RankMaisAjudados = styled.div`
 export const MentorRank = styled.div`
    display: flex;
    width: 100%;
-   min-height: 7.5vh;
-   max-height: 7.5vh;
+   min-height: 8vh;
    border-bottom: solid #d9d9d9 3px;
    border-top: solid #d9d9d9 3px;
 
@@ -122,7 +122,27 @@ export const DescerRank = styled.div`
 export const NavegacaoRank = styled.div`
    width: 100%;
    min-height:6%;
-   background-color: blue;
    display: flex;
-   
-   `
+   border-bottom: solid 3px #d9d9d9;
+   border-left: solid 3px #d9d9d9;
+   border-right: solid 3px #d9d9d9;
+   width: 80%;
+   place-self: center;
+   align-items: center;
+   justify-content: center;
+   gap: 6%;
+`
+
+export const Seta = styled.img`
+   height: 40%;
+   width: 3%;
+`
+
+export const SetaTudo = styled.img`
+   height: 40%;
+   width: 5%;
+`
+
+export const NumeroPagina= styled.span`
+   font-size: 1rem;
+`
