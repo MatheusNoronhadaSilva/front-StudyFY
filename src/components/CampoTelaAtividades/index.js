@@ -65,7 +65,7 @@ const CampoTelaAtividade = () => {
                     setSerieAluno(response.data.serieAluno[0])
 
                     setSerieAtual(response.data.serieAluno[0])
-
+                    
                     setSeries(response.data.series)
 
                 }
@@ -81,7 +81,7 @@ const CampoTelaAtividade = () => {
     const showSelectionAlert = () => {
         MySwal.fire({
             title: "Escolha uma de suas matérias",
-            width: 1000,
+            width: 850,
             heightAuto: true,
             html: (
 

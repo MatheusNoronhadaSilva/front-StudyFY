@@ -140,6 +140,7 @@ const CampoCadernoVirtual = () => {
                         theme="snow"
                         value={currentNote}
                         onChange={setCurrentNote}
+                        style={{width: '100%'}}
                     />
                     </C.BlocoDeNotas>
                     <C.ButtonGroup>

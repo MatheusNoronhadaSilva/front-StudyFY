@@ -6,34 +6,23 @@ export const CampoEmblemas = styled.div`
    height: 100%;
    padding-bottom: 20%;
    overflow-y: auto;
+   display: flex;
+   flex-direction: column;
 
    @media (min-width: 768px) {
       max-height: 100%;
       padding-top: 4%;
       padding-bottom: 5%;
+      gap: 8%;
    }
 `
-export const EmblemasAluno = styled.div`
+export const Emblemas = styled.div`
    display: flex;
    flex-direction: column;
    height: auto;
    width: 100%;
    padding-inline: 5vw;
    gap: 2vh;
-`
-
-export const EmblemasProfessor = styled.div`
-   display: flex;
-   flex-direction: column;
-   min-height: 50%;
-   width: 100%;
-   padding-inline: 5vw;
-   gap: 2vh;
-   margin-top: 8vh;
-
-   @media (min-width: 768px){
-      margin-top: 5vh;
-   }
 `
 
 export const Titulo = styled.span`

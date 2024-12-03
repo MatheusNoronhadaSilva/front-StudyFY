@@ -19,8 +19,10 @@ const CampoCadastroAluno = ({ RegistroCompleto }) => {
       
       setStep(step + 1);
     } else {
-        console.log('Estado materiaSelecionada dentro do callback antes do RegistroCompleto:', materiaSelecionada);
-        RegistroCompleto(usuario, dadosAluno, dataNascimento, materiaSelecionada);
+      setMateriaSelecionada((prevMateriaSelecionada) => {
+        console.log('Estado materiaSelecionada atualizado antes do RegistroCompleto:', prevMateriaSelecionada);
+        RegistroCompleto(usuario, dadosAluno, dataNascimento, prevMateriaSelecionada);
+      })
     }
   };
 

@@ -244,7 +244,6 @@ export const FotoMateriaDiv = styled.div`
    border-radius: 360px;
    z-index: 100;
    bottom: 5%;
-   border: solid 1px black;
    padding: 5% 5%;
    position: absolute;
 `
@@ -405,7 +404,7 @@ export const BotaoSair = styled.div`
    cursor: pointer;
 
    @media (min-width: 768px){
-      width: 45%;
+      width: 55%;
       height: 100%;
       padding: 2% 2% 2% 2%;
    }

@@ -18,9 +18,13 @@ const CadastroAluno = () => {
     const dadosCompletos = {
       ...dadosAluno,
       ...data_nascimento,
-      serie: '9º EF',
+      serie: 1,
+      foto: 2,
       materia_id: materiaSelecionada,
     };
+
+    console.log(dadosCompletos);
+    
 
     if(usuario === 'aluno'){
       url = 'http://localhost:8080/v1/studyFy/aluno'

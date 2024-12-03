@@ -88,6 +88,7 @@ const InfoGrupoMentoria = ({ id, status }) => {
         console.log(response);
 
         if (response.status === 200) {
+          localStorage.removeItem("id_grupo")
           console.log('Grupo excluído com sucesso');
           navigate(`/criar-grupo-mentoria`); // Redireciona para a página do grupo
         } else {
@@ -134,7 +135,10 @@ const InfoGrupoMentoria = ({ id, status }) => {
   };
 
 
-  console.log(status);
+  console.log(grupoData);
+  console.log(mentorData);
+  
+  
   return (
     <C.InfoGrupo>
       {isDesktop ? (
@@ -144,7 +148,7 @@ const InfoGrupoMentoria = ({ id, status }) => {
               <C.FotoGrupoDiv>
                 <C.IconeGrupo src={grupoData ? grupoData.foto_grupo : "https://via.placeholder.com/100"} alt='foto do grupo' />
                 <C.FotoMateriaDiv>
-                  <C.FotoMateria src={matematica} alt='matéria de matemática' />
+                  <C.FotoMateria src={grupoData ? grupoData.materia_imagem : "https://via.placeholder.com/100"} alt='matéria de matemática' />
                 </C.FotoMateriaDiv>
               </C.FotoGrupoDiv>
               <C.IntroGrupo>
@@ -191,7 +195,7 @@ const InfoGrupoMentoria = ({ id, status }) => {
                 </C.BotaoEntrar>
               ) : status == 'mentor' ? (
                 <C.BotaoSair onClick={handleExcluirGrupo}>
-                  <C.TituloBotao>Excluir grupo</C.TituloBotao>
+                  <C.TituloBotao>EXCLUIR GRUPO</C.TituloBotao>
                 </C.BotaoSair>
               ) : (
                 <C.BotaoSair onClick={handleSair}>

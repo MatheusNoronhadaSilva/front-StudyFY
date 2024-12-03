@@ -68,8 +68,7 @@ const VisualizarGruposIncluidos = () => {
                     <div style={{ minHeight: '10%' }}></div>
                     <C.Descricao>OU</C.Descricao>
                     <div style={{ minHeight: '10%' }}></div>
-                    <C.Descricao>Crie um grupo</C.Descricao>
-                    <C.VerGrupo onClick={telaCriarGrupo}>Criar grupo</C.VerGrupo>
+                    <C.VerGrupo onClick={telaCriarGrupo}>Crie grupo</C.VerGrupo>
                 </C.VerGruposDiv>
             ) : (
                 <C.VisualizacaoGrupos>

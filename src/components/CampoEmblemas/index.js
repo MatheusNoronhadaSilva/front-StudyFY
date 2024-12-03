@@ -5,69 +5,114 @@ import livrosDegraus from '../../assets/livro_degraus.png';
 import mascote from '../../assets/mascote.png';
 
 const CampoEmblemas = () => {
-    const atividadesConcluidas = 3;
-    const metaAtividades = 5;
 
-    // Calcula a porcentagem de progresso
-    const progresso = ((atividadesConcluidas / metaAtividades) * 100).toFixed(2);
-    const progressoPorcentagem = `${progresso}%`;
-
-    useEffect(() => {
-        // Seleciona a barra e o texto após o componente ser montado
-        const barraProgresso = document.getElementById("barraProgresso");
-        if (barraProgresso) {
-            // Atualiza a largura da barra
-            barraProgresso.style.width = progresso + "%";
+    // Array com informações dos emblemas
+    const emblemasAluno = [
+        {
+            foto: medalha,
+            titulo: "Sua jornada",
+            descricao: "Realizou a primeira atividade da aplicação",
+            cor: "#71DDF5",
+            meta: 1,
+            andamento: 0
+        },
+        {
+            foto: livrosDegraus,
+            titulo: "Degraus do conhecimento",
+            descricao: "Realizou 5 atividades",
+            cor: "#56EE9C",
+            meta: 5,
+            andamento: 2
+        },
+        {
+            foto: mascote,
+            titulo: "Mestre das atividades",
+            descricao: "Finalizou todas as atividades de um assunto",
+            cor: "#fee101",
+            meta: 1,
+            andamento: 0
         }
-    }, [progresso]); // Dependência para re-executar se progresso mudar
+    ];
+
+    const emblemasMentor = [
+        {
+            foto: medalha,
+            titulo: "A ascensão de um herói",
+            descricao: "Ajudou um aluno pela primeira vez",
+            cor: "#71DDF5",
+            meta: 1,
+            andamento: 0
+        },
+        {
+            foto: livrosDegraus,
+            titulo: "Salva-vidas",
+            descricao: "ajudou 5 alunos",
+            cor: "#56EE9C",
+            meta: 5,
+            andamento: 4
+        }
+    ];
+
+    const isMentor = Number(localStorage.getItem('id_mentor'));
+
+    console.log(isMentor);
 
     return (
         <C.CampoEmblemas>
-        <C.EmblemasAluno>
-            <C.Titulo>Emblemas aluno</C.Titulo>
-            {/* Mapeando os emblemas, se necessário, para evitar repetição */}
-            {["medalha", "livrosDegraus", "mascote"].map((icone, index) => (
-                <C.Emblema key={index}>
-                    <C.AreaIcone cor={index === 0 ? "#71DDF5" : index === 1 ? "#56EE9C" : "#fee101"}>
-                        <C.Icone src={icone === "medalha" ? medalha : icone === "livrosDegraus" ? livrosDegraus : mascote}></C.Icone>
-                        <C.Nivel>Nível 1</C.Nivel>
-                    </C.AreaIcone>
-                    <C.AreaInfo>
-                        <C.AreaDescricao>
-                            <C.TituloEmblema>Engatinhando</C.TituloEmblema>
-                            <C.Descricao>Realizou a primeira atividade da aplicação</C.Descricao>
-                        </C.AreaDescricao>
-                        <C.AreaProgresso>
-                            <C.Andamento>{progressoPorcentagem}</C.Andamento>
-                            <C.Progresso id='barraProgresso'></C.Progresso>
-                        </C.AreaProgresso>
-                    </C.AreaInfo>
-                </C.Emblema>
-            ))}
-        </C.EmblemasAluno>
-                <C.EmblemasProfessor>
-                <C.Titulo>Emblemas mentor</C.Titulo>
-                {/* Mapeando os emblemas, se necessário, para evitar repetição */}
-                {["medalha", "livrosDegraus", "mascote"].map((icone, index) => (
-                    <C.Emblema key={index}>
-                        <C.AreaIcone cor={index === 0 ? "#71DDF5" : index === 1 ? "#56EE9C" : "#fee101"}>
-                            <C.Icone src={icone === "medalha" ? medalha : icone === "livrosDegraus" ? livrosDegraus : mascote}></C.Icone>
-                            <C.Nivel>Nível 1</C.Nivel>
-                        </C.AreaIcone>
-                        <C.AreaInfo>
-                            <C.AreaDescricao>
-                                <C.TituloEmblema>Engatinhando</C.TituloEmblema>
-                                <C.Descricao>Realizou a primeira atividade da aplicação</C.Descricao>
-                            </C.AreaDescricao>
-                            <C.AreaProgresso>
-                                <C.Andamento>{progressoPorcentagem}</C.Andamento>
-                                <C.Progresso id='barraProgresso'></C.Progresso>
-                            </C.AreaProgresso>
-                        </C.AreaInfo>
-                    </C.Emblema>
-                ))}
-            </C.EmblemasProfessor>
+            <C.Emblemas>
+                <C.Titulo>Emblemas aluno</C.Titulo>
+                {emblemasAluno.map((emblema, index) => {
+                    const progresso = ((emblema.andamento / emblema.meta) * 100).toFixed(2);
+                    return (
+                        <C.Emblema key={index}>
+                            <C.AreaIcone cor={emblema.cor}>
+                                <C.Icone src={emblema.foto}></C.Icone>
+                                <C.Nivel>Nível 1</C.Nivel>
+                            </C.AreaIcone>
+                            <C.AreaInfo>
+                                <C.AreaDescricao>
+                                    <C.TituloEmblema>{emblema.titulo}</C.TituloEmblema>
+                                    <C.Descricao>{emblema.descricao}</C.Descricao>
+                                </C.AreaDescricao>
+                                <C.AreaProgresso>
+                                    <C.Andamento>{progresso}%</C.Andamento>
+                                    <C.Progresso style={{ width: `${progresso}%` }}></C.Progresso>
+                                </C.AreaProgresso>
+                            </C.AreaInfo>
+                        </C.Emblema>
+                    );
+                })}
+            </C.Emblemas>
+            {isMentor !== 0 && (
+                <C.Emblemas>
+                    <C.Titulo>Emblemas mentor</C.Titulo>
+                    {emblemasMentor.map((emblema, index) => {
+                        const progresso = ((emblema.andamento / emblema.meta) * 100).toFixed(2);
+                        return (
+                            <C.Emblema key={index}>
+                                <C.AreaIcone cor={emblema.cor}>
+                                    <C.Icone src={emblema.foto}></C.Icone>
+                                    <C.Nivel>Nível 1</C.Nivel>
+                                </C.AreaIcone>
+                                <C.AreaInfo>
+                                    <C.AreaDescricao>
+                                        <C.TituloEmblema>{emblema.titulo}</C.TituloEmblema>
+                                        <C.Descricao>{emblema.descricao}</C.Descricao>
+                                    </C.AreaDescricao>
+                                    <C.AreaProgresso>
+                                        <C.Andamento>{progresso}%</C.Andamento>
+                                        <C.Progresso style={{ width: `${progresso}%` }}></C.Progresso>
+                                    </C.AreaProgresso>
+                                </C.AreaInfo>
+                            </C.Emblema>
+                        );
+                    })}
+                </C.Emblemas>
+            )}
+
         </C.CampoEmblemas>
+
+
     );
 };
 

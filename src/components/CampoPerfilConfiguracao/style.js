@@ -60,7 +60,7 @@ export const NomeUsuario = styled.span`
 `
 
 export const DataEntrada = styled.span`
-   font-size: 1.5vw;
+   font-size: 1.3vw;
    font-weight: bold;
    z-index: 1;
 `

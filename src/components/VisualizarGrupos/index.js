@@ -55,6 +55,8 @@ const VisualizarGrupos = () => {
         navigate(`/grupo-mentoria/${id}`, { state: { status: 'visitante' } });
     };
 
+    console.log(grupos);
+    
     return (
         <C.CampoVisualizarGrupos>
             <C.Descricao>Encontre um grupo de mentoria para aperfeiçoar seus estudos</C.Descricao>

@@ -18,22 +18,22 @@ const Desempenho = () => {
         <C.Desempenho>
         <C.IconeDesempenho icon={faBullseye}></C.IconeDesempenho>
         <C.DesempenhoInfo>
-          <C.DesempenhoTitulo>Rank recorde</C.DesempenhoTitulo>
-          <C.DesempenhoDesc>Bronze III</C.DesempenhoDesc>
+          <C.DesempenhoTitulo>Pontos totais</C.DesempenhoTitulo>
+          <C.DesempenhoDesc>0</C.DesempenhoDesc>
          </C.DesempenhoInfo>
         </C.Desempenho>
         <C.Desempenho>
         <C.IconeDesempenho icon={faFire}></C.IconeDesempenho>
         <C.DesempenhoInfo>
-          <C.DesempenhoTitulo>Rank recorde</C.DesempenhoTitulo>
-          <C.DesempenhoDesc>Bronze III</C.DesempenhoDesc>
+          <C.DesempenhoTitulo>Dias seguidos</C.DesempenhoTitulo>
+          <C.DesempenhoDesc>0</C.DesempenhoDesc>
          </C.DesempenhoInfo>
         </C.Desempenho>
         <C.Desempenho>
         <C.IconeDesempenho icon={faGraduationCap}></C.IconeDesempenho>
         <C.DesempenhoInfo>
-          <C.DesempenhoTitulo>Rank recorde</C.DesempenhoTitulo>
-          <C.DesempenhoDesc>Bronze III</C.DesempenhoDesc>
+          <C.DesempenhoTitulo>Atividades feitas</C.DesempenhoTitulo>
+          <C.DesempenhoDesc>0</C.DesempenhoDesc>
          </C.DesempenhoInfo>
         </C.Desempenho>
       </C.DesempenhoDiv>

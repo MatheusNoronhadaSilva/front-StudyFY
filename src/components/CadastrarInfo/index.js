@@ -180,12 +180,6 @@ const InserirInfoAluno = ({ AvancarEtapa, RetornarDados }) => {
             </C.EntradaInfo>
           </C.Campo>
         </C.CampoPreencher>
-
-        <C.CadastroGoogle>
-          <C.DescricaoGoogle>Ou cadastre-se com: </C.DescricaoGoogle>
-          <C.ImgGoogle src={google} alt='iconeGoogle' />
-        </C.CadastroGoogle>
-
         <C.EnvioFormuario>
           <C.Erro>{mensagemErro}</C.Erro>
           <C.Botao type="submit" onClick={AcaoBotao}>Cadastrar</C.Botao>

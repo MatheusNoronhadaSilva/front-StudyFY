@@ -149,9 +149,7 @@ const CampoPerfilConfiguracao = () => {
     }, [idUsuario]);
 
     const sair = () => {
-        localStorage.removeItem('userId');
-        localStorage.removeItem('imgAtiva');
-        localStorage.removeItem('id_mentor');
+        localStorage.clear()
 
         // Força a navegação para a página de login
         navigate('/login', { replace: true });
@@ -176,7 +174,7 @@ const CampoPerfilConfiguracao = () => {
             <C.CampoInfoPrincipal>
                 <C.FundoAmarelo />
                 <C.IconePerfil src={aluno.foto_aluno || IconePerfil} /> {/* Verifica se existe foto do aluno */}
-                <C.DataEntrada>{aluno.data_criacao_conta}</C.DataEntrada>
+                <C.DataEntrada>Ingressou em: {aluno.data_criacao_conta}</C.DataEntrada>
             </C.CampoInfoPrincipal>
             <C.Campos>
                 <C.EntradaInfo>

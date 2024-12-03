@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export const BlocoDeNotas = styled.div`
 
     height: 70%;
+    max-width: 35vw;
     .ql-container {
         height: 30vh; /* Define a altura do editor */
     }

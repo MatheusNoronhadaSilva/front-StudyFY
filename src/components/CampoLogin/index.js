@@ -104,10 +104,6 @@ const LogarAluno = ({ RetornarDadosLogin }) => { // Corrigido o nome do parâmet
           </C.Campo>
           <C.EsqueceuSenha to={'/esqueceu-senha'}>Esqueceu a senha?</C.EsqueceuSenha>
         </C.CampoPreencher>
-        <C.CadastroGoogle>
-          <C.DescricaoGoogle>Ou cadastre-se com: </C.DescricaoGoogle>
-          <C.ImgGoogle src={google} alt='iconeGoogle' />
-        </C.CadastroGoogle>
         <C.EnvioFormuario>
           <C.Erro>{mensagemErro}</C.Erro>
           <C.Botao onClick={AcaoBotao}>Logar</C.Botao>
