@@ -45,7 +45,7 @@ const PesquisaAluno = ({ AvancarEtapa, RetornarDados }) => {
     }
   
     // Adicionar a matéria se não foi encontrada e o limite ainda não foi atingido
-    if (!encontrada && novasSelecoes.length < 2) {
+    if (!encontrada && novasSelecoes.length < 3) {
       novasSelecoes.push(materia.id);
     }
   
@@ -70,10 +70,10 @@ const PesquisaAluno = ({ AvancarEtapa, RetornarDados }) => {
             <img src={mascote} alt="mascote" style={{ width: '15%', minHeight: '100%' }} />
             <span style={{ fontSize: '2.5vw' }}>Cadastre-se</span>
           </div>
-          <C.Descricao>Escolha no máximo 2 matérias que queira estuda</C.Descricao>
+          <C.Descricao>Escolha no máximo 3 matérias que queira estudar</C.Descricao>
         </div>
       ) : (
-        <C.Descricao>Escolha no máximo 2 matérias que queira estuda</C.Descricao>
+        <C.Descricao>Escolha no máximo 3 matérias que queira estudar</C.Descricao>
       )}
         <C.Campos>
           {materias.map((materia) => (

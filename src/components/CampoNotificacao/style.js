@@ -79,7 +79,7 @@ export const DivImagens = styled.div`
 
 export const Imagem = styled.img`
   height: 60%;
-  width: 30%;
+  width: 25%;
 `;
 
 export const CartoesDiv = styled.div`

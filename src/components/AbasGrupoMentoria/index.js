@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import * as C from './style';
 import AbaMembros from '../MembrosGrupo';
 import AbaDuvidas from '../DuvidasGrupo';
+import AbaAtividades from '../AtividadesGrupo';
 
 const AbasGrupoMentoria = (grupoId) => {
   const [abaAtiva, setAbaAtiva] = useState(0); // Estado para rastrear a aba ativa
@@ -28,7 +29,8 @@ const AbasGrupoMentoria = (grupoId) => {
 
       <C.CampoAba>
         {abaAtiva === 0 && <AbaMembros grupoId={grupoId}/>}      {/* Exibe AbaMembros se abaAtiva for 0 */}
-        {abaAtiva === 2 && <AbaDuvidas />}      {/* Exibe AbaDuvidas se abaAtiva for 2 */}
+        {abaAtiva === 1 && <AbaAtividades grupoId={grupoId}/>}
+        {abaAtiva === 2 && <AbaDuvidas grupoId={grupoId}/>}      {/* Exibe AbaDuvidas se abaAtiva for 2 */}
       </C.CampoAba>
     </C.AbasGrupo>
   );

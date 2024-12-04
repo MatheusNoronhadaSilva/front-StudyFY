@@ -22,7 +22,7 @@ const CampoEmblemas = () => {
             descricao: "Realizou 5 atividades",
             cor: "#56EE9C",
             meta: 5,
-            andamento: 2
+            andamento: 0
         },
         {
             foto: mascote,
@@ -49,7 +49,7 @@ const CampoEmblemas = () => {
             descricao: "ajudou 5 alunos",
             cor: "#56EE9C",
             meta: 5,
-            andamento: 4
+            andamento: 0
         }
     ];
 

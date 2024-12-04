@@ -21,13 +21,12 @@ position: relative;
 `
 
 export const SemMembros = styled.span`
-   position: absolute;
-   font-size: 2vw;
-   width: 30%;
-   text-align: center;
-   place-self: center;
-   right: 35%;
-   top: 45%;
+   font-size: 2rem;
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100%;
 `
 
 export const Membro = styled.div`

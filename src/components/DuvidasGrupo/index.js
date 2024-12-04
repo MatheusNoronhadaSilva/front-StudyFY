@@ -3,13 +3,14 @@ import ftPerfil from '../../assets/Ellipse (1).png';
 import questionIcon from '../../assets/question 1.png';
 import questionIconClicked from '../../assets/question (1) 1.png';
 
-const AbaDuvidas = () => {
+const AbaDuvidas = (grupoID) => {
   const [duvidas, setDuvidas] = useState([]);
   const [showResposta, setShowResposta] = useState({}); // Estado para exibir a resposta de cada dúvida
   const [showForm, setShowForm] = useState(false);
   const [newDuvida, setNewDuvida] = useState({
     conteudo_duvida: '',
   });
+  const userId = localStorage.getItem('userId')
   const [clickedIcons, setClickedIcons] = useState({}); // Estado para controlar quais ícones foram clicados
 
   const fetchDuvidas = async () => {
@@ -40,7 +41,7 @@ const AbaDuvidas = () => {
     const { name, value } = e.target;
     setNewDuvida((prev) => ({ ...prev, [name]: value }));
   };
-
+  
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -51,7 +52,8 @@ const AbaDuvidas = () => {
         body: JSON.stringify({
           conteudo: newDuvida.conteudo_duvida,
           data_envio: today,
-          membro_id: 1, // Ajuste o ID conforme necessário
+          user_id: userId,
+          grupo_id: grupoID.grupoId.grupoId
         }),
       });
 
@@ -141,7 +143,7 @@ const AbaDuvidas = () => {
               width: '100%',
             }}>
               <img 
-                src={ftPerfil} 
+                src= 'https://i.ibb.co/ZXMqtDj/image.png' 
                 alt="Foto de perfil" 
                 style={{
                   width: '50px',
@@ -171,6 +173,7 @@ const AbaDuvidas = () => {
                   fontSize: '0.9rem',
                   color: '#333',
                   marginTop: '5px',
+                  width: '80%'
                 }}>
                   {duvida.conteudo_duvida || 'Sem conteúdo'}
                 </p>
@@ -245,8 +248,8 @@ const AbaDuvidas = () => {
       <button 
         style={{
           position: 'fixed',
-          top: '82%',
-          right: '32%',
+          top: '80%',
+          right: '27%',
           width: '50px',
           height: '50px',
           borderRadius: '50%',

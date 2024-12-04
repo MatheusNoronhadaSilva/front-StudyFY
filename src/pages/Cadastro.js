@@ -19,7 +19,7 @@ const CadastroAluno = () => {
       ...dadosAluno,
       ...data_nascimento,
       serie: 1,
-      foto: 2,
+      foto: 1,
       materia_id: materiaSelecionada,
     };
 
