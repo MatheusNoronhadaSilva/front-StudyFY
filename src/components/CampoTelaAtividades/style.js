@@ -35,7 +35,7 @@ export const Topic = styled.div`
   font-size: 1.5vw;
   color: #333;
   margin-top: 5%;
-  width: 30%;
+  width: 100%;
   place-self: center;
   border-radius: 12px;
   padding: 1% 1%;
@@ -50,8 +50,8 @@ export const Topic = styled.div`
 export const SubTopicDiv = styled.div`
   background-color: #fff;
   color: #333;
-  margin: 15px 0;
-  width: 60%;
+  padding-inline: 20%;
+  width: 100%;
   place-self: center;
   display: flex;
   align-items: center;
@@ -248,7 +248,7 @@ export const CardsContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  height: 40vh;
+  height: 30vh;
 `
 
 export const CardMateria = styled.div`

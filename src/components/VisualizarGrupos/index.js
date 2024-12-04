@@ -84,7 +84,7 @@ const VisualizarGrupos = () => {
                                 <C.FotoMateriaDiv>
                                     <C.IconeMateria src={grupo.materia_imagem} />
                                 </C.FotoMateriaDiv>
-                                <C.NomeMateria>{grupo.materia_grupo}</C.NomeMateria>
+                                <C.NomeMateria>{grupo.materia_nome}</C.NomeMateria>
                             </C.MateriaGrupo>
                         </div>
 

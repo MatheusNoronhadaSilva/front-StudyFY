@@ -81,7 +81,7 @@ const CampoTelaAtividade = () => {
     const showSelectionAlert = () => {
         MySwal.fire({
             title: "Escolha uma de suas matérias",
-            width: 850,
+            width: 1000,
             heightAuto: true,
             html: (
 
@@ -262,7 +262,7 @@ const CampoTelaAtividade = () => {
 
         MySwal.fire({
             title: "Escolha uma série",
-            width: 800,
+            width: 900,
             html: (
                 <C.SeriesContainer>
                     {cards.map((card, index) => {
